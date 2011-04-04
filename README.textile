@@ -1,0 +1,1 @@
+This is a "homesick"[https://github.com/technicalpickles/homesick] ready repos
