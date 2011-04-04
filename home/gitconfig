@@ -1,0 +1,57 @@
+[github]
+  user = amiel
+  token = !read-password GitHub API Token
+[core]
+  # editor         = mate -w
+  editor           = vim
+  filemode         = true
+  logallrefupdates = true
+  whitespace       = fix, space-before-tab, trailing-space
+
+[merge]
+  tool = opendiff
+
+[color]
+    branch    = auto
+    diff      = auto
+    status    = auto
+[color "branch"]
+    current   = yellow reverse
+    local     = yellow
+    remote    = green
+[color "diff"]
+    meta      = yellow bold
+    frag      = magenta bold
+    old       = red bold
+    new       = green bold
+[color "status"]
+    added     = yellow
+    changed   = green
+    untracked = cyan
+
+[color]
+    ui = true
+
+[alias]
+  st      = status
+  s       = status -sb
+  ci      = commit
+  br      = branch
+  brav    = branch -a -v
+  brv     = branch -v
+  co      = checkout
+  lg      = log -p
+  ll      = log --pretty=oneline --abbrev-commit --max-count=15
+  browse  = !hub browse
+  w       = !hub browse
+  compare = !hub compare
+
+[user]
+  name = Amiel Martin
+  email = amiel@carnesmedia.com
+
+[branch]
+  autosetupmerge = true
+
+[push]
+  default = tracking
