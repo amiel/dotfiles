@@ -1,8 +1,10 @@
-This is a "homesick":https://github.com/technicalpickles/homesick ready repos.
+h2. Dotfiles!
 
-h2. Symlinks
+These are my dotfiles.
 
-I've symlinked all of the files in home from .filename -> filename because homesick expects all of the files it copies to start with a dot, but I would rather edit files without the dot...
+I clone this to Dropbox at ~/Dropbox/dotfiles
+
+Then run bin/link-dotfiles
 
 h2. Sensitive Data
 
