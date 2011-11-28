@@ -1,0 +1,22 @@
+if [[ -z $SSH_CONNECTION ]]; then
+  export IS_REMOTE=false
+else
+  export IS_REMOTE=true
+fi
+
+
+# Only run all this if the shell is interactive.
+if [[ $- == *i* ]] ; then
+  export IS_INTERACTIVE=true
+
+  DOTFILES=$(dirname $(dirname $(readlink "${BASH_SOURCE[0]}")))
+
+  export PATH="$PATH:$DOTFILES/bin"
+  for file in $DOTFILES/bash/*;do
+    source $file
+  done
+
+else
+  export IS_INTERACTIVE=false
+fi
+

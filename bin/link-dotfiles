@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DIR=$(cd -P $(dirname "$0"); cd ../home; pwd)
+
+pushd $DIR > /dev/null
+
+for name in *; do
+  target=~/.$name
+  if [ -e "$target" ]; then
+    if [ -L "$target" ]; then
+      echo "Exist $target"
+    else
+      echo "WARNING: $target exists but is not a symlink."
+      echo "         Please remove $target and run this $0 again to install $(basename $target)"
+    fi
+  else
+    echo "Link $target"
+    ln -s "$DIR/$name" "$target"
+  fi
+done
+
+popd > /dev/null

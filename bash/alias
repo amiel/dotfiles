@@ -1,0 +1,3 @@
+
+
+alias gb='for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cblue%cr%Creset" $k|head -n 1`\\t$k;done'
