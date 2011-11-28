@@ -1,0 +1,9 @@
+This is a "homesick":https://github.com/technicalpickles/homesick ready repos.
+
+h2. Symlinks
+
+I've symlinked all of the files in home from .filename -> filename because homesick expects all of the files it copies to start with a dot, but I would rather edit files without the dot...
+
+h2. Sensitive Data
+
+Sensitive data is stored in the OS X Keychain. See home/bin/read-password.
