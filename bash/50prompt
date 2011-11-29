@@ -1,17 +1,18 @@
 
 
-function EXT_COLOR () { echo -ne "\[\033[38;5;$1m\]"; }
+function EXT_COLOR () { echo -ne "\033[38;5;$1m"; }
 
 function __git_parse_dirty {
   [[ $(git status 2> /dev/null | tail -n1) == "" ]] && echo "" && return
   [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit (working directory clean)" ]] && printf "\033[32m✓\033[00m" && return
-  printf "\033[31m✗\033[00m"
+  printf "\[\033[31m\]✗\[\033[00m\]"
 }
+
 
 function __git_prompt {
   local branch=$(__git_ps1 "%s")
   if [[ "$branch" ]];then
-    echo -n "${branch} $(__git_parse_dirty) "
+    echo -ne "${branch} "
   else
     echo ""
   fi
@@ -33,15 +34,19 @@ function make_prompt() {
     Apple_Terminal|GLterm|xterm|iTerm|iTerm.app)
       if [ $TERM == "screen" ];then
         if [[ "$TMUX" ]];then
-          local screen="\[${screencolor}\]\$(tmux display -p '#W')\[$NC\] "
+          local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
         else
           local screen="\[${screencolor}\]$WINDOW\[$NC\] "
         fi
       fi
 
-      local title="\[\033]0;$(rvm-prompt)\007\]"
+      if [[ "$(__git_prompt)" ]];then
+        local git="\[${gitcolor}\]\$(__git_prompt)\[${NC}\]"
+      fi
 
-      export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] $screen\[${gitcolor}\]\$(__git_prompt)\[${NC}\]$(echo -e "\xe2\x87\x89") "
+      local title="\[\033]0;\$(rvm-prompt)\007\]"
+
+      export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
     ;;
     *)
       export PS1='\h:\u \W\$ '
