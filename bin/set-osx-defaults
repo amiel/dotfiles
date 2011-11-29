@@ -1,3 +1,6 @@
+# Inspired by https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
+
 
 # defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 # defaults write com.apple.menuextra.battery ShowTime -string "YES"
