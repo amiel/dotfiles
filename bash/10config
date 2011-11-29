@@ -1,13 +1,8 @@
 
-#export EDITOR=vim
-export EDITOR="mate -w"
-export LESSEDIT='mate -l %lm %f'
 
 # Allow cd'ing into any directory under src
 export CDPATH=".:~/src"
 
-export MANPATH="`brew --prefix`/share/man:$MANPATH"
-export NODE_PATH="`brew --prefix`/lib/node_modules"
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 export LANG='en_US.UTF-8'
@@ -15,6 +10,15 @@ export PAGER='less'
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
+
+if $IS_OSX; then
+  export EDITOR="mate -w"
+  export LESSEDIT='mate -l %lm %f'
+  export MANPATH="`brew --prefix`/share/man:$MANPATH"
+  export NODE_PATH="`brew --prefix`/lib/node_modules"
+else
+  export EDITOR=vim
+fi
 
 
 # Report the status of terminated background jobs immediately, rather than before the next

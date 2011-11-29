@@ -1,8 +1,12 @@
 
+
 # Initialize bash_completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+# Without homebrew, this will source /etc/bash_completion
+if [ -f $BREW_PREFIX/etc/bash_completion ]; then
+  . $BREW_PREFIX/etc/bash_completion
 fi
 
 
-complete -W "NSGlobalDomain" defaults
+if $IS_OSX; then
+  complete -W "NSGlobalDomain" defaults
+fi

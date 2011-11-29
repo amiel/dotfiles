@@ -10,6 +10,7 @@ function __git_parse_dirty {
 
 
 function __git_prompt {
+  if ! __command_exists __git_ps1;then return 1; fi
   local branch=$(__git_ps1 "%s")
   if [[ "$branch" ]];then
     echo -ne "${branch} "

@@ -1,7 +1,7 @@
-if [[ -z $SSH_CONNECTION ]]; then
-  export IS_REMOTE=false
-else
-  export IS_REMOTE=true
+
+# Put your secret/local environment variables in .env
+if [ -f ~/.env ]; then
+  . ~/.env
 fi
 
 # Only run all this if the shell is interactive.
@@ -20,8 +20,4 @@ else
   export IS_INTERACTIVE=false
 fi
 
-# Put your secret/local environment variables in .env
-if [ -f ~/.env ]; then
-  . ~/.env
-fi
 
