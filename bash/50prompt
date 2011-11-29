@@ -8,18 +8,7 @@ function __git_parse_dirty {
   printf "\[\033[31m\]✗\[\033[00m\]"
 }
 
-
-function __git_prompt {
-  if ! __command_exists __git_ps1;then return 1; fi
-  local branch=$(__git_ps1 "%s")
-  if [[ "$branch" ]];then
-    echo -ne "${branch} "
-  else
-    echo ""
-  fi
-}
-
-function make_prompt() {
+function color_prompt {
   # Pick colors from http://www.mudpedia.org/wiki/Xterm_256_colors
   local usercolor=$(EXT_COLOR 080)
   local hostcolor=$(EXT_COLOR 063)
@@ -29,29 +18,37 @@ function make_prompt() {
   local screencolor=$(EXT_COLOR 227)
   local NC="\e[0;m"
 
+  if [ $TERM == "screen" ];then
+    if [[ "$TMUX" ]];then
+      local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
+    else
+      local screen="\[${screencolor}\]$WINDOW\[$NC\] "
+    fi
+  fi
 
+  if __command_exists rvm-prompt; then
+    local title="\[\033]0;\$(rvm-prompt)\007\]"
+  fi
 
-  case "$TERM_PROGRAM" in
-    Apple_Terminal|GLterm|xterm|iTerm|iTerm.app)
-      if [ $TERM == "screen" ];then
-        if [[ "$TMUX" ]];then
-          local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
-        else
-          local screen="\[${screencolor}\]$WINDOW\[$NC\] "
-        fi
-      fi
+  if __command_exists __git_ps1; then
+    local git="\[${gitcolor}\]\$(__git_ps1 '%s')\[${NC}\]"
+  fi
 
-      local git="\[${gitcolor}\]\$(__git_prompt)\[${NC}\]"
-      local title="\[\033]0;\$(rvm-prompt)\007\]"
-
-      export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
-    ;;
-    *)
-      export PS1='\h:\u \W\$ '
-    ;;
-  esac
+  export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
 
 }
 
-make_prompt
+export PS1='\h:\u \W\$ '
+
+if $IS_OSX; then
+  case "$TERM_PROGRAM" in
+    Apple_Terminal|xterm*|iTerm*) color_prompt ;;
+  esac
+else
+  case "$TERM" in
+    xterm*) color_prompt ;;
+  esac
+fi
+
+
 unset make_prompt EXT_COLOR
