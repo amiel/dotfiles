@@ -40,10 +40,7 @@ function make_prompt() {
         fi
       fi
 
-      if [[ "$(__git_prompt)" ]];then
-        local git="\[${gitcolor}\]\$(__git_prompt)\[${NC}\]"
-      fi
-
+      local git="\[${gitcolor}\]\$(__git_prompt)\[${NC}\]"
       local title="\[\033]0;\$(rvm-prompt)\007\]"
 
       export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
