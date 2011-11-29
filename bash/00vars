@@ -13,6 +13,5 @@ case `uname` in
     ;;
   Darwin)
     IS_OSX=true
-    BREW_PREFIX=`brew --prefix`
     ;;
 esac
