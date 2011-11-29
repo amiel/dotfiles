@@ -1,4 +1,6 @@
 
+# TODO: This might as well be a .inputrc
+
 # See http://stackoverflow.com/questions/1030182/how-do-i-change-bash-history-completion-to-complete-whats-already-on-the-line
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'

@@ -1,6 +1,12 @@
+# TODO: Store user information in the keychain along with the GitHub API Token
+[user]
+  name = Amiel Martin
+  email = amiel@carnesmedia.com
+
 [github]
   user = amiel
   token = !read-password GitHub API Token
+
 
 [core]
   # editor         = mate -w
@@ -46,10 +52,6 @@
   browse  = !hub browse
   w       = !hub browse
   compare = !hub compare
-
-[user]
-  name = Amiel Martin
-  email = amiel@carnesmedia.com
 
 [branch]
   autosetupmerge = true
