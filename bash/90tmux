@@ -2,4 +2,6 @@
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # Re-source, dunno why
-tmux source-file ~/.tmux.conf
+if [[ "$TMUX" ]]; then
+  tmux source-file ~/.tmux.conf
+fi

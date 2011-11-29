@@ -4,7 +4,6 @@ else
   export IS_REMOTE=true
 fi
 
-
 # Only run all this if the shell is interactive.
 if [[ $- == *i* ]] ; then
   export IS_INTERACTIVE=true
@@ -20,7 +19,6 @@ if [[ $- == *i* ]] ; then
 else
   export IS_INTERACTIVE=false
 fi
-
 
 # Put your secret/local environment variables in .env
 if [ -f ~/.env ]; then
