@@ -6,6 +6,7 @@ export LESSEDIT='mate -l %lm %f'
 # Allow cd'ing into any directory under src
 export CDPATH=".:~/src"
 
+export MANPATH="`brew --prefix`/share/man:$MANPATH"
 export NODE_PATH="`brew --prefix`/lib/node_modules"
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
