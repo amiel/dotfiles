@@ -12,11 +12,18 @@ if [[ $- == *i* ]] ; then
   DOTFILES=$(dirname $(dirname $(readlink "${BASH_SOURCE[0]}")))
 
   export PATH="$PATH:$DOTFILES/bin"
+
   for file in $DOTFILES/bash/*;do
     source $file
   done
 
 else
   export IS_INTERACTIVE=false
+fi
+
+
+# Put your secret/local environment variables in .env
+if [ -f ~/.env ]; then
+  . ~/.env
 fi
 

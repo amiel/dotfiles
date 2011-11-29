@@ -1,6 +1,7 @@
 [github]
   user = amiel
   token = !read-password GitHub API Token
+
 [core]
   # editor         = mate -w
   editor           = vim
@@ -12,25 +13,25 @@
   tool = opendiff
 
 [color]
-    branch    = auto
-    diff      = auto
-    status    = auto
+  branch    = auto
+  diff      = auto
+  status    = auto
 [color "branch"]
-    current   = yellow reverse
-    local     = yellow
-    remote    = green
+  current   = yellow reverse
+  local     = yellow
+  remote    = green
 [color "diff"]
-    meta      = yellow bold
-    frag      = magenta bold
-    old       = red bold
-    new       = green bold
+  meta      = yellow bold
+  frag      = magenta bold
+  old       = red bold
+  new       = green bold
 [color "status"]
-    added     = yellow
-    changed   = green
-    untracked = cyan
+  added     = yellow
+  changed   = green
+  untracked = cyan
 
 [color]
-    ui = true
+  ui = true
 
 [alias]
   st      = status
