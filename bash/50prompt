@@ -31,7 +31,7 @@ function color_prompt {
   fi
 
   if __command_exists __git_ps1; then
-    local git="\[${gitcolor}\]\$(__git_ps1 '%s')\[${NC}\]"
+    local git="\[${gitcolor}\]\$(__git_ps1 '%s ')\[${NC}\]"
   fi
 
   export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
