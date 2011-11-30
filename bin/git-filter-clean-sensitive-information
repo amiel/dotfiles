@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+data = STDIN.read
+
+data.gsub!(/name\s*=[^\n]+# GIT_USER/, "name = GIT_USER")
+data.gsub!(/email\s*=[^\n]+# GIT_EMAIL/, "name = GIT_EMAIL")
+data.gsub!(/user\s*=[^\n]+# GITHUB_USER/, "name = GITHUB_USER")
+data.gsub!(/token\s*=[^\n]+# GITHUB_TOKEN/, "name = GITHUB_TOKEN")
+
+puts data

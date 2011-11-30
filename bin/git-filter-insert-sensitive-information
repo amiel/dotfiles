@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+data = STDIN.read
+
+data.gsub!(/name\s*=\s*GIT_USER/, "name = #{ ENV['GIT_USER'] } # GIT_USER")
+data.gsub!(/email\s*=\s*GIT_EMAIL/, "name = #{ ENV['GIT_EMAIL'] } # GIT_EMAIL")
+data.gsub!(/user\s*=\s*GITHUB_USER/, "name = #{ ENV['GITHUB_USER'] } # GITHUB_USER")
+data.gsub!(/token\s*=\s*GITHUB_TOKEN/, "name = #{ ENV['GITHUB_TOKEN'] } # GITHUB_TOKEN")
+
+puts data
