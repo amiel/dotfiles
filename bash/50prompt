@@ -11,7 +11,12 @@ function __git_parse_dirty {
 function color_prompt {
   # Pick colors from http://www.mudpedia.org/wiki/Xterm_256_colors
   local usercolor=$(EXT_COLOR 080)
-  local hostcolor=$(EXT_COLOR 063)
+  if $IS_REMOTE; then
+    local hostcolor=$(EXT_COLOR 227)
+  else
+    local hostcolor=$(EXT_COLOR 063)
+  fi
+
   local dircolor=$(EXT_COLOR 164)
   local gitcolor=$(EXT_COLOR 083)
   # local gitcolor=$(EXT_COLOR 077)
