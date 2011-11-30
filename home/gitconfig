@@ -1,10 +1,14 @@
 [user]
-  name = !read-setting GIT_NAME
-  email = !read-setting GIT_EMAIL
+  name = GIT_NAME
+  email = GIT_EMAIL
 
 [github]
-  user = !read-setting GITHUB_USER
-  token = !read-setting GITHUB_TOKEN
+  user = GITHUB_USER
+  token = GITHUB_TOKEN
+
+[diff "exif"]
+  # brew install exiftool
+  textconv = exiftool
 
 
 [core]
