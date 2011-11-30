@@ -6,10 +6,6 @@
   user = GITHUB_USER
   token = GITHUB_TOKEN
 
-[filter "securegitconfig"]
-  smudge = git-filter-insert-sensitive-information
-  clean = git-filter-clean-sensitive-information
-
 [diff "exif"]
   # brew install exiftool
   textconv = exiftool

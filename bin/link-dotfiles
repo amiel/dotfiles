@@ -5,17 +5,22 @@ DIR=$(cd -P $(dirname "$0"); cd ../home; pwd)
 pushd $DIR > /dev/null
 
 for name in *; do
-  target=~/.$name
-  if [ -e "$target" ]; then
-    if [ -L "$target" ]; then
-      echo "Exist $target"
-    else
-      echo "WARNING: $target exists but is not a symlink."
-      echo "         Please remove $target and run this $0 again to install $(basename $target)"
-    fi
+  if [[ $name == *.example ]]; then
+    : # echo "Skip $name"
   else
-    echo "Link $target"
-    ln -s "$DIR/$name" "$target"
+
+    target=~/.$name
+    if [ -e "$target" ]; then
+      if [ -L "$target" ]; then
+        echo "Exist $name"
+      else
+        echo "WARNING: $target exists but is not a symlink."
+        echo "         Please remove $target and run this $0 again to install $name"
+      fi
+    else
+      echo "Link $name"
+      ln -s "$DIR/$name" "$target"
+    fi
   fi
 done
 
