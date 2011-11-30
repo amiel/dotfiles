@@ -18,13 +18,13 @@ function color_prompt {
   local screencolor=$(EXT_COLOR 227)
   local NC="\e[0;m"
 
-  if [ $TERM == "screen" ];then
-    if [[ "$TMUX" ]];then
-      local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
-    else
-      local screen="\[${screencolor}\]$WINDOW\[$NC\] "
-    fi
-  fi
+  # if [ $TERM == "screen" ];then
+  #   if [[ "$TMUX" ]];then
+  #     local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
+  #   else
+  #     local screen="\[${screencolor}\]$WINDOW\[$NC\] "
+  #   fi
+  # fi
 
   if __command_exists rvm-prompt; then
     local title="\[\033]0;\$(rvm-prompt)\007\]"
