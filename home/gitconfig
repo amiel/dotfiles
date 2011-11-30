@@ -1,15 +1,16 @@
-# TODO: Store user information in the keychain along with the GitHub API Token
 [user]
-  name = Amiel Martin
-  email = amiel@carnesmedia.com
+  name = !read-setting GIT_NAME
+  email = !read-setting GIT_EMAIL
 
 [github]
-  user = amiel
-  token = !read-password GitHub API Token
+  user = !read-setting GITHUB_USER
+  token = !read-setting GITHUB_TOKEN
 
 
 [core]
   # editor         = mate -w
+  # I'd rather edit my commit messages in vim.
+  # Use the above for textmate
   editor           = vim
   filemode         = true
   logallrefupdates = true
