@@ -1,0 +1,20 @@
+fontName         = "Inconsolata-dz"
+fontSize         = 13
+
+TM_GIT           = "/usr/local/bin/git"
+
+tabSize          = 2
+softTabs		 = true
+
+
+exclude = "{log/*.log,tmp/cache/*}"
+excludeDirectories  = "{tmp/cache,tmp/capybara}"
+excludeInFolderSearch = ""
+# exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
+
+
+
+[ .git/COMMIT_EDITMSG ]
+softWrap         = true
+spellChecking    = true
+spellingLanguage = 'en'
