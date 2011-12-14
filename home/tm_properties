@@ -4,12 +4,14 @@ fontSize         = 13
 TM_GIT           = "/usr/local/bin/git"
 
 tabSize          = 2
-softTabs		 = true
+softTabs         = true
+
+showInvisibles = true
 
 
-exclude = "{log/*.log,tmp/cache/*}"
+include = "{.tm_properties,.htaccess,.rvmrc,.gitignore}"
+exclude = "{log/*.log,rerun.txt}"
 excludeDirectories  = "{tmp/cache,tmp/capybara}"
-excludeInFolderSearch = ""
 # exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
 
 
