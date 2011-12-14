@@ -45,18 +45,20 @@
   ui = true
 
 [alias]
-  st      = status
-  s       = status -sb
+  st      = status -sb
   ci      = commit
+  dif     = diff --word-diff
   br      = branch
   brav    = branch -a -v
   brv     = branch -v
   co      = checkout
+  l       = log --oneline --decorate
   lg      = log -p
   ll      = log --pretty=oneline --abbrev-commit --max-count=15
   browse  = !hub browse
-  w       = !hub browse
   compare = !hub compare
+
+
 
 [branch]
   autosetupmerge = true
