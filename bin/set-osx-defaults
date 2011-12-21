@@ -1,9 +1,17 @@
 # Inspired by https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
-
-
 # defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 # defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+
+#############
+# Textmate 2
+
+# Always show the tab bar
+defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool true
+
+#########
+# Finder
 
 # Show all filename extensions in Finder
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -17,18 +25,24 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+
+#########
+# Safari
+
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+#########
+# iTunes
 
 # Disable the Ping sidebar in iTunes
 defaults write com.apple.iTunes disablePingSidebar -bool true
 
 # Disable all the other Ping stuff in iTunes
 defaults write com.apple.iTunes disablePing -bool true
-
-# Show the ~/Library folder
-chflags nohidden ~/Library
-
 
 # Kill (restart) affected applications
 for app in Safari Finder Dock Mail; do killall "$app"; done
