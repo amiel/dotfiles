@@ -1,7 +1,7 @@
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-# Re-source, dunno why
+# Re-source, dunno why, but it just doesn't stick
 if [[ "$TMUX" ]]; then
   tmux source-file ~/.tmux.conf
 fi

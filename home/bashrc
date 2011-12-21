@@ -1,4 +1,7 @@
 
+
+# set -x
+
 # Put your secret/local environment variables in .env
 if [ -f ~/.env ]; then
   . ~/.env
