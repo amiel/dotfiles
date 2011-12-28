@@ -1,8 +1,13 @@
 
-if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
+if [[ -s ~/.rvm/scripts/rvm ]]; then
+  source ~/.rvm/scripts/rvm
+elif [[ -s /usr/local/rvm/scripts/rvm ]]; then
+  source /usr/local/rvm/scripts/rvm
+fi
 
 # Enable pow to use .com domains that are in the /etc/hosts file.
 export POW_EXT_DOMAINS=com
 
 # Use bundle binstubs first. Make sure this goes after rvm initialization
+# NOTE: This can be considered a security issue.
 export PATH="./bin:$PATH"
