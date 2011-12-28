@@ -1,5 +1,5 @@
 
-if [[ -s /Users/amiel/.rvm/scripts/rvm ]] ; then source /Users/amiel/.rvm/scripts/rvm ; fi
+if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 # Enable pow to use .com domains that are in the /etc/hosts file.
 export POW_EXT_DOMAINS=com
