@@ -52,7 +52,7 @@ if $IS_OSX; then
 fi
 
 case "$TERM" in
-  xterm*) color_prompt ;;
+  xterm*|screen*) color_prompt ;;
 esac
 
 
