@@ -19,6 +19,7 @@
   filemode         = true
   logallrefupdates = true
   whitespace       = fix, space-before-tab, trailing-space
+  autocrlf         = true
 
 [merge]
   tool = opendiff
