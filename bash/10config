@@ -11,11 +11,13 @@ export PAGER='less'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
+export PATH="$PATH:~/bin"
+
 if $IS_OSX; then
   export BREW_PREFIX=`brew --prefix`
   export PGDATA="/usr/local/var/postgres"
 
-  export PATH="/usr/local/bin:$PATH"
+  export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
   export MANPATH="`brew --prefix`/share/man:$MANPATH"
   export NODE_PATH="`brew --prefix`/lib/node_modules"
