@@ -53,7 +53,7 @@
   brav    = branch -a -v
   brv     = branch -v
   co      = checkout
-  l       = log --oneline --decorate
+  l       = log --oneline --decorate --graph
   lg      = log -p
   ll      = log --pretty=oneline --abbrev-commit --max-count=15
   browse  = !hub browse
