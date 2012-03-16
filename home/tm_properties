@@ -31,3 +31,6 @@ spellChecking = true
 
 [ *.rb ]
 softWrap = true
+
+[ *_spec.rb ]
+fileType = source.ruby.rspec
