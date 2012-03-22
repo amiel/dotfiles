@@ -8,7 +8,7 @@ Then run bin/link-dotfiles
 
 h2. Sensitive Data
 
-Sensitive data is stored in the OS X Keychain or ~/.env (see bin/read-password).
+Sensitive data is stored in ~/.env which is sourced by .bashrc.
 
 h3. Instructions
 
