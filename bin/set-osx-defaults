@@ -1,5 +1,21 @@
 # Inspired by https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+# and also https://gist.github.com/2260182
 
+# defaults write com.apple.menuextra.battery ShowPercent -string "NO"
+# defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+#########
+# Global
+
+
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+
+# Show remaining battery time; hide percentage
 # defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 # defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
@@ -25,6 +41,16 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+# Show Path bar in Finder
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Show Status bar in Finder
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
@@ -44,6 +70,10 @@ defaults write com.apple.iTunes disablePingSidebar -bool true
 
 # Disable all the other Ping stuff in iTunes
 defaults write com.apple.iTunes disablePing -bool true
+
+# Enable iTunes track notifications in the Dock
+defaults write com.apple.dock itunes-notifications -bool true
+
 
 # Kill (restart) affected applications
 for app in Safari Finder Dock Mail; do killall "$app"; done
