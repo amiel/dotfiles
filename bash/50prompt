@@ -9,6 +9,7 @@ function __git_parse_dirty {
 }
 
 function color_prompt {
+
   # Pick colors from http://www.mudpedia.org/wiki/Xterm_256_colors
   local usercolor=$(EXT_COLOR 080)
   if $IS_REMOTE; then
@@ -20,26 +21,17 @@ function color_prompt {
   local dircolor=$(EXT_COLOR 164)
   local gitcolor=$(EXT_COLOR 083)
   # local gitcolor=$(EXT_COLOR 077)
-  local screencolor=$(EXT_COLOR 227)
   local NC="\e[0;m"
-
-  # if [ $TERM == "screen" ];then
-  #   if [[ "$TMUX" ]];then
-  #     local screen="\[${screencolor}\]\$(tmux display -p '#I')\[$NC\] "
-  #   else
-  #     local screen="\[${screencolor}\]$WINDOW\[$NC\] "
-  #   fi
-  # fi
 
   if __command_exists rvm-prompt; then
     local title="\[\033]0;\$(rvm-prompt)\007\]"
   fi
 
   if __command_exists __git_ps1; then
-    local git="\[${gitcolor}\]\$(__git_ps1 '%s ')\[${NC}\]"
+    local gitps1="\[${gitcolor}\]\$(__git_ps1 '%s ')\[${NC}\]"
   fi
 
-  export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${screen}${git}$(echo -ne "\xe2\x87\x89") "
+  export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${gitps1}$(echo -ne "\xe2\x87\x89") "
 
 }
 
@@ -49,11 +41,11 @@ if $IS_OSX; then
   case "$TERM_PROGRAM" in
     Apple_Terminal|xterm*|iTerm*) color_prompt ;;
   esac
+else
+  case "$TERM" in
+    xterm*|screen*) color_prompt ;;
+  esac
 fi
-
-case "$TERM" in
-  xterm*|screen*) color_prompt ;;
-esac
 
 
 unset make_prompt EXT_COLOR

@@ -22,5 +22,3 @@ if [[ $- == *i* ]] ; then
 else
   export IS_INTERACTIVE=false
 fi
-
-
