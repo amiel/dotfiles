@@ -22,3 +22,5 @@ if [[ $- == *i* ]] ; then
 else
   export IS_INTERACTIVE=false
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
