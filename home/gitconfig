@@ -1,0 +1,107 @@
+
+[user]
+  name = Amiel Martin
+  email = amiel@carnesmedia.com
+
+
+[diff "exif"]
+  # brew install exiftool
+  textconv = exiftool
+
+
+[core]
+  # editor         = mate -w
+  # I'd rather edit my commit messages in vim.
+  # Use the above for textmate
+  editor           = vim
+  filemode         = true
+  logallrefupdates = true
+  whitespace       = fix, space-before-tab, trailing-space
+  quotepath = false
+  excludesfile = ~/.gitignore_global
+
+[merge]
+  tool = opendiff
+
+[color]
+  branch    = auto
+  diff      = auto
+  status    = auto
+[color "branch"]
+  current   = yellow reverse
+  local     = yellow
+  remote    = green
+[color "diff"]
+  meta      = yellow bold
+  frag      = magenta bold
+  old       = red bold
+  new       = green bold
+[color "status"]
+  added     = yellow
+  changed   = green
+  untracked = cyan
+
+[color]
+  ui = true
+
+
+[branch]
+  autosetupmerge = true
+
+[push]
+  default = tracking
+
+[difftool "Kaleidoscope"]
+  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[diff]
+  tool = Kaleidoscope
+[mergetool]
+  keepBackup = false
+
+[advice]
+  pushNonFastForward = false
+
+
+
+[alias]
+  st      = status -sb
+  ci      = commit
+  aa      = add --all
+  dif     = diff --word-diff=color
+  dc      = diff --cached
+  br      = branch
+  brav    = branch -a -v
+  brv     = branch -v
+  co      = checkout
+  pullff  = pull --no-ff
+  ff      = merge --ff-only
+  l       = log --oneline --decorate --graph
+  lg      = log -p
+  ll      = log --pretty=oneline --abbrev-commit --max-count=15
+  browse  = !hub browse
+  compare = !hub compare
+  pom     = push origin master
+  ds      = diff --stat=160,120
+  fixup   = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  ri      = rebase --interactive --autosquash
+
+  # Fancy logging.
+  #   h = head
+  #   hp = head with patch
+  #   r = recent commits, only current branch
+  #   ra = recent commits, all reachable refs
+  #   l = all commits, only current branch
+  #   la = all commits, all reachable refs
+  head = !git l -1
+  h = !git head
+  hp = "!source ~/.githelpers && show_git_head"
+  r = !git l -30
+  ra = !git r --all
+  l = "!source ~/.githelpers && pretty_git_log"
+  la = !git l --all
+
+[heroku]
+  account = work
