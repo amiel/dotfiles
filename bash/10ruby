@@ -3,6 +3,7 @@ if [[ -s ~/.rvm/scripts/rvm ]]; then
   source ~/.rvm/scripts/rvm
 elif [[ -s /usr/local/rvm/scripts/rvm ]]; then
   source /usr/local/rvm/scripts/rvm
+  export POW_RVM_PATH=/usr/local/rvm/scripts/rvm
 fi
 
 # Enable pow to use .com domains that are in the /etc/hosts file.

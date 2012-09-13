@@ -37,7 +37,7 @@ function color_prompt {
 
 export PS1='\h:\u \W\$ '
 
-if $IS_OSX; then
+if $IS_OSX && [ ! -z "$TERM_PROGRAM" ]; then
   case "$TERM_PROGRAM" in
     Apple_Terminal|xterm*|iTerm*) color_prompt ;;
   esac
