@@ -28,7 +28,11 @@ function color_prompt {
   fi
 
   if __command_exists __git_ps1; then
-    local gitps1="\[${gitcolor}\]\$(__git_ps1 '%s ')\[${NC}\]"
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export GIT_PS1_SHOWSTASHSTATE=true
+    export GIT_PS1_SHOWUNTRACKEDFILES=true
+    export GIT_PS1_SHOWUPSTREAM=verbose # or auto?
+    local gitps1="\[${gitcolor}\]\$(__git_ps1 '(%s) ')\[${NC}\]"
   fi
 
   export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${gitps1}$(echo -ne "\xe2\x87\x89") "
