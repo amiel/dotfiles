@@ -1,4 +1,5 @@
 
+
 set nocompatible
 syntax enable
 set encoding=utf-8
@@ -16,14 +17,54 @@ set showmatch
 set incsearch
 set hlsearch
 
+set autoread                    "Reload files changed outside vim
+
+
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
+
+set winwidth=80
+set switchbuf=useopen,split
+set cursorline
+
+set scrolloff=4
+
+set ruler
+
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+if $VIM_CRONTAB == "true"
+set nobackup
+set nowritebackup
+endif
+
+set wildmode=longest,list
+set wildmenu
+
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/cache
+set wildignore+=*.png,*.jpg,*.gif
+
+set showcmd
+
+set listchars=tab:>-,trail:· ",eol:$
+
 
 call pathogen#infect()
 
 let mapleader = ","
 
 
+" http://items.sjbach.com/319/configuring-vim-right
+runtime macros/matchit.vim
 
 
 " Edit or view files in same directory as current file	
@@ -34,10 +75,11 @@ map <leader>v :view %%
 
 " Command-T mappings
 
+"let g:CommandTMatchWindowAtTop=1
 
 
-" Open files with <leader>f
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+" Open files with <leader>h
+map <leader>h :CommandTFlush<cr>\|:CommandT<cr>
 " Open files, limited to the directory of the current file, with <leader>gf
 " This requires the %% mapping found below.
 map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
@@ -53,8 +95,8 @@ map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
 map <leader>gs :CommandTFlush<cr>\|:CommandT spec<cr>
 
 
-
-
+map <leader>gg :topleft 100 :split Gemfile<cr>
+map <leader>gr :topleft :split config/routes.rb<cr>
 
 " Rake Routes
 
@@ -81,7 +123,9 @@ map <leader>gR :call ShowRoutes()<cr>
 " COLOR
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:set background=dark
+":set background=dark
+:color Tomorrow-Night-Eighties
+" :color grb256
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,7 +164,7 @@ function! AlternateForCurrentFile()
   let new_file = current_file
   let in_spec = match(current_file, '^spec/') != -1
   let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') || match(current_file, '\<helpers\>') != -1
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
   if going_to_spec
     if in_app
       let new_file = substitute(new_file, '^app/', '', '')
@@ -203,4 +247,17 @@ function! RunTests(filename)
 endfunction
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
 
