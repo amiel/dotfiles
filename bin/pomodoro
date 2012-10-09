@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+#
+# for use with ugol's pomodoro app (https://github.com/ugol/pomodoro) and tmux
+# use applescript to set the time
+# How to use it:
+
+# 1. Open preferences from the pomodoro app
+# 2. Choose script
+# 3. Set start, reset and end to: do shell script "/usr/local/bin/pomodoro reset"
+# 4. set every 1 min to: do shell script "/usr/local/bin/pomodoro decrease"
+# 5. in .tmux.conf set set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time) min"
+
+class Pomodoro
+  TIME_FILE = File.expand_path('~/.pomodoro_left_time')
+  attr_accessor :time_file
+
+  def initialize(time_file=TIME_FILE)
+    @time_file = time_file
+  end
+
+  def reset_timer(value=25)
+    write_time_to_file(value-1)
+  end
+
+  def current_time
+    read_time_from_file
+  end
+
+  def decrease(step=1)
+    new_time = current_time-1
+    write_time_to_file(new_time)
+  end
+
+  def read_time_from_file
+    time = nil
+    f = File.open(@time_file) do |f|
+      time = f.read.to_i
+    end
+    time
+  end
+
+  def write_time_to_file(value)
+    f = File.open(@time_file, "w") do |f|
+      f.write(value)
+    end
+    value
+  end
+end
+
+command = ARGV.shift || 'time'
+p = Pomodoro.new
+case command
+when 'time'
+  puts "#{ p.current_time }m left"
+when 'decrease'
+  p.decrease
+when 'reset'
+  p.reset_timer
+when 'running'
+  exit ! p.current_time.zero?
+end
+
