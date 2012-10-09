@@ -23,7 +23,7 @@ class Pomodoro
   end
 
   def current_time
-    read_time_from_file
+    read_time_from_file - 1
   end
 
   def decrease(step=1)
@@ -31,10 +31,27 @@ class Pomodoro
     write_time_to_file(new_time)
   end
 
+  def break
+    write_time_to_file('break')
+  end
+
+  def finish
+    write_time_to_file('')
+  end
+
+  def to_s
+    time = read_time_from_file
+    if time.match(/\d/)
+      "#{ time }m left"
+    else
+      time
+    end
+  end
+
   def read_time_from_file
     time = nil
     f = File.open(@time_file) do |f|
-      time = f.read.to_i
+      time = f.read
     end
     time
   end
@@ -51,11 +68,15 @@ command = ARGV.shift || 'time'
 p = Pomodoro.new
 case command
 when 'time'
-  puts "#{ p.current_time }m left"
+  puts p
 when 'decrease'
   p.decrease
 when 'reset'
   p.reset_timer
+when 'break'
+  p.break
+when 'end'
+  p.finish
 when 'running'
   exit ! p.current_time.zero?
 end
