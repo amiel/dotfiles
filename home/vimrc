@@ -35,7 +35,7 @@ set winminheight=5
 set winheight=999
 
 set switchbuf=useopen,split
-set cursorline
+" set cursorline
 
 set scrolloff=4
 
@@ -67,7 +67,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :set background=dark
-:color Tomorrow-Night-Eighties
+" :color Tomorrow-Night-Eighties
 " :color grb256
 
 
@@ -92,7 +92,7 @@ set listchars=tab:>-,trail:· ",eol:$
 runtime macros/matchit.vim
 
 
-" Edit or view files in same directory as current file	
+" Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
@@ -104,20 +104,23 @@ map <leader>v :view %%
 
 
 " Open files with <leader>h
-map <leader>h :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>h :CommandT<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 " Open files, limited to the directory of the current file, with <leader>gf
 " This requires the %% mapping found below.
-map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
-map <leader>gb :CommandTFlush<cr>\|:CommandTBuffer<cr>
+map <leader>nf :CommandTFlush<cr>\|:CommandT %%<cr>
+map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT spec<cr>
+map <leader>nad :CommandT app/admin<cr>
+map <leader>nas :CommandT app/assets<cr>
+map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>nh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
+map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
+map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
+map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
 
 
 map <leader>gg :topleft 100 :split Gemfile<cr>
@@ -143,19 +146,12 @@ function! ShowRoutes()
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COLOR
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set t_Co=256 " 256 colors
-":set background=dark
-:color Tomorrow-Night-Eighties
-" :color grb256
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <space> zz
+
+
 map <leader>y "*y
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
