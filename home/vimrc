@@ -216,8 +216,7 @@ map <leader>gR :call ShowRoutes()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! OpenTestAlternate()
   let new_file = AlternateForCurrentFile()
@@ -226,7 +225,10 @@ endfunction
 function! AlternateForCurrentFile()
   let current_file = expand("%")
   let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
+  let in_engine = match(current_file, '^engines') != -1
+
+  let in_spec = match(current_file, '^spec/') != -1 ||
+        \ match(current_file, '^engines/.\+/spec/') != -1
   let going_to_spec = !in_spec
   let in_app = match(current_file, '\<controllers\>') != -1 ||
         \ match(current_file, '\<models\>') != -1 ||
@@ -234,18 +236,23 @@ function! AlternateForCurrentFile()
         \ match(current_file, '\<helpers\>') != -1 ||
         \ match(current_file, '\<decorators\>') != -1 ||
         \ match(current_file, '\<presenters\>') != -1
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
+
+  if in_engine
+    exec ":A"
   else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
+    if going_to_spec
+      if in_app
+        let new_file = substitute(new_file, '^app/', '', '')
+      end
+      let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+      let new_file = 'spec/' . new_file
+    else
+      let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+      let new_file = substitute(new_file, '^spec/', '', '')
+      if in_app
+        let new_file = 'app/' . new_file
+      end
+    endif
   endif
   return new_file
 endfunction
