@@ -10,6 +10,8 @@ set mouse=a
 set hidden
 filetype plugin indent on
 
+" set shortmess=atI
+
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -19,6 +21,8 @@ set laststatus=2
 set showmatch
 set incsearch
 set hlsearch
+
+set history=1000
 
 set autoread                    "Reload files changed outside vim
 
