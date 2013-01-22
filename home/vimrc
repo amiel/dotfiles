@@ -7,6 +7,8 @@ set nocompatible
 syntax enable
 set encoding=utf-8
 set mouse=a
+" Keep open files hidden (doesn't require you to save files to switch away
+" from them)
 set hidden
 filetype plugin indent on
 
@@ -15,6 +17,13 @@ filetype plugin indent on
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+
+set wrap
+set textwidth=80
+set formatoptions=qcron1
+set colorcolumn=96
+
+set cursorline
 
 set autoindent
 set laststatus=2
@@ -26,7 +35,8 @@ set history=1000
 
 set autoread                    "Reload files changed outside vim
 
-set nu " show numbers
+set number " show numbers
+set relativenumber " but relative to the cursor
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
@@ -45,11 +55,15 @@ set scrolloff=4
 
 "set ruler
 
+" keep undo information even after we quit
+set undofile
+
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 if $VIM_CRONTAB == "true"
+  " VIM_CRONTAB=true crontab -e
   set nobackup
   set nowritebackup
 endif
@@ -59,7 +73,7 @@ set wildmenu
 
 set showcmd
 
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 
 set wildignore+=*vim/backups*
@@ -72,7 +86,7 @@ set wildignore+=log/**
 set wildignore+=tmp/cache
 set wildignore+=*.png,*.jpg,*.gif
 
-
+set list
 set listchars=tab:>-,trail:· ",eol:$
 
 
@@ -80,6 +94,7 @@ set listchars=tab:>-,trail:· ",eol:$
 
 
 " http://items.sjbach.com/319/configuring-vim-right
+" extends % to match more things correctly
 runtime macros/matchit.vim
 
 
@@ -104,11 +119,9 @@ endif
 " :color Tomorrow-Night-Eighties
 " :color grb256
 
-
-
-set cursorline
-hi cursorline cterm=bold ctermbg=233
-hi LineNr ctermfg=238
+hi ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
+hi cursorline cterm=bold ctermbg=234
+hi LineNr ctermfg=239
 
 
 
@@ -116,14 +129,20 @@ hi LineNr ctermfg=238
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" center cursor position in screen
 nmap <space> zz
 
 map <leader>y "*y
+
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" New vertical split, switch to it
+nnoremap <leader>w <C-w>v<C-w>l
 
 " tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
@@ -149,6 +168,10 @@ vnoremap > >gv
 
 nmap <silent> <leader>/ :nohlsearch<CR>
 nnoremap <leader><leader> <c-^>
+
+" Use real regexes for searches
+nnoremap / /\v
+vnoremap / /\v
 
 map ,= mzgg=G`z
 
@@ -270,7 +293,6 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
     if a:0
