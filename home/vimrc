@@ -99,7 +99,15 @@ set listchars=tab:>-,trail:· ",eol:$
 " extends % to match more things correctly
 runtime macros/matchit.vim
 
+"""""""""""""""""""""""""""""""""""
+" Show coverage report if it exists
+"""""""""""""""""""""""""""""""""""
 
+function! SetupCoverage()
+  if filereadable("coverage.vim")
+    source coverage.vim
+  endif
+endfunction
 
 if has("autocmd")
   " Remove trailing whitespace on save
@@ -110,7 +118,9 @@ if has("autocmd")
 
   autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
   autocmd FileType rb set makeprg=rake
+  autocmd FileType ruby call SetupCoverage()
 endif
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
