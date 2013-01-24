@@ -132,9 +132,10 @@ endif
 " :color grb256
 
 hi ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
-hi cursorline cterm=bold ctermbg=234
+hi cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
 hi LineNr ctermfg=239
-
+hi SpecialKey term=NONE ctermfg=238 guifg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 
 
 
