@@ -191,6 +191,8 @@ vnoremap / /\v
 map ,= mzgg=G`z
 
 nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
+nnoremap  ,i :call ri#OpenSearchPrompt(0)<cr> " horizontal split
+
 
 
 
@@ -240,7 +242,7 @@ function! ShowRoutes()
   " Put routes output in buffer
   :0r! rake -s routes
   " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . _ "
+  " :exec ":normal " . line("$") . _ "
   " Move cursor to bottom
   :normal 1GG
   " Delete empty trailing line
