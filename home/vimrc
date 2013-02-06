@@ -190,16 +190,28 @@ vnoremap / /\v
 
 map ,= mzgg=G`z
 
-nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
-nnoremap  ,i :call ri#OpenSearchPrompt(0)<cr> " horizontal split
-
-
 
 
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
+
+
+nnoremap  ,i :call ri#OpenSearchPrompt(0)<cr>
+
+
+" nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
+nmap <buffer> <leader>r   <Plug>(xmpfilter-run)
+
+nmap <buffer> <F5> <Plug>(xmpfilter-run)
+xmap <buffer> <F5> <Plug>(xmpfilter-run)
+imap <buffer> <F5> <Plug>(xmpfilter-run)
+
+nmap <buffer> <F6> <Plug>(xmpfilter-mark)
+xmap <buffer> <F6> <Plug>(xmpfilter-mark)
+imap <buffer> <F6> <Plug>(xmpfilter-mark)
+
 
 
 " Command-T mappings
@@ -258,6 +270,7 @@ map <leader>gR :call ShowRoutes()<cr>
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" TODO: Make better for handling test/unit, etc
 function! OpenTestAlternate()
   let new_file = AlternateForCurrentFile()
   exec ':e ' . new_file
@@ -275,9 +288,11 @@ function! AlternateForCurrentFile()
         \ match(current_file, '\<views\>') != -1 ||
         \ match(current_file, '\<helpers\>') != -1 ||
         \ match(current_file, '\<decorators\>') != -1 ||
-        \ match(current_file, '\<presenters\>') != -1
+        \ match(current_file, '\<presenters\>') != -1 ||
+        \ match(current_file, '\<uploaders\>') != -1
 
   if in_engine
+    " TODO: use :A for test/unit, etc
     exec ":A"
   else
     if going_to_spec
