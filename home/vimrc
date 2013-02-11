@@ -311,7 +311,12 @@ function! AlternateForCurrentFile()
   endif
   return new_file
 endfunction
-nnoremap <leader>. :call OpenTestAlternate()<cr>
+
+" Trying out just :A always to see how that goes
+" Maybe I'll end up wanting it for rails projects, but then OpenTestAlternate
+" for non-rails projects
+nnoremap <leader>. :A<cr>
+":call OpenTestAlternate()<cr>
 
 
 
