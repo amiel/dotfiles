@@ -25,3 +25,6 @@
 [submodule "home/vim/bundle/vim-ruby-xmpfilter"]
 	path = home/vim/bundle/vim-ruby-xmpfilter
 	url = git@github.com:t9md/vim-ruby-xmpfilter.git
+[submodule "home/vim/bundle/vim-less"]
+	path = home/vim/bundle/vim-less
+	url = https://github.com/groenewege/vim-less.git
