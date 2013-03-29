@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby -rubygems
+
+require 'digiusb/digiblink'
+
+# TODO:
+COLORS = {
+  'success' => 'green',
+  'failed'  => 'red',
+  'pending' => '#ff5500',
+  'off'     => 'black',
+  'default' => 'black',
+}
+
+def get_spark
+  @spark ||= DigiBlink.sparks.last
+end
+
+def set_color(color)
+  get_spark.color = color
+# rescue LIBUSB::ERROR_NO_DEVICE
+#   @light = nil
+end
+
+color = COLORS.fetch(ARGV[0]) do |key|
+  begin
+    key.to_color; key
+  rescue ArgumentError, NoMethodError
+    COLORS['default']
+  end
+end
+
+puts "DIGIRGB: #{color}"
+
+if ARGV[1] == '--blink'
+  set_color('black')
+  sleep 1
+end
+
+set_color(color)

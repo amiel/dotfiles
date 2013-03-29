@@ -1,0 +1,10 @@
+#!/bin/bash
+
+digicolor black
+
+if eval "$@";then
+  digicolor success
+else
+  digicolor failed
+fi
+
