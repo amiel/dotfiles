@@ -14,6 +14,8 @@ filetype plugin indent on
 
 " set shortmess=atI
 
+set nrformats=octal,hex,alpha
+
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -138,6 +140,16 @@ hi SpecialKey term=NONE ctermfg=238 guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
 
+highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
+highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
+highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
+highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
+
+" from something else...
+" highlight! link DiffText MatchParen
+
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -224,7 +236,7 @@ map <leader>h :CommandT<cr>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 " Open files, limited to the directory of the current file, with <leader>gf
 " This requires the %% mapping found below.
-map <leader>nf :CommandTFlush<cr>\|:CommandT %%<cr>
+map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
 map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
 map <leader>nad :CommandT app/admin<cr>
@@ -232,7 +244,7 @@ map <leader>nas :CommandT app/assets<cr>
 map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
 map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>nh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+" map <leader>nh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
 map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
 map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
 map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
@@ -302,8 +314,8 @@ function! AlternateForCurrentFile()
       let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
       let new_file = 'spec/' . new_file
     else
-      let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-      let new_file = substitute(new_file, '^spec/', '', '')
+      let new_file = substitute(new_file, '\(_spec\|_test\)\.rb$', '.rb', '')
+      let new_file = substitute(new_file, '^\(spec\|test\)/', '', '')
       if in_app
         let new_file = 'app/' . new_file
       end
@@ -315,8 +327,8 @@ endfunction
 " Trying out just :A always to see how that goes
 " Maybe I'll end up wanting it for rails projects, but then OpenTestAlternate
 " for non-rails projects
-nnoremap <leader>. :A<cr>
-":call OpenTestAlternate()<cr>
+" nnoremap <leader>. :A<cr>
+nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 
 
@@ -339,7 +351,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -378,6 +390,8 @@ function! RunTests(filename)
             exec ":!rspec --color " . a:filename
         end
     end
+
+    redraw!
 endfunction
 
 
@@ -391,7 +405,7 @@ function! InsertTabWrapper()
     if !col || getline('.')[col - 1] !~ '\k'
         return "\<tab>"
     else
-        return "\<c-p>"
+        return "\<c-n>"
     endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
