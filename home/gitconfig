@@ -21,7 +21,7 @@
   excludesfile = ~/.gitignore_global
 
 [merge]
-	tool = Kaleidoscope
+ tool = fugitive
 
 [color]
   branch    = auto
@@ -59,7 +59,7 @@
 	tool = Kaleidoscope
 [mergetool]
   keepBackup = false
-	prompt = false
+  prompt = false
 
 [advice]
   pushNonFastForward = false
@@ -111,3 +111,5 @@
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+[credential]
+	helper = osxkeychain
