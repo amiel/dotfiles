@@ -28,3 +28,6 @@
 [submodule "home/vim/bundle/vim-less"]
 	path = home/vim/bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
+[submodule "home/vim/bundle/vim-tbone"]
+	path = home/vim/bundle/vim-tbone
+	url = git://github.com/tpope/vim-tbone.git
