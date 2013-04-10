@@ -77,6 +77,7 @@
   brv     = branch -v
   co      = checkout
   pullff  = pull --no-ff
+  purr    = pull ––rebase
   ff      = merge --ff-only
   l       = log --oneline --decorate --graph
   lg      = log -p
@@ -88,6 +89,7 @@
   fixup   = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   ri      = rebase --interactive --autosquash
+  standup = !git log –-since yesterday –-author `git config user.email` -–pretty=short
 
   # Fancy logging.
   #   h = head
