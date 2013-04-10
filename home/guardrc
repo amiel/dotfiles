@@ -1,0 +1,2 @@
+Pry.commands.block_command /^$/, 'Do nothing' do
+end
