@@ -1,8 +1,10 @@
 
 if [[ -s ~/.rvm/scripts/rvm ]]; then
   source ~/.rvm/scripts/rvm
+  PATH=$PATH:$HOME/.rvm/bin
 elif [[ -s /usr/local/rvm/scripts/rvm ]]; then
   source /usr/local/rvm/scripts/rvm
+  PATH=$PATH:/usr/local/rvm/bin
   export POW_RVM_PATH=/usr/local/rvm/scripts/rvm
 fi
 

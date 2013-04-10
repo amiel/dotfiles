@@ -1,5 +1,4 @@
 
-
 # set -x
 
 # Put your secret/local environment variables in .env
@@ -23,5 +22,8 @@ else
   export IS_INTERACTIVE=false
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
+
+if [[ -f ~/Dropbox/dotfiles/bash/10ruby ]];then
+  source ~/Dropbox/dotfiles/bash/10ruby
+fi
+
