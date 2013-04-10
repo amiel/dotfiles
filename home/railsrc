@@ -1,2 +1,0 @@
--T # Don't use Test::Unit
---database=postgresql # Use postgresql
