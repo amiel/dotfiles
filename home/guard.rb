@@ -2,10 +2,12 @@
 notification(:file, path: '.guard_result')
 
 # On start => false?
-guard(:shell) do
-  watch('.guard_result') do
-    ::Bundler.with_clean_env do
-      `digicolor $(head -1 .guard_result) --blink`
+::Bundler.with_clean_env do
+  guard(:shell) do
+    watch('.guard_result') do
+      ::Bundler.with_clean_env do
+        `digicolor $(head -1 .guard_result) --blink`
+      end
     end
   end
 end

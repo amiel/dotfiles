@@ -1,3 +1,4 @@
 .guard_results
+.guard_result
 Gemfile.local
 Gemfile.local.lock

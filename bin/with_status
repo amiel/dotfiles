@@ -3,8 +3,8 @@
 digicolor black
 
 if eval "$@";then
-  digicolor success
+  digicolor blue
 else
-  digicolor failed
+  digicolor '#ff0009'
 fi
 
