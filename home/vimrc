@@ -210,9 +210,6 @@ map <leader>e :edit %%
 map <leader>v :view %%
 
 
-nnoremap  ,i :call ri#OpenSearchPrompt(0)<cr>
-
-
 " nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
 nmap <buffer> <leader>r   <Plug>(xmpfilter-run)
 
