@@ -166,6 +166,12 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+nnoremap <c-=> <c-w>+
+nnoremap <c-+> <c-w>+
+nnoremap <c--> <c-w>-
+
+
+
 " New vertical split, switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 " New horiz split, switch to it
@@ -367,28 +373,29 @@ function! SetTestFile()
     let t:grb_test_file=@%
 endfunction
 
-function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    :w
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
-    end
+function! DispatchTests(command)
+  let command = a:command
 
-    redraw!
+  " if filereadable(".ruby-version")
+  "   let ruby_version = "`cat .ruby-version`"
+  "   if filereadable(".ruby-gemset")
+  "     let ruby_version = ruby . "@`cat .ruby-gemset`"
+  "   endif
+  " endif
+
+
+  exec ":Dispatch " . a:command
+endfunction
+
+function! RunTests(filename)
+    :w
+    if filereadable("script/test")
+      call DispatchTests("script/test " . a:filename)
+    elseif filereadable("Gemfile")
+      call DispatchTests("bundle exec rspec --color " . a:filename)
+    else
+      call DispatchTests("rspec --color " . a:filename)
+    end
 endfunction
 
 
