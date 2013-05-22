@@ -16,7 +16,7 @@ def get_spark
 end
 
 def set_color(color)
-  get_spark.color = color
+  get_spark.color = color if get_spark
 # rescue LIBUSB::ERROR_NO_DEVICE
 #   @light = nil
 end
