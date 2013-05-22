@@ -1,7 +1,7 @@
 
 [user]
-	name = Amiel Martin
-	email = amiel.martin@gmail.com
+  name = Amiel Martin
+  email = amiel.martin@gmail.com
 
 
 [diff "exif"]
@@ -19,6 +19,7 @@
   whitespace       = fix, space-before-tab, trailing-space
   quotepath = false
   excludesfile = ~/.gitignore_global
+	attributesfile = /Users/amiel/.gitattributes
 
 [merge]
  tool = fugitive
@@ -52,11 +53,11 @@
   default = tracking
 
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
-	prompt = false
+  prompt = false
 [diff]
-	tool = Kaleidoscope
+  tool = Kaleidoscope
 [mergetool]
   keepBackup = false
   prompt = false
@@ -65,6 +66,20 @@
   pushNonFastForward = false
 
 
+[merge "railsschema"]
+  name = newer Rails schema version
+  driver = "ruby -e '\n\
+    system %(git), %(merge-file), %(--marker-size=%L), %(%A), %(%O), %(%B)\n\
+    b = File.read(%(%A))\n\
+    b.sub!(/^<+ .*\\nActiveRecord::Schema\\.define.:version => (\\d+). do\\n=+\\nActiveRecord::Schema\\.define.:version => (\\d+). do\\n>+ .*/) do\n\
+      %(ActiveRecord::Schema.define(:version => #{[$1, $2].max}) do)\n\
+    end\n\
+    File.open(%(%A), %(w)) {|f| f.write(b)}\n\
+    exit 1 if b.include?(%(<)*%L)'"
+
+[merge "gemfilelock"]
+  name = relocks the gemfile.lock
+  driver = bundle lock
 
 [alias]
   st      = status -sb
@@ -106,12 +121,10 @@
   l = "!source ~/.githelpers && pretty_git_log"
   la = !git l --all
 
-[heroku]
-  account = work
 [mergetool "fugitive"]
   cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain

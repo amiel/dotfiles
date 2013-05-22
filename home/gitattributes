@@ -1,1 +1,4 @@
 *.png diff=exif
+db/schema.rb merge=railsschema
+Gemfile.lock merge=gemfilelock
+
