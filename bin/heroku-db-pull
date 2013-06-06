@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+# Quit on failure
+set -e
+
+# Fail on undefined vairables
+set -o nounset
+
+# Sets DB_ADAPTER="postresql" etc
+eval $(ruby -ryaml -e 'YAML.load_file("config/database.yml")["development"].each { |k,v| puts "DB_#{k.upcase}=\"#{v}\"" }')
+
+if [ "$DB_ADAPTER" != "postgresql" ];then
+  echo "Only works with postgresql"
+  exit 1
+fi
+
+app=`heroku info "$@"|head -1|awk '{print $2}'`
+
+if [ -z "$app" ];then
+  echo "No app name found"
+  exit 1
+fi
+
+echo "Using app name: $app"
+
+heroku pgbackups:capture --expire "$@"
+
+url="`heroku pgbackups:url "$@"`"
+file="db/$app.pgdump"
+curl -o "$file" "$url"
+
+
+pg_restore --verbose --clean --no-acl --no-owner -h $DB_HOST -U $DB_USERNAME -d $DB_DATABASE $file
