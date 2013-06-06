@@ -3,6 +3,7 @@ call pathogen#infect()
 
 let mapleader = ","
 
+
 set nocompatible
 syntax enable
 set encoding=utf-8
@@ -121,6 +122,15 @@ if has("autocmd")
   autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
   autocmd FileType rb set makeprg=rake
   autocmd FileType ruby call SetupCoverage()
+
+  " if exists("did_load_filetypes")
+  "   finish
+  " endif
+  set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
+
+  augroup filetypedetect
+    au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
+  augroup END
 endif
 
 
