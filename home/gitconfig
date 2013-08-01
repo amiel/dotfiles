@@ -99,7 +99,7 @@
   ll      = log --pretty=oneline --abbrev-commit --max-count=15
   browse  = !hub browse
   compare = !hub compare
-  pom     = push origin master
+  pom     = push -u origin master
   ds      = diff --stat=160,120
   fixup   = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
