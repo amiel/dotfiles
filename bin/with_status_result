@@ -1,0 +1,5 @@
+# Call with $?
+# Example:
+#
+#   false; with_status_result $?
+with_status "( exit $1 )"

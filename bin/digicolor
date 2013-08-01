@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby -rubygems
 
+# :P
+# exit
+
 require 'digiusb/digiblink'
 
 # TODO:
@@ -11,12 +14,17 @@ COLORS = {
   'default' => 'black',
 }
 
+# DigiUSB.refresh
+
 def get_spark
   @spark ||= DigiBlink.sparks.last
 end
 
 def set_color(color)
   get_spark.color = color if get_spark
+# rescue LIBUSB::ERROR_IO
+  # @light = nil
+  # DigiUSB.refresh
 # rescue LIBUSB::ERROR_NO_DEVICE
 #   @light = nil
 end
