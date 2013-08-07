@@ -15,7 +15,7 @@ filetype plugin indent on
 
 " set shortmess=atI
 
-set nrformats=octal,hex,alpha
+set nrformats=hex,alpha
 
 set expandtab
 set shiftwidth=2
@@ -28,15 +28,7 @@ set colorcolumn=96
 
 set cursorline
 
-set autoindent
-set laststatus=2
-set showmatch
-set incsearch
 set hlsearch
-
-set history=1000
-
-set autoread                    "Reload files changed outside vim
 
 set number " show numbers
 set relativenumber " but relative to the cursor
@@ -76,8 +68,6 @@ endif
 set wildmode=longest,list
 set wildmenu
 
-set showcmd
-
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 
@@ -92,7 +82,7 @@ set wildignore+=tmp/cache
 set wildignore+=*.png,*.jpg,*.gif
 
 set list
-set listchars=tab:>-,trail:· ",eol:$
+" set listchars=tab:>-,trail:· ",eol:$
 
 
 
