@@ -34,3 +34,6 @@
 [submodule "home/vim/bundle/vim-tmux-navigator"]
 	path = home/vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "home/vim/bundle/vim-sensible"]
+	path = home/vim/bundle/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
