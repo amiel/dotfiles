@@ -1,3 +1,6 @@
 #!/bin/bash
 
+ROOT=$(dirname "${BASH_SOURCE}")
+PATH="$PATH:/usr/local/rvm/bin:$ROOT"
+
 rvm ruby-2.0.0-p247 do digicolor black
