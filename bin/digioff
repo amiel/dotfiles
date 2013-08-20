@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rvm ruby-2.0.0-p247 do digicolor black
