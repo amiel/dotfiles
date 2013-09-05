@@ -2,3 +2,4 @@
 .guard_result
 Gemfile.local
 Gemfile.local.lock
+tags
