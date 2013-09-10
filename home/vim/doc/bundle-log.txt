@@ -1,0 +1,145 @@
+*bundle-log.txt*                   Bundle Install Log
+
+
+Logs bundle install activity. Also see the list of installed |bundles|.
+
+Tue Sep 10 12:58:12 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-pathogen|             v2.2-8-g1270dce    https://github.com/tpope/vim-pathogen.git
+ Del |ag|                       b0d50730dbf69
+ Del |command-t|                1.4-11-g56c19c4
+ Del |fugitive|                 v1.2-195-gf6d93b8
+ Del |vim-blockle|              9bb9394ca70c2
+ Del |vim-coffee-script|        v002-34-g089506e
+ Del |vim-commentary|           v1.1-9-ga3ae0df
+ Del |vim-dispatch|             v1.0-14-g7af3fd5
+ Del |vim-endwise|              v1.0-20-g9f05e4c
+ Del |vim-handlebars|           30f7f7d45c10b
+ Del |vim-javascript|           f07cc6708f628
+ Del |vim-less|                 1b37c0d7cc0f7
+ Del |vim-rails|                v4.4-400-g74f407e
+ Del |vim-repeat|               v1.0-14-ga81bef7
+ Del |vim-ruby-xmpfilter|       0fc06d6e0c799
+ Del |vim-sensible|             v1.0-35-g92c7ee7
+ Del |vim-surround|             v1.90-35-g02199ea
+ Del |vim-tbone|                245b783ecf922
+ Del |vim-tmux-navigator|       1c32f8dae720a
+   1 bundle added, 18 bundles removed
+
+Tue Sep 10 13:10:29 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/rking/ag.git ag' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:11:18 PDT 2013 by vim-update-bundles 0.8
+ Add |ag.vim|                   b0d50730dbf69      https://github.com/rking/ag.vim.git
+   1 bundle added
+
+Tue Sep 10 13:11:28 PDT 2013 by vim-update-bundles 0.8
+   no updates
+
+Tue Sep 10 13:12:00 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/command-t.git command-t' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:13:39 PDT 2013 by vim-update-bundles 0.8
+ Add |Command-T|                1.3.1              https://github.com/vim-scripts/Command-T.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/fugitive.git fugitive' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:27:08 PDT 2013 by vim-update-bundles 0.8
+ bundle for command-t changed from https://github.com/vim-scripts/Command-T.git to https://git.wincent.com/command-t.git
+
+ Del |command-t|                1.3.1
+ Aborted: 'git clone -q https://git.wincent.com/command-t.git command-t' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:28:06 PDT 2013 by vim-update-bundles 0.8
+ Add |Command-T|                1.3.1              https://github.com/vim-scripts/Command-T.git
+ Aborted: BundleCommand cd Command-T && rake make in /Users/amiel/Dropbox/dotfiles/home/vim/bundle failed!
+
+Tue Sep 10 13:29:27 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-sensible.git vim-sensible' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:29:41 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-sensible|             v1.0-35-g92c7ee7   https://github.com/tpope/vim-sensible.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-tmux-navigator.git vim-tmux-navigator' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:30:42 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-tmux-navigator|       1c32f8dae720a      https://github.com/christoomey/vim-tmux-navigator.git
+ Aborted: BundleCommand cd command-t && rake make in /Users/amiel/Dropbox/dotfiles/home/vim/bundle failed!
+
+Tue Sep 10 13:31:22 PDT 2013 by vim-update-bundles 0.8
+ Aborted: BundleCommand pwd && cd command-t && rake make in /Users/amiel/Dropbox/dotfiles/home/vim/bundle failed!
+
+Tue Sep 10 13:31:39 PDT 2013 by vim-update-bundles 0.8
+ Aborted: BundleCommand rake make in /Users/amiel/Dropbox/dotfiles/home/vim/bundle failed!
+
+Tue Sep 10 13:33:14 PDT 2013 by vim-update-bundles 0.8
+ bundle for Command-T changed from https://github.com/vim-scripts/Command-T.git to https://github.com/wincent/Command-T.git
+
+ Del |Command-T|                1.3.1
+ Add |Command-T|                1.4-11-g8866bbc    https://github.com/wincent/Command-T.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-rails.git vim-rails' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:33:51 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-rails|                v5.0-13-gbdc3238   https://github.com/tpope/vim-rails.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-fugitive.git vim-fugitive' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:34:34 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/fugitive.git fugitive' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:34:44 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-fugitive|             v1.2-207-g124550c  https://github.com/tpope/vim-fugitive.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-blockle.git vim-blockle' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:35:27 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-blockle|              v0.4-8-g8ebaa60    https://github.com/jgdavey/vim-blockle.git
+ Add |vim-coffee-script|        v002               https://github.com/vim-scripts/vim-coffee-script.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-commentary.git vim-commentary' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:35:47 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/commentary.git commentary' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:35:53 PDT 2013 by vim-update-bundles 0.8
+ Add |commentary.vim|           1.1                https://github.com/vim-scripts/commentary.vim.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-dispatch.git vim-dispatch' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:36:07 PDT 2013 by vim-update-bundles 0.8
+ Add |fugitive.vim|             1.2                https://github.com/vim-scripts/fugitive.vim.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-dispatch.git vim-dispatch' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:36:31 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-dispatch|             v1.0-23-g6a88e79   https://github.com/tpope/vim-dispatch.git
+ Add |endwise.vim|              1.1                https://github.com/vim-scripts/endwise.vim.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-handlebars.git vim-handlebars' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:37:01 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/handlebars.vim.git handlebars.vim' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:37:08 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/handlebars.vim.git handlebars.vim' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:37:11 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/handlebars.git handlebars' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:37:19 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-handlebars|           30f7f7d45c10b      https://github.com/nono/vim-handlebars.git
+ Add |javascript.vim|           0.9                https://github.com/vim-scripts/javascript.vim.git
+ Add |less.vim|                 1.1                https://github.com/vim-scripts/less.vim.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-repeat.git vim-repeat' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:37:42 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/tpop/vim-repeat.git vim-repeat' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:38:13 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-repeat|               v1.1               https://github.com/tpope/vim-repeat.git
+ Add |vim-ruby-xmpfilter|       d3ab51297eeb8      https://github.com/t9md/vim-ruby-xmpfilter.git
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-surround.git vim-surround' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:38:24 PDT 2013 by vim-update-bundles 0.8
+ Aborted: 'git clone -q https://github.com/vim-scripts/vim-surround.git vim-surround' in /Users/amiel/Dropbox/dotfiles/home/vim/bundle exited with code 128
+
+Tue Sep 10 13:38:58 PDT 2013 by vim-update-bundles 0.8
+ Add |vim-surround|             v2.0-4-g9bf527a    https://github.com/tpope/vim-surround.git
+ Add |vim-tbone|                v1.1-2-g1505b77    https://github.com/tpope/vim-tbone.git
+ Del |vim-fugitive|             v1.2-207-g124550c
+   2 bundles added, 1 bundle removed
+
+Tue Sep 10 13:39:06 PDT 2013 by vim-update-bundles 0.8
+   no updates
+

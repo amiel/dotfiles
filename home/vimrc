@@ -1,5 +1,28 @@
-
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+" Bundle: tpope/vim-pathogen
 call pathogen#infect()
+
+
+" Bundle: tpope/vim-sensible
+" Bundle: christoomey/vim-tmux-navigator
+" Bundle: wincent/Command-T
+" BundleCommand: rvm system do rake make
+" Bundle: tpope/vim-rails
+" Bundle: rking/ag.vim
+" Bundle: fugitive.vim
+" Bundle: jgdavey/vim-blockle
+" Bundle: vim-coffee-script
+" Bundle: commentary.vim
+" Bundle: tpope/vim-dispatch
+" Bundle: endwise.vim
+" Bundle: nono/vim-handlebars
+" Bundle: javascript.vim
+" Bundle: less.vim
+" Bundle: tpope/vim-repeat
+" Bundle: t9md/vim-ruby-xmpfilter
+" Bundle: tpope/vim-surround
+" Bundle: tpope/vim-tbone
+
 
 let mapleader = ","
 
