@@ -271,7 +271,6 @@ map <leader>nas :CommandT app/assets<cr>
 map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
 map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
-" map <leader>nh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
 map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
 map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
 map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
@@ -280,6 +279,18 @@ map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
 
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>gr :topleft :split config/routes.rb<cr>
+
+map <leader>ne :call CommandTInRailsEngine()<cr>
+map <leader>gR :call ShowRoutes()<cr>
+
+function CommandTInRailsEngine()
+    let in_engine_file = match(expand("%"), '^engines/.\+$') != -1
+
+    if in_engine_file
+      let engine_dir = substitute(expand("%"), '^\(engines/\w\+\)/.*$', '\1', '')
+      exec ":CommandT " . engine_dir
+    endif
+endfunction
 
 " Rake Routes
 
@@ -299,7 +310,6 @@ function! ShowRoutes()
   " Delete empty trailing line
   :normal dd
 endfunction
-map <leader>gR :call ShowRoutes()<cr>
 
 
 
