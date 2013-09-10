@@ -166,9 +166,9 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-nnoremap <c-=> <c-w>+
-nnoremap <c-+> <c-w>+
-nnoremap <c--> <c-w>-
+nnoremap <c-s> <c-w>j<c-w>=
+" nnoremap <c-+> <c-w>+
+" nnoremap <c--> <c-w>-
 
 
 
