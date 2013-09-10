@@ -2,6 +2,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Bundle: tpope/vim-pathogen
 call pathogen#infect()
 
+" vim-update-bundles
 
 " Bundle: tpope/vim-sensible
 " Bundle: christoomey/vim-tmux-navigator
