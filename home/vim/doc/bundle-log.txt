@@ -143,3 +143,10 @@ Tue Sep 10 13:38:58 PDT 2013 by vim-update-bundles 0.8
 Tue Sep 10 13:39:06 PDT 2013 by vim-update-bundles 0.8
    no updates
 
+Tue Sep 10 13:45:16 PDT 2013 by vim-update-bundles 0.8
+   no updates
+
+Tue Sep 10 13:57:31 PDT 2013 by vim-update-bundles 0.8
+ Del |javascript.vim|           0.9
+   1 bundle removed
+

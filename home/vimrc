@@ -17,7 +17,6 @@ call pathogen#infect()
 " Bundle: tpope/vim-dispatch
 " Bundle: endwise.vim
 " Bundle: nono/vim-handlebars
-" Bundle: javascript.vim
 " Bundle: less.vim
 " Bundle: tpope/vim-repeat
 " Bundle: t9md/vim-ruby-xmpfilter

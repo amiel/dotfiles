@@ -2,7 +2,7 @@
 
 
 Lists the currently installed bundles. Also see the |bundle-log|.
-Last updated by vim-update-bundles on Tue Sep 10 13:39:06 PDT 2013.
+Last updated by vim-update-bundles on Tue Sep 10 13:57:31 PDT 2013.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
@@ -19,7 +19,6 @@ Last updated by vim-update-bundles on Tue Sep 10 13:39:06 PDT 2013.
   |vim-dispatch|                   v1.0-23-g6a88e79       2013-09-09
   |endwise.vim|                    1.1                    2013-01-01
   |vim-handlebars|                 30f7f7d45c10b          2013-08-24
-  |javascript.vim|                 0.9                    2004-11-14
   |less.vim|                       1.1                    2004-12-20
   |vim-repeat|                     v1.1                   2013-01-01
   |vim-ruby-xmpfilter|             d3ab51297eeb8          2013-07-02
