@@ -22,6 +22,9 @@ call pathogen#infect()
 " Bundle: t9md/vim-ruby-xmpfilter
 " Bundle: tpope/vim-surround
 " Bundle: tpope/vim-tbone
+" Bundle: pangloss/vim-javascript
+" Bundle: mattn/emmet-vim
+
 
 
 let mapleader = ","

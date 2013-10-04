@@ -2,14 +2,14 @@
 
 
 Lists the currently installed bundles. Also see the |bundle-log|.
-Last updated by vim-update-bundles on Tue Sep 10 13:57:31 PDT 2013.
+Last updated by vim-update-bundles on Fri Oct  4 11:27:30 PDT 2013.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
   |vim-pathogen|                   v2.2-8-g1270dce        2013-06-06
   |vim-sensible|                   v1.0-35-g92c7ee7       2013-08-03
   |vim-tmux-navigator|             1c32f8dae720a          2013-07-19
-  |Command-T|                      1.4-11-g8866bbc        2013-04-16
+  |Command-T|                      1.4-12-gbcd4424        2013-09-14
   |vim-rails|                      v5.0-13-gbdc3238       2013-05-02
   |ag.vim|                         b0d50730dbf69          2013-05-03
   |fugitive.vim|                   1.2                    2011-04-29
@@ -21,7 +21,9 @@ Last updated by vim-update-bundles on Tue Sep 10 13:57:31 PDT 2013.
   |vim-handlebars|                 30f7f7d45c10b          2013-08-24
   |less.vim|                       1.1                    2004-12-20
   |vim-repeat|                     v1.1                   2013-01-01
-  |vim-ruby-xmpfilter|             d3ab51297eeb8          2013-07-02
+  |vim-ruby-xmpfilter|             89324be5ca541          2013-09-15
   |vim-surround|                   v2.0-4-g9bf527a        2013-09-09
   |vim-tbone|                      v1.1-2-g1505b77        2013-06-14
+  |vim-javascript|                 v0.9.0-3-g932b675      2013-09-02
+  |emmet-vim|                      emmet-132-g89dd2b7     2013-10-02
 
