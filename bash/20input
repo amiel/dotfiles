@@ -8,6 +8,8 @@ bind '"\e[B": history-search-forward'
 # Make option-delete work
 bind '"\M-d": backward-kill-word'
 
+# I use this so that c-s works in vim
+stty ixoff -ixon
 
 # There's more inputrc ideas here: https://gist.github.com/1812027
 
