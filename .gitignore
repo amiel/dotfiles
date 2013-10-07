@@ -5,3 +5,8 @@ Icon*
 env
 home/tmuxinator
 .netrwhist
+
+# Bundles managed by vim-update-bundles
+home/vim/doc/bundle-log.txt
+home/vim/doc/bundles.txt
+home/vim/bundle
