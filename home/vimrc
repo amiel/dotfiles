@@ -10,7 +10,7 @@ call pathogen#infect()
 " BundleCommand: rvm system do rake make
 " Bundle: tpope/vim-rails
 " Bundle: rking/ag.vim
-" Bundle: fugitive.vim
+" Bundle: tpope/vim-fugitive
 " Bundle: jgdavey/vim-blockle
 " Bundle: vim-coffee-script
 " Bundle: commentary.vim
@@ -25,6 +25,7 @@ call pathogen#infect()
 " Bundle: pangloss/vim-javascript
 " Bundle: mattn/emmet-vim
 " Bundle: bling/vim-airline
+" Bundle: airblade/vim-gitgutter
 
 
 
@@ -95,7 +96,6 @@ endif
 set wildmode=longest,list
 set wildmenu
 
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 
 set wildignore+=*vim/backups*
@@ -113,44 +113,21 @@ set list
 
 
 
-
-
 " http://items.sjbach.com/319/configuring-vim-right
 " extends % to match more things correctly
 runtime macros/matchit.vim
 
-"""""""""""""""""""""""""""""""""""
-" Show coverage report if it exists
-"""""""""""""""""""""""""""""""""""
-
-function! SetupCoverage()
-  if filereadable("coverage.vim")
-    source coverage.vim
-  endif
-endfunction
-
-if has("autocmd")
-  " Remove trailing whitespace on save
-  autocmd BufWritePre * :%s/\s\+$//e
-
-  " Source the vimrc file after saving it
-  " autocmd bufwritepost .vimrc source $MYVIMRC
-
-  autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
-  autocmd FileType rb set makeprg=rake
-  autocmd FileType ruby call SetupCoverage()
-
-  " if exists("did_load_filetypes")
-  "   finish
-  " endif
-  set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
-
-  augroup filetypedetect
-    au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
-  augroup END
-endif
 
 
+""""""""""""""
+" Airline
+""""""""""""""
+
+
+" set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
+set ttimeoutlen=50
+let g:airline_powerline_fonts = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -166,7 +143,6 @@ hi LineNr ctermfg=239
 hi SpecialKey term=NONE ctermfg=238 guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
-
 highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
 highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
@@ -180,7 +156,7 @@ highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " center cursor position in screen
 nmap <space> zz
@@ -314,6 +290,38 @@ function! ShowRoutes()
   :normal dd
 endfunction
 
+
+
+"""""""""""""""""""""""""""""""""""
+" Show coverage report if it exists
+"""""""""""""""""""""""""""""""""""
+
+function! SetupCoverage()
+  if filereadable("coverage.vim")
+    source coverage.vim
+  endif
+endfunction
+
+if has("autocmd")
+  " Remove trailing whitespace on save
+  autocmd BufWritePre * :%s/\s\+$//e
+
+  " Source the vimrc file after saving it
+  " autocmd bufwritepost .vimrc source $MYVIMRC
+
+  autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
+  autocmd FileType rb set makeprg=rake
+  autocmd FileType ruby call SetupCoverage()
+
+  " if exists("did_load_filetypes")
+  "   finish
+  " endif
+  set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
+
+  augroup filetypedetect
+    au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
+  augroup END
+endif
 
 
 
