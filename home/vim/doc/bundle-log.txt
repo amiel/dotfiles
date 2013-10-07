@@ -160,3 +160,15 @@ Fri Oct  4 11:27:30 PDT 2013 by vim-update-bundles 0.8
  Add |emmet-vim|                emmet-132-g89dd2b7 https://github.com/mattn/emmet-vim.git
    1 bundle added
 
+Mon Oct  7 11:52:07 PDT 2013 by vim-update-bundles 0.8
+ Interrupted
+
+Mon Oct  7 11:52:10 PDT 2013 by vim-update-bundles 0.8
+ up  |vim-tmux-navigator|       6daddabf5496e      <- 1c32f8dae720a
+ up  |Command-T|                1.5.1-1-g89896bd   <- 1.4-12-gbcd4424
+ up  |vim-handlebars|           f419dd0fe0f8d      <- 30f7f7d45c10b
+ up  |vim-ruby-xmpfilter|       5dc9aa468e4e6      <- 89324be5ca541
+ up  |vim-surround|             v2.0-5-g42e9b46    <- v2.0-4-g9bf527a
+ Add |vim-airline|              v0.5-124-g9e53c2c  https://github.com/bling/vim-airline.git
+   1 bundle added, 5 bundles updated
+

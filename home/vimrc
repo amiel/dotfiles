@@ -24,6 +24,7 @@ call pathogen#infect()
 " Bundle: tpope/vim-tbone
 " Bundle: pangloss/vim-javascript
 " Bundle: mattn/emmet-vim
+" Bundle: bling/vim-airline
 
 
 
