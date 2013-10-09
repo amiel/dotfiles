@@ -17,7 +17,6 @@ call pathogen#infect()
 " Bundle: tpope/vim-dispatch
 " Bundle: endwise.vim
 " Bundle: nono/vim-handlebars
-" Bundle: less.vim
 " Bundle: tpope/vim-repeat
 " Bundle: t9md/vim-ruby-xmpfilter
 " Bundle: tpope/vim-surround
@@ -26,6 +25,7 @@ call pathogen#infect()
 " Bundle: mattn/emmet-vim
 " Bundle: bling/vim-airline
 " Bundle: airblade/vim-gitgutter
+" Bundle: scrooloose/syntastic
 
 
 
@@ -128,6 +128,8 @@ runtime macros/matchit.vim
 
 set ttimeoutlen=50
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#hunks#non_zero_only = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
