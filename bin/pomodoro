@@ -32,7 +32,7 @@ class Pomodoro
   end
 
   def break
-    write_time_to_file('break')
+    write_time_to_file(' -- break -- ')
   end
 
   def finish
@@ -42,7 +42,7 @@ class Pomodoro
   def to_s
     time = read_time_from_file
     if time.match(/\d/)
-      "#{ time }m left"
+      " #{ time }m left "
     else
       time
     end
@@ -50,14 +50,14 @@ class Pomodoro
 
   def read_time_from_file
     time = nil
-    f = File.open(@time_file) do |f|
+    File.open(@time_file) do |f|
       time = f.read
     end
     time
   end
 
   def write_time_to_file(value)
-    f = File.open(@time_file, "w") do |f|
+    File.open(@time_file, "w") do |f|
       f.write(value)
     end
     value
