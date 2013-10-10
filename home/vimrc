@@ -144,6 +144,7 @@ hi cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
 hi LineNr ctermfg=239
 hi SpecialKey term=NONE ctermfg=238 guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi NonText ctermfg=black
 
 highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
 highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
