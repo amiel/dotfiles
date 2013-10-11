@@ -130,7 +130,7 @@ set ttimeoutlen=50
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'custom'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
