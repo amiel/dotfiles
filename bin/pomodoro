@@ -5,10 +5,16 @@
 # How to use it:
 
 # 1. Open preferences from the pomodoro app
-# 2. Choose script
-# 3. Set start, reset and end to: do shell script "/usr/local/bin/pomodoro reset"
-# 4. set every 1 min to: do shell script "/usr/local/bin/pomodoro decrease"
-# 5. in .tmux.conf set set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time) min"
+# 2. Choose scripts
+# 3. Paste in the following:
+#    Start: do shell script "~/Dropbox/dotfiles/bin/pomodoro reset mins:$mins passed:$passed time:$time"
+#    Reset: do shell script "~/Dropbox/dotfiles/bin/pomodoro end"
+#    End: do shell script "~/Dropbox/dotfiles/bin/pomodoro break"
+#    Break End: do shell script "~/Dropbox/dotfiles/bin/pomodoro end"
+#    Every 1 mins: do shell script "~/Dropbox/dotfiles/bin/pomodoro set $time"
+# 4. in .tmux.conf you can call this script:
+#    Example: set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time) min"
+#    Or, check out mine at: https://github.com/amiel/dotfiles/blob/master/home/tmux.conf
 
 class Pomodoro
   TIME_FILE = File.expand_path('~/.pomodoro_left_time')
