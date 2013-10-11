@@ -105,7 +105,7 @@
   squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   ri      = rebase --interactive --autosquash
   standup = !git log –-since yesterday –-author `git config user.email` -–pretty=short
-  amend  = commit --amend --no-edit
+  camend  = commit --amend --no-edit
 
   # Fancy logging.
   #   h = head
