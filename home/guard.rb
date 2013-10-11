@@ -22,6 +22,6 @@ notification(:tmux, {
   :success => 'colour150',
   :failed => 'colour174',
   :pending => 'colour179',
-  :color_location => %w[status-left-bg pane-active-border-fg pane-border-fg],
+  :color_location => %w[status-left-bg status-left-fg pane-active-border-fg pane-border-fg],
 }) if ENV['TMUX']
 

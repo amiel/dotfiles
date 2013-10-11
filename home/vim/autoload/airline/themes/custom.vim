@@ -2,11 +2,11 @@
 
 " Color palette
 let s:gui_dark_gray = '#303030'
-let s:cterm_dark_gray = 236
+let s:cterm_dark_gray = 235
 let s:gui_med_gray_hi = '#444444'
 let s:cterm_med_gray_hi = 238
 let s:gui_med_gray_lo = '#3a3a3a'
-let s:cterm_med_gray_lo = 237
+let s:cterm_med_gray_lo = 236
 let s:gui_light_gray = '#b2b2b2'
 let s:cterm_light_gray = 249
 let s:gui_green = '#afd787'
@@ -56,7 +56,7 @@ let g:airline#themes#custom#palette.visual = airline#themes#generate_color_map(s
 let g:airline#themes#custom#palette.visual_modified = copy(g:airline#themes#custom#palette.insert_modified)
 
 " Inactive window
-let s:IA = [s:gui_dark_gray, s:gui_med_gray_hi, s:cterm_dark_gray, s:cterm_med_gray_hi, '']
+let s:IA = [s:gui_light_gray, s:gui_med_gray_hi, s:cterm_light_gray, s:cterm_med_gray_hi, '']
 let g:airline#themes#custom#palette.inactive = airline#themes#generate_color_map(s:IA, s:IA, s:IA)
 let g:airline#themes#custom#palette.inactive_modified = {
       \ 'airline_c': [s:gui_orange, '', s:cterm_orange, '', ''],

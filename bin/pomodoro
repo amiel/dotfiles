@@ -42,7 +42,7 @@ class Pomodoro
   def to_s
     time = read_time_from_file
     if time.match(/\d/)
-      " #{ time }m left "
+      "#{ time }m left "
     else
       time
     end
@@ -68,6 +68,10 @@ command = ARGV.shift || 'time'
 pomodoro = Pomodoro.new
 case command
 when 'time'
+  if ! pomodoro.current_time.zero?
+    # A tomato
+    print " \xF0\x9F\x8D\x85  "
+  end
   puts pomodoro
 when 'decrease'
   pomodoro.decrease
