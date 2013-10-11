@@ -234,6 +234,9 @@ nmap <buffer> <F6> <Plug>(xmpfilter-mark)
 xmap <buffer> <F6> <Plug>(xmpfilter-mark)
 imap <buffer> <F6> <Plug>(xmpfilter-mark)
 
+nnoremap <leader>. :A<cr>
+
+
 
 
 " Command-T mappings
@@ -266,7 +269,7 @@ map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>ne :call CommandTInRailsEngine()<cr>
 map <leader>gR :call ShowRoutes()<cr>
 
-function CommandTInRailsEngine()
+function! CommandTInRailsEngine()
     let in_engine_file = match(expand("%"), '^engines/.\+$') != -1
 
     if in_engine_file
@@ -326,61 +329,6 @@ if has("autocmd")
     au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
   augroup END
 endif
-
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SWITCH BETWEEN TEST AND PRODUCTION CODE
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" TODO: Make better for handling test/unit, etc
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_engine = match(current_file, '^engines') != -1
-
-  let in_spec = match(current_file, '^spec/') != -1 ||
-        \ match(current_file, '^engines/.\+/spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 ||
-        \ match(current_file, '\<models\>') != -1 ||
-        \ match(current_file, '\<views\>') != -1 ||
-        \ match(current_file, '\<helpers\>') != -1 ||
-        \ match(current_file, '\<decorators\>') != -1 ||
-        \ match(current_file, '\<presenters\>') != -1 ||
-        \ match(current_file, '\<uploaders\>') != -1
-
-  if in_engine
-    " TODO: use :A for test/unit, etc
-    exec ":A"
-  else
-    if going_to_spec
-      if in_app
-        let new_file = substitute(new_file, '^app/', '', '')
-      end
-      let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-      let new_file = 'spec/' . new_file
-    else
-      let new_file = substitute(new_file, '\(_spec\|_test\)\.rb$', '.rb', '')
-      let new_file = substitute(new_file, '^\(spec\|test\)/', '', '')
-      if in_app
-        let new_file = 'app/' . new_file
-      end
-    endif
-  endif
-  return new_file
-endfunction
-
-" Trying out just :A always to see how that goes
-" Maybe I'll end up wanting it for rails projects, but then OpenTestAlternate
-" for non-rails projects
-nnoremap <leader>. :A<cr>
-" nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 
 
