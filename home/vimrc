@@ -489,3 +489,8 @@ function! CopyFileToClipboard()
 endfunction
 :command! CopyFile :call CopyFileToClipboard()
 
+function! MakeDirectoryForCurrentFile()
+  :!mkdir -p -v %:h
+endfunction
+:command! Mkdir :call MakeDirectoryForCurrentFile()
+
