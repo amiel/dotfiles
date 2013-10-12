@@ -197,10 +197,10 @@ inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
 
-" nnoremap <c-s-l> :tabnext<cr>
-" nnoremap <c-s-h> :tabprevious<cr>
-
-
+" CTRL+A moves to start of line in command mode
+cnoremap <C-a> <home>
+" CTRL+E moves to end of line in command mode
+cnoremap <C-e> <end>
 
 " Insert a hash rocket with <c-l>
 imap <c-l> <space>=><space>
