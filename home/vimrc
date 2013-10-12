@@ -64,16 +64,15 @@ set relativenumber " but relative to the cursor
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 
-" set equalalways
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
-set winheight=5
-set winminheight=5
-" These cause the "E36 Not enough room" error
-set winheight=999
-set winminwidth=12
-set winwidth=96
+set noequalalways
+
+set winheight=5 winminheight=5
+set winwidth=12 winminwidth=12
+set winheight=9999 winwidth=96
+
 
 
 set switchbuf=useopen,split
