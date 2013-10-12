@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# Encoding: UTF-8
 #
 # for use with ugol's pomodoro app (https://github.com/ugol/pomodoro) and tmux
 # use applescript to set the time
@@ -16,8 +17,10 @@
 #    Example: set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time) min"
 #    Or, check out mine at: https://github.com/amiel/dotfiles/blob/master/home/tmux.conf
 
+require 'pathname'
+
 class Pomodoro
-  TIME_FILE = File.expand_path('~/.pomodoro_left_time')
+  TIME_FILE = Pathname.new(File.expand_path('~/.pomodoro_left_time'))
   attr_accessor :time_file
 
   def initialize(time_file=TIME_FILE)
@@ -48,17 +51,46 @@ class Pomodoro
   def to_s
     time = read_time_from_file
     if time.match(/\d/)
-      "#{ time }m left "
+      "#{ time }m left"
     else
       time
     end
   end
 
-  def read_time_from_file
-    time = nil
-    File.open(@time_file) do |f|
-      time = f.read
+  def running?
+    state == 'running'
+  end
+
+  def break?
+    state == 'break'
+  end
+
+  def state
+    if ! current_time.zero?
+      'running'
+    elsif time.match(/break/)
+      'break'
+    else
+      ''
     end
+  end
+
+  def colors
+    {
+      'running' => '61',
+      'break' => '174',
+    }
+  end
+
+  def color
+    colors[state]
+  end
+
+  def time
+    @_time ||= @time_file.read
+  end
+
+  def read_time_from_file
     time
   end
 
@@ -74,11 +106,15 @@ command = ARGV.shift || 'time'
 pomodoro = Pomodoro.new
 case command
 when 'time'
-  if ! pomodoro.current_time.zero?
+  string = pomodoro.to_s
+  if pomodoro.running? || pomodoro.break?
+    print "#[fg=colour#{pomodoro.color}]#[bg=colour#{pomodoro.color},fg=colour235]"
+    # \xE2\x97\x80
     # A tomato
-    print " \xF0\x9F\x8D\x85  "
+    print " \xF0\x9F\x8D\x85  " if pomodoro.running?
+    print string
+    puts ' #[bg=default,fg=default]'
   end
-  puts pomodoro
 when 'decrease'
   pomodoro.decrease
 when 'reset'
