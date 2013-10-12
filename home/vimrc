@@ -75,11 +75,14 @@ set winheight=9999 winwidth=96
 
 
 
-set switchbuf=useopen,split
 
 set scrolloff=4
 
-"set ruler
+set switchbuf=useopen,split
+
+set autoread
+
+" set ruler
 
 " keep undo information even after we quit
 set undofile
@@ -107,11 +110,11 @@ set wildignore+=vendor/rails/**
 set wildignore+=vendor/cache/**
 set wildignore+=*.gem
 set wildignore+=log/**
+set wildignore+=.git
 set wildignore+=tmp/cache
 set wildignore+=*.png,*.jpg,*.gif
 
 set list
-" set listchars=tab:>-,trail:· ",eol:$
 
 
 
@@ -154,7 +157,6 @@ highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
 highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 
-" set fillchars=vert:\|
 highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
 
 " from something else...
@@ -332,6 +334,11 @@ if has("autocmd")
 
   augroup filetypedetect
     au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
+  augroup END
+
+  augroup windows
+    autocmd!
+    autocmd VimResized * :wincmd = " resize splits when the window is resized
   augroup END
 endif
 
