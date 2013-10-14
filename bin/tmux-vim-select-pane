@@ -2,18 +2,30 @@
 # Like `tmux select-pane`, but if Vim is running in the current pane it sends
 # a `<C-h/j/k/l>` keystroke to Vim instead.
 #
-# Gratefully yanked from
-# https://raw.github.com/mislav/dotfiles/1500cd2/bin/tmux-vim-select-pane
-# (See https://gist.github.com/mislav/5189704 for more info)
-set -e
+# Gratefully stolen from https://gist.github.com/svenfuchs/6146321
 
-cmd="$(tmux display -p '#{pane_current_command}')"
-cmd="$(basename "$cmd" | tr A-Z a-z)"
+cmd="$(tmux display -p '#{pane_current_command}' | xargs basename | tr A-Z a-z)"
+[ "${cmd%m}" = "vi" ] && vim=true || vim=false
 
-if [ "${cmd%m}" = "vi" ]; then
-  direction="$(echo "${1#-}" | tr 'lLDUR' '\\hjkl')"
-  # forward the keystroke to Vim
-  tmux send-keys "C-$direction"
+pane="$(tmux display -p '#{pane_index}')"
+panes="$(tmux display -p '#{window_panes}')"
+
+if [[
+    "$@" = '-L' && $pane == 1 ||
+    "$@" = '-R' && $pane == $panes ||
+    "$@" = '-U' && $pane == 1 ||
+    "$@" = '-D' && $pane == $panes
+  ]]; then
+  cmd="tmux resize-pane -Z"
 else
-  tmux select-pane "$@"
+  cmd="tmux select-pane $@"
+fi
+
+if $vim; then
+  wincmd="$(echo "${1#-}" | tr 'lLDUR' 'phjkl')"
+  tmux send-keys ":let nr = winnr() | wincmd $wincmd" C-m
+  tmux send-keys ":if nr == winnr() | silent call system(\"$cmd\") | end"
+  tmux send-keys C-m ':echo "\r"' C-m
+else
+  $cmd
 fi

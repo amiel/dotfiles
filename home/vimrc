@@ -5,7 +5,6 @@ call pathogen#infect()
 " vim-update-bundles
 
 " Bundle: tpope/vim-sensible
-" Bundle: christoomey/vim-tmux-navigator
 " Bundle: wincent/Command-T
 " BundleCommand: rvm system do rake make
 " Bundle: tpope/vim-rails
