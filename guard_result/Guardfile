@@ -1,0 +1,7 @@
+
+guard(:shell) do
+  watch('result/guard_result') do
+    `digicolor $(head -1 result/guard_result) --blink`
+  end
+end
+
