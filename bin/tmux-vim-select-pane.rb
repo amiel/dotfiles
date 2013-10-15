@@ -77,9 +77,11 @@ end
 if pane.vim?
   wincmd = arg.sub('-', '').tr 'lLDUR', 'phjkl'
 
+  # `tmux send-keys C-#{wincmd}`
+
   `tmux send-keys ":let nr = winnr() | wincmd #{wincmd}" C-m`
   `tmux send-keys ":if nr == winnr() | silent call system(\\"#{command}\\") | end"`
-  sleep 0.1
+  sleep 0.05
   `tmux send-keys C-m ':echo "\\r"' C-m`
 else
   `#{command}`
