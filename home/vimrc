@@ -118,6 +118,7 @@ set list
 runtime macros/matchit.vim
 
 
+let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 
 """"""""""""""
 " Airline
