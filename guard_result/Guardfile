@@ -1,9 +1,13 @@
 interactor :off
 notification :off
 
-guard(:shell) do
-  watch('result/guard_result') do
-    `digicolor $(head -1 result/guard_result) --blink`
+guard :shell do
+  file = 'result/guard_result'
+  watch file do
+    puts Time.new
+    puts `cat #{file}|sed 's/^/\t/'`
+    puts
+    `digicolor $(head -1 #{file}) --blink > /dev/null`
   end
 end
 
