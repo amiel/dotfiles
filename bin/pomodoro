@@ -35,11 +35,6 @@ class Pomodoro
     read_time_from_file.to_i
   end
 
-  def decrease(step=1)
-    new_time = current_time.to_i-1
-    write_time_to_file(new_time)
-  end
-
   def break
     write_time_to_file(' -- break -- ')
   end
@@ -66,7 +61,7 @@ class Pomodoro
   end
 
   def state
-    if ! current_time.zero?
+    if time.match(/\d/)
       'running'
     elsif time.match(/break/)
       'break'
@@ -115,8 +110,6 @@ when 'time'
     print string
     puts ' #[bg=default,fg=default]'
   end
-when 'decrease'
-  pomodoro.decrease
 when 'reset'
   pomodoro.reset_timer
 when 'set'
