@@ -118,7 +118,12 @@ set list
 runtime macros/matchit.vim
 
 
+""""""""""""
+" Syntastic
+""""""""""""
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
 
 """"""""""""""
 " Airline
@@ -141,12 +146,12 @@ let g:airline_theme = 'custom'
 " :color Tomorrow-Night-Eighties
 " :color grb256
 
-hi ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
-hi cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
-hi LineNr ctermfg=239
-hi SpecialKey term=NONE ctermfg=238 guifg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
-hi NonText ctermfg=black
+highlight ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
+highlight cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
+highlight LineNr ctermfg=239
+highlight SpecialKey term=NONE ctermfg=238 guifg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
+highlight NonText ctermfg=black
 
 highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
 highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
@@ -175,6 +180,8 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+nnoremap <c-w><c-o> <c-w>r
 
 nnoremap <c-s> <c-w>j<c-w>=
 " nnoremap <c-+> <c-w>+
@@ -322,6 +329,12 @@ if has("autocmd")
   autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
   autocmd FileType rb set makeprg=rake
   autocmd FileType ruby call SetupCoverage()
+
+  autocmd InsertEnter * :set number
+  autocmd InsertLeave * :set relativenumber
+
+  :au FocusLost * :set number
+  :au FocusGained * :set relativenumber
 
   " if exists("did_load_filetypes")
   "   finish
