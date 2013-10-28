@@ -7,7 +7,7 @@ call pathogen#infect()
 " Bundle: tpope/vim-sensible
 " Bundle: wincent/Command-T
 " BundleCommand: rvm system do rake make
-" " Bundle: christoomey/vim-tmux-navigator
+" Bundle: amiel/vim-tmux-navigator
 " Bundle: tpope/vim-rails
 " Bundle: rking/ag.vim
 " Bundle: tpope/vim-fugitive
@@ -236,13 +236,13 @@ map <leader>v :view %%
 " nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
 nmap <buffer> <leader>r   <Plug>(xmpfilter-run)
 
-nmap <buffer> <F5> <Plug>(xmpfilter-run)
-xmap <buffer> <F5> <Plug>(xmpfilter-run)
-imap <buffer> <F5> <Plug>(xmpfilter-run)
+" nmap <buffer> <F5> <Plug>(xmpfilter-run)
+" xmap <buffer> <F5> <Plug>(xmpfilter-run)
+" imap <buffer> <F5> <Plug>(xmpfilter-run)
 
-nmap <buffer> <F6> <Plug>(xmpfilter-mark)
-xmap <buffer> <F6> <Plug>(xmpfilter-mark)
-imap <buffer> <F6> <Plug>(xmpfilter-mark)
+" nmap <buffer> <F6> <Plug>(xmpfilter-mark)
+" xmap <buffer> <F6> <Plug>(xmpfilter-mark)
+" imap <buffer> <F6> <Plug>(xmpfilter-mark)
 
 nnoremap <leader>. :A<cr>
 
