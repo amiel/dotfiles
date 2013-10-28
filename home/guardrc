@@ -1,2 +1,11 @@
+
+# Disable enter-runs-all-tests
 Pry.commands.block_command /^$/, 'Do nothing' do
 end
+
+# Disable stack_explorer as it outputs "Frame number: 0/0" and we don't need that
+# Pry.plugins['stack_explorer'] && Pry.plugins['stack_explorer'].disable!
+
+# Pry.plugins.each { |key, plugin| plugin.disable! }
+# debugger", "doc", "docmore", "rescue", "stack_explorer", "plus", "rails
+

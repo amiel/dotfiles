@@ -124,6 +124,7 @@ runtime macros/matchit.vim
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
+let g:syntastic_javascript_checkers = ['jshint']
 
 """"""""""""""
 " Airline

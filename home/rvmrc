@@ -6,3 +6,4 @@ fi
 
 export rvm_pretty_print_flag=1
 
+export rvm_auto_reload_flag=1
