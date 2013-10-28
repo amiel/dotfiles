@@ -13,4 +13,4 @@ export POW_EXT_DOMAINS=com
 
 # Use bundle binstubs first. Make sure this goes after rvm initialization
 # NOTE: This can be considered a security issue.
-export PATH="./bin:$PATH"
+# export PATH="./bin:$PATH"
