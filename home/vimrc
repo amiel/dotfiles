@@ -162,10 +162,10 @@ highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
 
 highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
-highlight TabLine term=NONE cterm=NONE ctermbg=236 ctermfg=146
-highlight TabLineSel term=NONE cterm=NONE ctermbg=236 ctermfg=150
+highlight TabLine term=NONE cterm=NONE ctermbg=235 ctermfg=249
+highlight TabLineSel term=NONE cterm=NONE ctermbg=235 ctermfg=150
 
-highlight Title term=NONE cterm=NONE ctermbg=236 ctermfg=61
+highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
 
 " from something else...
 " highlight! link DiffText MatchParen
