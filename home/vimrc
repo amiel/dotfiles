@@ -161,6 +161,12 @@ highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
 
 highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
 
+highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
+highlight TabLine term=NONE cterm=NONE ctermbg=236 ctermfg=146
+highlight TabLineSel term=NONE cterm=NONE ctermbg=236 ctermfg=150
+
+highlight Title term=NONE cterm=NONE ctermbg=236 ctermfg=61
+
 " from something else...
 " highlight! link DiffText MatchParen
 
@@ -231,6 +237,7 @@ map ,= mzgg=G`z
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
+map <leader>E :Explore<cr>
 map <leader>v :view %%
 
 
