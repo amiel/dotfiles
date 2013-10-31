@@ -7,13 +7,13 @@
 # 1. Open preferences from the pomodoro app
 # 2. Choose scripts
 # 3. Paste in the following:
-#    Start: do shell script "~/Dropbox/dotfiles/bin/pomodoro set $time"
+#    Start: do shell script "~/Dropbox/dotfiles/bin/pomodoro set $duration"
 #    Reset: do shell script "~/Dropbox/dotfiles/bin/pomodoro end"
 #    End: do shell script "~/Dropbox/dotfiles/bin/pomodoro break"
 #    Break End: do shell script "~/Dropbox/dotfiles/bin/pomodoro end"
 #    Every 1 mins: do shell script "~/Dropbox/dotfiles/bin/pomodoro set $time"
 # 4. in .tmux.conf you can call this script:
-#    Example: set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time) min"
+#    Example: set -g status-right "#(date '+%H:%M') | #(~/bin/pomodoro time)"
 #    Or, check out mine at: https://github.com/amiel/dotfiles/blob/master/home/tmux.conf
 
 file=~/.pomodoro_time_left
