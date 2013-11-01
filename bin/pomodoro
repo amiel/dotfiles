@@ -59,12 +59,12 @@ case $1 in
     t=`current_time`
 
     if is_running || is_break; then
-      echo -n "#[fg=colour$(color)]#[bg=colour$(color),fg=colour235]"
-      # \xE2\x97\x80
-      # A tomato
-      is_running && echo -ne " \xf0\x9f\x8d\x85  "
-      pomodoro_string
-      echo ' #[bg=default,fg=default]'
+      arrow="\xee\x82\xb2"
+      tomato="\xf0\x9f\x8d\x85"
+
+      echo -ne "#[fg=colour$(color)]$arrow#[bg=colour$(color),fg=colour235]"
+      is_running && echo -ne " $tomato  "
+      echo "$(pomodoro_string) #[bg=default,fg=default]"
     fi
     ;;
 esac
