@@ -1,7 +1,7 @@
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-tmuxinator_completion="`ls -1 /usr/local/rvm/gems/*/gems/tmuxinator-*/completion/*.bash|tail -1`"
+tmuxinator_completion="`ls -1 /usr/local/rvm/gems/*/gems/tmuxinator-*/completion/*.bash 2>/dev/null|tail -1`"
 
 [[ -e "$tmuxinator_completion" ]] && source "$tmuxinator_completion"
 
