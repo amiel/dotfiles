@@ -18,8 +18,9 @@
   logallrefupdates = true
   whitespace       = fix, space-before-tab, trailing-space
   quotepath = false
+  attributesfile = /Users/amiel/.gitattributes
   excludesfile = ~/.gitignore_global
-	attributesfile = /Users/amiel/.gitattributes
+  excludesfile = /opt/boxen/config/git/gitignore
 
 [merge]
  tool = fugitive
@@ -127,5 +128,9 @@
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
+
 [credential]
-  helper = osxkeychain
+  helper = /opt/boxen/bin/boxen-git-credential
+
+[hub]
+  protocol = https
