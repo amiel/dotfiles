@@ -20,7 +20,6 @@
   quotepath = false
   attributesfile = /Users/amiel/.gitattributes
   excludesfile = ~/.gitignore_global
-  excludesfile = /opt/boxen/config/git/gitignore
 
 [merge]
  tool = fugitive
@@ -130,7 +129,7 @@
   trustExitCode = true
 
 [credential]
-  helper = /opt/boxen/bin/boxen-git-credential
+  helper = osxkeychain
 
 [hub]
   protocol = https
