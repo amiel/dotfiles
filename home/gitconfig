@@ -121,6 +121,8 @@
   ra = !git r --all
   l = "!source ~/.githelpers && pretty_git_log"
   la = !git l --all
+  today = log --since=midnight --author='Amiel Martin' --oneline
+  yesterday = log --graph --all --since=\"day.before.yesterday.midnight\" --until=midnight --author=\\\"$(git config user.name)\\\" --oneline
 
 [mergetool "fugitive"]
   cmd = vim -f -c \"Gdiff\" \"$MERGED\"

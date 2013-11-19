@@ -3,3 +3,4 @@
 Gemfile.local
 Gemfile.local.lock
 tags
+.DS_Store

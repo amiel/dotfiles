@@ -27,6 +27,8 @@ call pathogen#infect()
 " Bundle: airblade/vim-gitgutter
 " Bundle: scrooloose/syntastic
 
+" " Bundle: groenewege/vim-less
+" Bundle: lunaru/vim-less
 
 
 let mapleader = ","
