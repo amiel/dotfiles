@@ -26,10 +26,9 @@ call pathogen#infect()
 " Bundle: bling/vim-airline
 " Bundle: airblade/vim-gitgutter
 " Bundle: scrooloose/syntastic
-
-" " Bundle: groenewege/vim-less
 " Bundle: lunaru/vim-less
 
+" Bundle: terryma/vim-multiple-cursors
 
 let mapleader = ","
 
@@ -450,9 +449,8 @@ inoremap <s-tab> <c-n>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! PromoteToLet()
   :normal! dd
-  " :exec '?^\s*it\>'
   :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :.s/\(@\)\?\(\w\+\) \(||\)\?= \(.*\)$/let(:\2) { \4 }/
   :normal ==
 endfunction
 :command! PromoteToLet :call PromoteToLet()
