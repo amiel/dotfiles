@@ -1,4 +1,3 @@
-
 notification(:file, path: File.expand_path('~/Dropbox/dotfiles/guard_result/result/guard_result'))
 
 notification(:tmux, {
