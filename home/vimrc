@@ -339,6 +339,8 @@ if has("autocmd")
   autocmd FileType rb set makeprg=rake
   autocmd FileType ruby call SetupCoverage()
 
+  autocmd BufNewFile,BufRead *.js.em setlocal filetype=coffee
+
   autocmd InsertEnter * :set number
   autocmd InsertLeave * :set relativenumber
 
