@@ -12,7 +12,8 @@ call pathogen#infect()
 " Bundle: rking/ag.vim
 " Bundle: tpope/vim-fugitive
 " Bundle: jgdavey/vim-blockle
-" Bundle: vim-coffee-script
+" Bundle: kchmck/vim-coffee-script
+" Bundle: heartsentwined/vim-ember-script
 " Bundle: commentary.vim
 " Bundle: tpope/vim-dispatch
 " Bundle: endwise.vim
@@ -338,8 +339,6 @@ if has("autocmd")
   autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
   autocmd FileType rb set makeprg=rake
   autocmd FileType ruby call SetupCoverage()
-
-  autocmd BufNewFile,BufRead *.js.em setlocal filetype=coffee
 
   autocmd InsertEnter * :set number
   autocmd InsertLeave * :set relativenumber
