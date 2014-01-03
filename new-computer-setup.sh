@@ -25,7 +25,7 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Set trackpad speed
 defaults write -g com.apple.trackpad.scaling -int 3
-    
+
 # Enable directory spring loading
 defaults write -g com.apple.springing.enabled -bool true
 
@@ -83,4 +83,17 @@ defaults write com.apple.safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Add context menu for Safari Web Inspector
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+######################
+# Set up a few things
+
+mkdir ~/src
+ln -s ~/Dropbox/dotfiles ~/src/dotfiles
+~/src/dotfiles/bin/link-dotfiles
+
+
+###########
+# Homebrew
+
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
