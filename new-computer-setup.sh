@@ -4,8 +4,11 @@
 # First:
 # 1. Update OSX
 # 2. Install XCode
-# 3. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
-# 4. Install dropbox and start syncing
+# 3. Install dropbox and start syncing
+# 4. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
+# 5. When XCode is done, install command-line-tools
+
+# Then, run this script
 
 ###############
 # OSX Settings
