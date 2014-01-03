@@ -58,4 +58,13 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 # Remap Caps Lock to Ctl
 
 ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' - | xargs -I{} defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
-  
+
+
+#######################
+# Application Settings
+
+# Set Alfred sync folder
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string ~/Dropbox/Alfred
+
+# Set iterm2 sync folder
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Preferences
