@@ -44,6 +44,15 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Finder: allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
+# Use scroll gesture with the Ctrl (^) key to zoom
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
+# Use mouse wheel (scroll gesture) to zoom
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
 
 #########################
 # Remap Caps Lock to Ctl
