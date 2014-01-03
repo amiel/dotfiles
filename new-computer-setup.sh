@@ -68,3 +68,19 @@ defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string ~/Dr
 
 # Set iterm2 sync folder
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Preferences
+
+#########################
+# Safari/WebKit settings
+
+# nable Safari Developer Menu
+defaults write com.apple.safari IncludeDevelopMenu -bool true
+
+# Enable Safari Inspector
+defaults write com.apple.safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+
+# Enable Safari Inspector (again? cargo-culting here)
+defaults write com.apple.safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# Add context menu for Safari Web Inspector
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
