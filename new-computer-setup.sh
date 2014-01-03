@@ -6,7 +6,7 @@
 # 2. Install XCode
 # 3. Install dropbox and start syncing
 # 4. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
-# 5. When XCode is done, install command-line-tools
+# 5. When XCode is done, install command-line-tools (`xcode-select --install`)
 
 # Then, run this script
 
