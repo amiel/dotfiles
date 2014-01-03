@@ -263,6 +263,8 @@ nnoremap <leader>. :A<cr>
 
 "let g:CommandTMatchWindowAtTop=1
 
+let g:CommandTWildIgnore=&wildignore . ",app/components/**,node_modules/**"
+
 
 " Open files with <leader>h
 map <leader>h :CommandT<cr>
