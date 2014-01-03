@@ -97,3 +97,10 @@ ln -s ~/Dropbox/dotfiles ~/src/dotfiles
 
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
+brew install git reattach-to-user-namespace tmux
+
+brew tap phinze/cask
+brew install brew-cask
+brew cask install google-chrome
+
+brew install postgresql redis imagemagick node the_silver_searcher memcached wget watch sleepwatcher
