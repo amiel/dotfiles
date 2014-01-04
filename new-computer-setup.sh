@@ -152,3 +152,8 @@ brew cask install qlprettypatch
 # brew cask install transmission
 # brew cask install time-tracker-mac
 # brew install sleepwatcher
+
+#######
+# Ruby
+
+brew install rbenv ruby-build
