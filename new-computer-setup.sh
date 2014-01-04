@@ -121,6 +121,9 @@ brew cask install teleport
 brew cask install github
 brew cask install flowdock
 
+brew tap homebrew/versions
+brew install apple-gcc42
+
 brew install ssh-copy-id
 brew install colordiff
 brew install mobile-shell
