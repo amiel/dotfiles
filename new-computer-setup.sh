@@ -91,16 +91,64 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 [ -e ~/src/dotfiles ] || ln -s ~/Dropbox/dotfiles ~/src/dotfiles
 ~/src/dotfiles/bin/link-dotfiles
 
+launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 ###########
 # Homebrew
 
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-brew install git reattach-to-user-namespace tmux
+brew install git
+brew install reattach-to-user-namespace tmux
+brew install bash-completion
 
 brew tap phinze/cask
 brew install brew-cask
-brew cask install google-chrome
+brew tap caskroom/fonts
 
-brew install postgresql redis imagemagick node the_silver_searcher memcached wget watch sleepwatcher
+brew cask install font-inconsolata
+brew cask install font-inconsolata-dz-for-powerline
+
+# brew cask install dropbox # theoretically already installed
+brew cask install google-chrome
+brew cask install alfred
+brew cask alfred link
+brew cask install iterm2
+brew cask install onepassword
+brew cask install transmit
+brew cask install sublime-text
+brew cask install teleport
+brew cask install github
+brew cask install flowdock
+
+brew install ssh-copy-id
+brew install colordiff
+brew install mobile-shell
+brew install imagemagick
+brew install node
+brew install nmap
+brew install the_silver_searcher
+brew install wget
+brew install watch
+brew install memcached
+brew install redis
+brew install postgresql
+brew install gnupg
+
+brew cask install firefox
+brew cask install codekit
+brew cask install skype
+brew cask install heroku-toolbelt
+brew cask install airfoil
+brew cask install google-hangouts
+
+# ql plugins
+brew cask install jsonlook
+brew cask install qlmarkdown
+brew cask install qlprettypatch
+
+# extra
+# brew cask install vlc
+# brew cask install transmission
+# brew cask install time-tracker-mac
+# brew install sleepwatcher
