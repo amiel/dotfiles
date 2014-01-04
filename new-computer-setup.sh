@@ -133,6 +133,7 @@ brew install nmap
 brew install the_silver_searcher
 brew install wget
 brew install watch
+brew install v8
 brew install memcached
 brew install redis
 brew install postgresql
