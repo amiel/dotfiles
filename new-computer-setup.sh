@@ -87,8 +87,8 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 ######################
 # Set up a few things
 
-mkdir ~/src
-ln -s ~/Dropbox/dotfiles ~/src/dotfiles
+[ -d ~/src ] || mkdir ~/src
+[ -e ~/src/dotfiles ] || ln -s ~/Dropbox/dotfiles ~/src/dotfiles
 ~/src/dotfiles/bin/link-dotfiles
 
 
