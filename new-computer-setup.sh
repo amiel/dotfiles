@@ -57,6 +57,10 @@ defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
+# Enable full keyboard access for all controls
+# (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
 
 #########################
 # Remap Caps Lock to Ctl
