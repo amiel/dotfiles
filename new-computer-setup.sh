@@ -14,7 +14,10 @@
 # OSX Settings
 
 # Do not beep when changing the volume
-defaults write -g com.apple.sound.beep.feedback -bool false
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -float 0
+
+# Expand save dialogs by default
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 
 # Show battery percentage
 defaults write com.apple.menuextra.battery ShowTime -bool false
@@ -22,6 +25,7 @@ defaults write com.apple.menuextra.battery ShowPercent -bool true
 
 # Disable dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
+defaults write com.apple.dock 'dashboard-in-overlay' -bool false
 
 # Set trackpad speed
 defaults write -g com.apple.trackpad.scaling -int 3
