@@ -258,6 +258,7 @@ brew install v8
 brew install memcached
 brew install redis
 brew install postgresql
+brew install mysql
 brew install gnupg
 
 brew cask install firefox
