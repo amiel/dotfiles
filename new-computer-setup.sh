@@ -240,6 +240,7 @@ brew cask install sublime-text
 brew cask install teleport
 brew cask install github
 brew cask install flowdock
+brew cask install chronomate
 
 brew tap homebrew/versions
 brew install apple-gcc42
@@ -265,6 +266,7 @@ brew cask install skype
 brew cask install heroku-toolbelt
 brew cask install airfoil
 brew cask install google-hangouts
+brew cask install knock
 
 # ql plugins
 brew cask install jsonlook
