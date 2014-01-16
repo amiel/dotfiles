@@ -73,7 +73,7 @@ set noequalalways
 
 set winheight=5 winminheight=5
 set winwidth=12 winminwidth=12
-set winheight=9999 winwidth=96
+set winheight=50 winwidth=96
 
 
 
