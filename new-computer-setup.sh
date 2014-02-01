@@ -202,7 +202,20 @@ defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string ~/Dr
 # Set iterm2 sync folder
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Preferences
 
+###############################
+# Sync Sublime Text 2 settings
+function setupstsync() {
+  local stdir=~/"Library/Application Support/Sublime Text 2"
+  local dropboxdir=~/"Dropbox/Sublime Text 2"
+  if [ ! -d "$stdir" ];then
+    mkdir -p "$stdir"
+    ln -s "$dropboxdir/Installed Packages" "$stdir/Installed Packages"
+    ln -s "$dropboxdir/Packages" "$stdir/Packages"
+    ln -s "$dropboxdir/Pristine Packages" "$stdir/Pristine Packages"
+  fi
+}
 
+setupstsync
 
 ######################
 # Set up a few things
