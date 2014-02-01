@@ -15,7 +15,7 @@ if [ "$DB_ADAPTER" != "postgresql" ];then
   exit 1
 fi
 
-app=`heroku info "$@"|head -1|awk '{print $2}'`
+app=`heroku info "$@"|awk 'NR==1 {print $2}'`
 
 if [ -z "$app" ];then
   echo "No app name found"
