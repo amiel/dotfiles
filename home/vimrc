@@ -114,7 +114,8 @@ set wildignore+=*.gem
 set wildignore+=log/**
 set wildignore+=.git
 set wildignore+=tmp/cache
-set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=.tmp
+set wildignore+=*.png,*.jpg,*.gif,*.db
 
 set list
 
@@ -470,6 +471,8 @@ function! UpdateRspec()
 endfunction
 :map <leader>P :call UpdateRspec()<cr>
 
+":nmap <leader>gh :s/\v( |\{):(\w+)\=\>/\1\r\2: /g<cr>
+:nmap <leader>gc :%s/\v:(\w+) \=\>/\1:/g<cr>
 
 
 " Copy the entire contents of the current file to the system clipboard
