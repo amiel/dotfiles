@@ -96,7 +96,7 @@
   ff      = merge --ff-only
   l       = log --oneline --decorate --graph
   lg      = log -p
-  ll      = log --pretty=oneline --abbrev-commit --max-count=15
+  ll      = log --pretty=oneline --abbrev-commit --max-count=15 --decorate --graph
   browse  = !hub browse
   compare = !hub compare
   pom     = push -u origin master
