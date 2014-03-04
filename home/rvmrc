@@ -1,9 +1,0 @@
-if [ -d "$HOME/.rvm" ];then
-  export rvm_path="$HOME/.rvm"
-else
-  export rvm_path="/usr/local/rvm"
-fi
-
-export rvm_pretty_print_flag=1
-
-export rvm_auto_reload_flag=1

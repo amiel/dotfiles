@@ -1,20 +1,9 @@
-
-# RVM
-if [[ -s ~/.rvm/scripts/rvm ]]; then
-  source ~/.rvm/scripts/rvm
-  PATH=$PATH:$HOME/.rvm/bin
-elif [[ -s /usr/local/rvm/scripts/rvm ]]; then
-  source /usr/local/rvm/scripts/rvm
-  PATH=$PATH:/usr/local/rvm/bin
-  export POW_RVM_PATH=/usr/local/rvm/scripts/rvm
-fi
-
 # RBENV
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Enable pow to use .com domains that are in the /etc/hosts file.
 export POW_EXT_DOMAINS=com
 
-# Use bundle binstubs first. Make sure this goes after rvm initialization
+# Use bundle binstubs first.
 # NOTE: This can be considered a security issue.
 # export PATH="./bin:$PATH"

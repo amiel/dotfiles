@@ -23,8 +23,8 @@ function color_prompt {
   # local gitcolor=$(EXT_COLOR 077)
   local NC="\e[0;m"
 
-  if __command_exists rvm-prompt; then
-    local title="\[\033]0;\$(rvm-prompt)\007\]"
+  if __command_exists rbenv; then
+    local title="\[\033]0;\$(rbenv version-name)\007\]"
   fi
 
   if __command_exists __git_ps1; then
