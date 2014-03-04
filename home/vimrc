@@ -6,6 +6,7 @@ call pathogen#infect()
 
 " Bundle: tpope/vim-sensible
 " Bundle: wincent/Command-T
+" TODO: rbenv
 " BundleCommand: rvm system do rake make
 " Bundle: amiel/vim-tmux-navigator
 " Bundle: tpope/vim-rails
@@ -13,7 +14,6 @@ call pathogen#infect()
 " Bundle: tpope/vim-fugitive
 " Bundle: jgdavey/vim-blockle
 " Bundle: kchmck/vim-coffee-script
-" Bundle: heartsentwined/vim-ember-script
 " Bundle: commentary.vim
 " Bundle: tpope/vim-dispatch
 " Bundle: endwise.vim
@@ -28,8 +28,11 @@ call pathogen#infect()
 " Bundle: airblade/vim-gitgutter
 " Bundle: scrooloose/syntastic
 " Bundle: lunaru/vim-less
-
+" Bundle: ember.vim
 " Bundle: terryma/vim-multiple-cursors
+" Bunlde: vim-preview
+
+" " Bundle: heartsentwined/vim-ember-script
 
 let mapleader = ","
 
