@@ -73,8 +73,8 @@ set ignorecase smartcase
 " fail.
 set noequalalways
 
-set winheight=5 winminheight=5
-set winwidth=12 winminwidth=12
+set winheight=7 winminheight=7
+set winwidth=13 winminwidth=13
 set winheight=50 winwidth=96
 
 
