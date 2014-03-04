@@ -33,6 +33,8 @@ call pathogen#infect()
 
 let mapleader = ","
 
+set exrc
+set secure
 
 set nocompatible
 syntax enable
