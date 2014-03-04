@@ -240,6 +240,7 @@ brew install brew-cask
 brew tap caskroom/fonts
 
 brew cask install font-inconsolata
+brew cask install font-inconsolata-dz
 brew cask install font-inconsolata-dz-for-powerline
 
 # brew cask install dropbox # theoretically already installed
