@@ -1,7 +1,6 @@
 #!/bin/bash
 
 
-ROOT=$(dirname "${BASH_SOURCE}")
-PATH="$PATH:/usr/local/rvm/bin:$ROOT"
+# ROOT=$(dirname "${BASH_SOURCE}")
 
-rvm ruby-2.0.0-p247 do digicolor red
+RBENV_VERSION=2.1.0 digicolor red
