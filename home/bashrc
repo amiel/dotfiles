@@ -14,7 +14,7 @@ if [[ $- == *i* ]] ; then
 
   export PATH="$PATH:$DOTFILES/bin"
 
-  for file in $DOTFILES/bash/*;do
+  for file in $DOTFILES/bash/*.sh;do
     source $file
   done
 
