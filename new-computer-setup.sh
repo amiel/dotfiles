@@ -281,7 +281,7 @@ brew cask install skype
 brew cask install heroku-toolbelt
 brew cask install airfoil
 brew cask install google-hangouts
-brew cask install knock
+brew cask install gitx
 
 # ql plugins
 brew cask install jsonlook
@@ -298,3 +298,4 @@ brew cask install qlprettypatch
 # Ruby
 
 brew install rbenv ruby-build
+
