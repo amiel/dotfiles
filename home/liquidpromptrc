@@ -1,0 +1,19 @@
+
+function EXT_COLOR () { echo -ne "\033[38;5;$1m"; }
+
+LP_COLOR_USER_LOGGED="$(EXT_COLOR 080)"           # user who logged in
+# LP_COLOR_USER_ALT="$(EXT_COLOR 080)"         # user but not the one who logged in
+LP_COLOR_USER_ROOT="$(EXT_COLOR 227)"      # root
+
+LP_COLOR_PATH="$(EXT_COLOR 164)"
+LP_COLOR_PATH_ROOT="$(EXT_COLOR 227)"
+
+LP_COLOR_HOST="$(EXT_COLOR 063)"             # local host
+
+LP_COLOR_ERR="$WARN_RED"
+
+LP_COLOR_UP=$(EXT_COLOR 083)
+LP_COLOR_COMMITS=$(EXT_COLOR 070)
+LP_COLOR_CHANGES=$(EXT_COLOR 063)
+LP_COLOR_DIFF=$(EXT_COLOR 063)
+
