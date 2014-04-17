@@ -1,12 +1,16 @@
 #!/bin/bash
 
-export RBENV_VERSION=2.1.0
+function set_color() {
+  local rbenv_version_save="$RBENV_VERSION"
+  export RBENV_VERSION=2.1.0
+  digicolor $1
+  export RBENV_VERSION="$rbenv_version_save"
+}
 
-digicolor black
-
+set_color black
 if eval "$@";then
-  digicolor blue
+  set_color blue
 else
-  digicolor '#ff0009'
+  set_color '#ff0009'
 fi
 
