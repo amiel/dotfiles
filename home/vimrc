@@ -160,7 +160,8 @@ let g:airline_theme = 'custom'
 " :color grb256
 
 highlight ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
-highlight cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
+" highlight cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
+highlight cursorline cterm=bold ctermbg=NONE term=NONE guibg=NONE
 highlight LineNr ctermfg=239
 highlight SpecialKey term=NONE ctermfg=238 guifg=NONE
 highlight SignColumn ctermbg=NONE guibg=NONE
