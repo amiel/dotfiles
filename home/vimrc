@@ -137,6 +137,7 @@ let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_javascript_checkers = ['jshint']
 
+
 """"""""""""""
 " Airline
 """"""""""""""
@@ -331,41 +332,21 @@ endfunction
 
 
 
-"""""""""""""""""""""""""""""""""""
-" Show coverage report if it exists
-"""""""""""""""""""""""""""""""""""
 
-function! SetupCoverage()
-  if filereadable("coverage.vim")
-    source coverage.vim
-  endif
-endfunction
-
-" TODO: Move to filetype files
-"
 if has("autocmd")
   " Remove trailing whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
 
   " Source the vimrc file after saving it
-  " autocmd bufwritepost .vimrc source $MYVIMRC
-
-  autocmd BufNewFile,BufRead Gemfile,Rakefile,Guardfile,Capfile,config.ru setlocal filetype=ruby
-  autocmd FileType rb set makeprg=rake
-  autocmd FileType ruby call SetupCoverage()
+  autocmd bufwritepost .vimrc source $MYVIMRC
 
   set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
-
-  augroup filetypedetect
-    au! BufNewFile,BufRead *.ly,*.ily           setf lilypond
-  augroup END
 
   augroup windows
     autocmd!
     autocmd VimResized * :wincmd = " resize splits when the window is resized
   augroup END
 
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 endif
 
 
