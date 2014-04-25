@@ -23,7 +23,6 @@ call pathogen#infect()
 " Bundle: pangloss/vim-javascript
 " Bundle: mattn/emmet-vim
 " Bundle: bling/vim-airline
-" Bundle: airblade/vim-gitgutter
 " Bundle: scrooloose/syntastic
 " Bundle: lunaru/vim-less
 " " Bundle: ember.vim
@@ -136,6 +135,7 @@ let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_filetype_map = { 'handlebars.html': 'handlebars' }
 
 
 """"""""""""""
