@@ -6,8 +6,10 @@ call pathogen#infect()
 
 " Bundle: tpope/vim-sensible
 " Bundle: wincent/Command-T
-" BundleCommand: ( export RBENV_VERSION=1.8.7-p358; rbenv rehash; ruby --version; rake make )
+" BundleCommand: ( eval "$(rbenv init -)"; export RBENV_VERSION=1.8.7-p358; pwd; rbenv rehash; ruby --version; rake make )
 " Bundle: amiel/vim-tmux-navigator
+" Bundle: bling/vim-airline
+" Bundle: tpope/vim-rsi
 " Bundle: tpope/vim-rails
 " Bundle: rking/ag.vim
 " Bundle: tpope/vim-fugitive
@@ -19,21 +21,24 @@ call pathogen#infect()
 " Bundle: tpope/vim-repeat
 " Bundle: t9md/vim-ruby-xmpfilter
 " Bundle: tpope/vim-surround
-" Bundle: tpope/vim-tbone
+"
 " Bundle: pangloss/vim-javascript
 " Bundle: mattn/emmet-vim
-" Bundle: bling/vim-airline
 " Bundle: scrooloose/syntastic
-" Bundle: lunaru/vim-less
-" " Bundle: ember.vim
-" Bundle: terryma/vim-multiple-cursors
-" Bunlde: vim-preview
-" Bundle: jlanzarotta/bufexplorer
-" Bundle: tpope/vim-dispatch
-" Bundle: rizzatti/funcoo.vim
-" Bundle: rizzatti/dash.vim
 " Bundle: jtratner/vim-flavored-markdown
-" Bundle: ngmy/vim-rubocop
+
+
+
+" " Bundle: tpope/vim-tbone
+" " Bundle: lunaru/vim-less
+" " Bundle: ember.vim
+" " Bundle: terryma/vim-multiple-cursors
+" " Bunlde: vim-preview
+" " Bundle: jlanzarotta/bufexplorer
+" " Bundle: tpope/vim-dispatch
+" " Bundle: rizzatti/funcoo.vim
+" " Bundle: rizzatti/dash.vim
+" " Bundle: ngmy/vim-rubocop
 
 " " Bundle: heartsentwined/vim-ember-script
 

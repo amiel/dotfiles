@@ -24,11 +24,10 @@ fi
 
 echo "Using app name: $app"
 
-heroku pgbackups:capture --expire "$@"
-
-url="`heroku pgbackups:url "$@"`"
 file="db/$app.pgdump"
-curl -o "$file" "$url"
 
+heroku pgbackups:capture --expire "$@"
+url="`heroku pgbackups:url "$@"`"
+curl -o "$file" "$url"
 
 pg_restore --verbose --clean --no-acl --no-owner -h $DB_HOST -U $DB_USERNAME -d $DB_DATABASE $file
