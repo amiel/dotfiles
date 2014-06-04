@@ -51,8 +51,7 @@ set nocompatible
 syntax enable
 set encoding=utf-8
 set mouse=a
-" Keep open files hidden (doesn't require you to save files to switch away
-" from them)
+" Keep open files hidden (doesn't require you to save files to switch away from them)
 set hidden
 filetype plugin indent on
 
@@ -473,3 +472,12 @@ function! MakeDirectoryForCurrentFile()
 endfunction
 :command! Mkdir :call MakeDirectoryForCurrentFile()
 
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
