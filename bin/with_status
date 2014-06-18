@@ -1,16 +1,15 @@
 #!/bin/bash
 
 function set_color() {
-  local rbenv_version_save="$RBENV_VERSION"
-  export RBENV_VERSION=2.1.0
-  digicolor $1
-  export RBENV_VERSION="$rbenv_version_save"
+  blink1-tool -l 1 --rgb=$1
 }
 
-set_color black
+# TODO: Emulate blink (without blocking the port) with an internal background process
+
+set_color 0
 if eval "$@";then
-  set_color blue
+  set_color '0,0,0xff'
 else
-  set_color '#ff0009'
+  set_color '0xff,0,0'
 fi
 
