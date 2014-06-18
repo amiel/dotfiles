@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+COLORS = {
+  'success' => '0,0xff,0',
+  'failed'  => '0xff,0,0',
+  'pending' => '0xff,0xcc,0',
+  'off'     => '0',
+}
+
+
+puts COLORS.fetch(ARGV[0], '0')
+

@@ -3,11 +3,18 @@ notification :off
 
 guard :shell do
   file = 'result/guard_result'
+  color = nil
+
   watch file do
     puts Time.new
     puts `cat #{file}|sed 's/^/\t/'`
     puts
-    `digicolor $(head -1 #{file}) --blink > /dev/null`
+
+    `blink1-tool -l 2 --rgb="#{color}" --blink=1 -t 0` if color
+
+    color = `blink1-color $(head -1 #{file})`.strip
+
+    `blink1-tool -l 2 --rgb="#{color}"`
   end
 end
 
