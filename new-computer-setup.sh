@@ -274,6 +274,7 @@ brew install redis
 brew install postgresql
 brew install mysql
 brew install gnupg
+brew install blink1
 
 brew cask install firefox
 brew cask install codekit
@@ -282,6 +283,7 @@ brew cask install heroku-toolbelt
 brew cask install airfoil
 brew cask install google-hangouts
 brew cask install gitx
+brew cask install vagrant
 
 # ql plugins
 brew cask install jsonlook
