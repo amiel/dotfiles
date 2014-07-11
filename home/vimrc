@@ -88,8 +88,6 @@ set winwidth=13 winminwidth=13
 set winheight=50 winwidth=96
 
 
-
-
 set scrolloff=4
 
 set switchbuf=useopen,split
@@ -308,12 +306,12 @@ map <leader>ne :call CommandTInRailsEngine()<cr>
 map <leader>gR :call ShowRoutes()<cr>
 
 function! CommandTInRailsEngine()
-    let in_engine_file = match(expand("%"), '^engines/.\+$') != -1
+  let in_engine_file = match(expand("%"), '^engines/.\+$') != -1
 
-    if in_engine_file
-      let engine_dir = substitute(expand("%"), '^\(engines/\w\+\)/.*$', '\1', '')
-      exec ":CommandT " . engine_dir
-    endif
+  if in_engine_file
+    let engine_dir = substitute(expand("%"), '^\(engines/\w\+\)/.*$', '\1', '')
+    exec ":CommandT " . engine_dir
+  endif
 endfunction
 
 " Rake Routes
@@ -371,12 +369,12 @@ map <leader>T :VroomRunNearestTest<cr>
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-n>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-n>"
+  endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
