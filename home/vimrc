@@ -196,7 +196,13 @@ highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
 " center cursor position in screen
 nmap <space> zz
 
-map <leader>y "*y
+map <leader>a =ip
+
+" apply macros easily with Q
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+
+set pastetoggle=<leader>z
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
@@ -204,12 +210,16 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" rotate windows
 nnoremap <c-w><c-o> <c-w>r
 
 nnoremap <c-s> <c-w>j<c-w>=
 " nnoremap <c-+> <c-w>+
 " nnoremap <c--> <c-w>-
 
+" shift l/h to switch tabs
+noremap <S-l> gt
+noremap <S-h> gT
 
 
 " New vertical split, switch to it
@@ -246,7 +256,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap / /\v
 vnoremap / /\v
 
-map ,= mzgg=G`z
+map <leader>= mzgg=G`z
 
 
 
@@ -282,11 +292,11 @@ let g:CommandTWildIgnore=&wildignore . ",node_modules/**"
 
 " Open files with <leader>h
 map <leader>h :CommandT<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-" Open files, limited to the directory of the current file, with <leader>gf
+
+" Open files, limited to the directory of the current file
 " This requires the %% mapping found below.
 map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
-map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
+map <leader>nt :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
 map <leader>nad :CommandT app/admin<cr>
 map <leader>nas :CommandT app/assets<cr>
