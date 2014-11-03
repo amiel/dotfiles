@@ -6,7 +6,7 @@ call pathogen#infect()
 
 " Bundle: tpope/vim-sensible
 " Bundle: wincent/Command-T
-" BundleCommand: ( eval "$(rbenv init -)"; export RBENV_VERSION=1.8.7-p358; pwd; rbenv rehash; ruby --version; rake make )
+" BundleCommand: ( eval "$(rbenv init -)"; export RBENV_VERSION=system; pwd; rbenv rehash; ruby --version; rake make )
 " Bundle: amiel/vim-tmux-navigator
 " Bundle: bling/vim-airline
 " Bundle: tpope/vim-rsi
