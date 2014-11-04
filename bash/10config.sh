@@ -19,8 +19,8 @@ if $IS_OSX; then
 
   export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
-  export MANPATH="`brew --prefix`/share/man:$MANPATH"
-  export NODE_PATH="`brew --prefix`/lib/node:`brew --prefix`/lib/node_modules"
+  export MANPATH="$BREW_PREFIX/share/man:$MANPATH"
+  export NODE_PATH="$BREW_PREFIX/lib/node:$BREW_PREFIX/lib/node_modules"
   export PATH="$PATH:/usr/local/share/npm/bin"
 
   export EDITOR="vim"
