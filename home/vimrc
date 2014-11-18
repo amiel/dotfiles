@@ -268,7 +268,7 @@ map <leader>v :view %%
 
 
 " nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
-nmap <buffer> <leader>r   <Plug>(xmpfilter-run)
+nmap <buffer> <lender>r   <Plug>(xmpfilter-run)
 
 " nmap <buffer> <F5> <Plug>(xmpfilter-run)
 " xmap <buffer> <F5> <Plug>(xmpfilter-run)
@@ -411,7 +411,8 @@ endfunction
 :map <leader>P :call UpdateRspec()<cr>
 
 ":nmap <leader>gh :s/\v( |\{):(\w+)\=\>/\1\r\2: /g<cr>
-:nmap <leader>gc :%s/\v:(\w+) \=\>/\1:/g<cr>
+" :nmap <leader>gc :%s/\v:(\w+) \=\>/\1:/g<cr>
+:nmap <leader>gc :s/\v:(\w+) \=\>/\1:/g<cr>
 
 
 " Copy the entire contents of the current file to the system clipboard
