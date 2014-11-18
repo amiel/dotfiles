@@ -229,7 +229,7 @@ launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 ###########
 # Homebrew
 
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install git
 brew install reattach-to-user-namespace tmux
