@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 function EXT_COLOR () { echo -ne "\033[38;5;$1m"; }
 
@@ -6,6 +6,13 @@ function __git_parse_dirty {
   [[ $(git status 2> /dev/null | tail -n1) == "" ]] && echo "" && return
   [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit (working directory clean)" ]] && printf "\033[32m✓\033[00m" && return
   printf "\[\033[31m\]✗\[\033[00m\]"
+}
+
+function __git_pairs {
+  local pairs="$(git config --get user.initials 2>/dev/null)"
+  if [ -n "$pairs" ];then
+    echo -n "[$pairs] "
+  fi
 }
 
 function color_prompt {
@@ -20,6 +27,7 @@ function color_prompt {
 
   local dircolor=$(EXT_COLOR 164)
   local gitcolor=$(EXT_COLOR 083)
+  local paircolor=$(EXT_COLOR 179)
   # local gitcolor=$(EXT_COLOR 077)
   local NC="\e[0;m"
 
@@ -32,11 +40,11 @@ function color_prompt {
     export GIT_PS1_SHOWSTASHSTATE=true
     export GIT_PS1_SHOWUNTRACKEDFILES=true
     export GIT_PS1_SHOWUPSTREAM=verbose # or auto?
-    local gitps1="\[${gitcolor}\]\$(__git_ps1 '(%s) ')\[${NC}\]"
+    local gitps1="\[${gitcolor}\]\$(__git_ps1 '(%s) ')\[${paircolor}\]\$(__git_pairs)\[${NC}\]"
   fi
 
-  export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${gitps1}$(echo -ne "\xe2\x87\x89") "
 
+  export PS1="$title\[${usercolor}\]\u@\[$NC\]\[${hostcolor}\]\h\[$NC\] \[${dircolor}\]\W\[$NC\] ${gitps1}$(echo -ne "\xe2\x87\x89") "
 }
 
 export PS1='\h:\u \W\$ '
