@@ -85,8 +85,9 @@
   st      = status -sb
   ci      = commit
   aa      = add --all .
-  dif     = diff --word-diff=color
-  dc      = diff --cached
+  dw      = diff --word-diff=color
+  dc      = icdiff --cached
+  dif     = icdiff
   br      = branch
   brav    = branch -a -v
   brv     = branch -v
