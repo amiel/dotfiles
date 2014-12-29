@@ -121,7 +121,7 @@ set wildignore+=log/**
 set wildignore+=.git
 set wildignore+=tmp/cache
 set wildignore+=.tmp
-set wildignore+=*.png,*.jpg,*.gif,*.db,*.sql
+set wildignore+=*.png,*.jpg,*.gif,*.db
 
 set list
 
