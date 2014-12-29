@@ -9,24 +9,25 @@ call pathogen#infect()
 " BundleCommand: ( eval "$(rbenv init -)"; export RBENV_VERSION=system; pwd; rbenv rehash; ruby --version; rake make )
 " Bundle: amiel/vim-tmux-navigator
 " Bundle: bling/vim-airline
-" Bundle: tpope/vim-rsi
-" Bundle: tpope/vim-rails
 " Bundle: rking/ag.vim
-" Bundle: tpope/vim-fugitive
-" Bundle: jgdavey/vim-blockle
 " Bundle: kchmck/vim-coffee-script
-" Bundle: commentary.vim
-" Bundle: endwise.vim
-" Bundle: nono/vim-handlebars
-" Bundle: tpope/vim-repeat
-" Bundle: t9md/vim-ruby-xmpfilter
-" Bundle: tpope/vim-surround
-" Bundle: vroom
-"
-" Bundle: pangloss/vim-javascript
-" Bundle: mattn/emmet-vim
-" Bundle: scrooloose/syntastic
-" Bundle: jtratner/vim-flavored-markdown
+" " Bundle: endwise.vim
+
+" " Bundle: tpope/vim-rsi
+" " Bundle: tpope/vim-rails
+" " Bundle: tpope/vim-fugitive
+" " Bundle: jgdavey/vim-blockle
+" " Bundle: commentary.vim
+" " Bundle: nono/vim-handlebars
+" " Bundle: tpope/vim-repeat
+" " Bundle: t9md/vim-ruby-xmpfilter
+" " Bundle: tpope/vim-surround
+" " Bundle: vroom
+
+" " Bundle: pangloss/vim-javascript
+" " Bundle: mattn/emmet-vim
+" " Bundle: scrooloose/syntastic
+" " Bundle: jtratner/vim-flavored-markdown
 
 
 
