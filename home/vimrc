@@ -1,18 +1,3 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-" Bundle: tpope/vim-pathogen
-call pathogen#infect()
-
-" vim-update-bundles
-
-" Bundle: tpope/vim-sensible
-" Bundle: wincent/Command-T
-" BundleCommand: ( eval "$(rbenv init -)"; export RBENV_VERSION=system; pwd; rbenv rehash; ruby --version; rake make )
-" Bundle: amiel/vim-tmux-navigator
-" Bundle: bling/vim-airline
-" Bundle: rking/ag.vim
-" Bundle: kchmck/vim-coffee-script
-" " Bundle: endwise.vim
-
 " " Bundle: tpope/vim-rsi
 " " Bundle: tpope/vim-rails
 " " Bundle: tpope/vim-fugitive
@@ -43,6 +28,31 @@ call pathogen#infect()
 " " Bundle: ngmy/vim-rubocop
 
 " " Bundle: heartsentwined/vim-ember-script
+
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=system; pwd; rbenv rehash; ruby --version; rake make )' }
+Plug 'amiel/vim-tmux-navigator'
+Plug 'bling/vim-airline'
+Plug 'rking/ag.vim'
+
+" Plug 'endwise.vim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-fugitive'
+
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-fugitive'
+Plug 'jgdavey/vim-blockle'
+Plug 'commentary.vim'
+
+Plug 'tpope/vim-dispatch'
+
+call plug#end()
+
 
 let mapleader = ","
 
