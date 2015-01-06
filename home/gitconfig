@@ -86,7 +86,7 @@
   ci      = commit
   aa      = add --all .
   dw      = diff --word-diff=color
-  dc      = icdiff --cached
+  dc      = diff --cached
   dif     = icdiff
   br      = branch
   brav    = branch -a -v
@@ -136,3 +136,7 @@
 
 [hub]
   protocol = https
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
