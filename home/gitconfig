@@ -79,7 +79,7 @@
 
 [merge "gemfilelock"]
   name = relocks the gemfile.lock
-  driver = bundle lock
+  driver = bundle
 
 [alias]
   st      = status -sb
