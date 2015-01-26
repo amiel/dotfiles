@@ -42,6 +42,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-fugitive'
 
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-rails'
