@@ -3,7 +3,6 @@
 " " Bundle: tpope/vim-fugitive
 " " Bundle: jgdavey/vim-blockle
 " " Bundle: commentary.vim
-" " Bundle: nono/vim-handlebars
 " " Bundle: tpope/vim-repeat
 " " Bundle: t9md/vim-ruby-xmpfilter
 " " Bundle: tpope/vim-surround
@@ -49,6 +48,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-fugitive'
 Plug 'jgdavey/vim-blockle'
 Plug 'commentary.vim'
+Plug 'nono/vim-handlebars'
 
 Plug 'tpope/vim-dispatch'
 
