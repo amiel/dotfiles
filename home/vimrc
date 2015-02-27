@@ -133,7 +133,7 @@ set wildignore+=.git
 set wildignore+=tmp/cache
 set wildignore+=.tmp
 set wildignore+=*.png,*.jpg,*.gif,*.db
-set wildignore+=coverage/*
+set wildignore+=coverage/**
 
 set list
 
