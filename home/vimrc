@@ -31,10 +31,12 @@
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=system; pwd; rbenv rehash; ruby --version; rake make )' }
+Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.1.0; pwd; rbenv rehash; ruby --version; rake make )' }
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
+
+Plug 'osyo-manga/vim-over'
 
 " Plug 'endwise.vim'
 Plug 'tpope/vim-rails'
@@ -102,7 +104,7 @@ set winheight=50 winwidth=96
 
 set scrolloff=4
 
-set switchbuf=useopen,split
+set switchbuf=useopen
 
 set autoread
 
@@ -301,7 +303,7 @@ nnoremap <leader>. :A<cr>
 
 "let g:CommandTMatchWindowAtTop=1
 
-let g:CommandTWildIgnore=&wildignore . ",node_modules/**"
+let g:CommandTWildIgnore=&wildignore
 
 
 " Open files with <leader>h
@@ -310,7 +312,10 @@ map <leader>h :CommandT<cr>
 " Open files, limited to the directory of the current file
 " This requires the %% mapping found below.
 map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
+map <leader>ne :CommandTFlush<cr>\|:CommandT %%<cr>
+
 map <leader>nt :CommandTFlush<cr>\|:CommandTBuffer<cr>
+map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
 map <leader>nad :CommandT app/admin<cr>
 map <leader>nas :CommandT app/assets<cr>
@@ -326,17 +331,7 @@ map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>gr :topleft :split config/routes.rb<cr>
 
-map <leader>ne :call CommandTInRailsEngine()<cr>
 map <leader>gR :call ShowRoutes()<cr>
-
-function! CommandTInRailsEngine()
-  let in_engine_file = match(expand("%"), '^engines/.\+$') != -1
-
-  if in_engine_file
-    let engine_dir = substitute(expand("%"), '^\(engines/\w\+\)/.*$', '\1', '')
-    exec ":CommandT " . engine_dir
-  endif
-endfunction
 
 " Rake Routes
 
