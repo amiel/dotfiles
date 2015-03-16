@@ -1,1 +1,15 @@
 set completion-ignore-case on
+
+"\M-d": backward-kill-word
+
+set history-preserve-point on
+
+# Try out some suggested settings
+# from https://gist.github.com/1812027
+set expand-tilde on
+set convert-meta off
+set input-meta on
+set output-meta on
+set show-all-if-ambiguous on
+set visible-stats on
+

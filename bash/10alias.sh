@@ -6,3 +6,4 @@ alias be="bundle exec"
 alias bake="bundle exec rake"
 alias ql="qlmanage -p"
 alias macvim="/Applications/MacVim.app/Contents/MacOS/Vim"
+alias vi="vim" # I'm lazy
