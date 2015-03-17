@@ -87,7 +87,8 @@ set cursorline
 
 set hlsearch
 
-set number " show numbers
+set number
+set relativenumber
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
