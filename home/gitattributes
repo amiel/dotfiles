@@ -1,4 +1,4 @@
 *.png diff=exif
-db/schema.rb merge=railsschema
 Gemfile.lock merge=gemfilelock
+db/structure.sql filter=remove-trailing-whitespace
 
