@@ -9,7 +9,6 @@
 " " Bundle: vroom
 
 " " Bundle: pangloss/vim-javascript
-" " Bundle: mattn/emmet-vim
 " " Bundle: scrooloose/syntastic
 " " Bundle: jtratner/vim-flavored-markdown
 
@@ -53,6 +52,8 @@ Plug 'commentary.vim'
 Plug 'nono/vim-handlebars'
 
 Plug 'tpope/vim-dispatch'
+
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -304,7 +305,7 @@ nnoremap <leader>. :A<cr>
 
 "let g:CommandTMatchWindowAtTop=1
 
-let g:CommandTWildIgnore=&wildignore
+let g:CommandTWildIgnore=&wildignore . ",tmp/*,dist/*"
 
 
 " Open files with <leader>h
