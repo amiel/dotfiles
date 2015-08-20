@@ -8,8 +8,6 @@
 " " Bundle: tpope/vim-surround
 " " Bundle: vroom
 
-" " Bundle: pangloss/vim-javascript
-" " Bundle: scrooloose/syntastic
 " " Bundle: jtratner/vim-flavored-markdown
 
 
@@ -25,8 +23,6 @@
 " " Bundle: rizzatti/dash.vim
 " " Bundle: ngmy/vim-rubocop
 
-" " Bundle: heartsentwined/vim-ember-script
-
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
@@ -34,15 +30,13 @@ Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERS
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
-
 Plug 'osyo-manga/vim-over'
 
-" Plug 'endwise.vim'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
 
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'scrooloose/syntastic'
 
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-rails'
@@ -51,9 +45,9 @@ Plug 'jgdavey/vim-blockle'
 Plug 'commentary.vim'
 Plug 'nono/vim-handlebars'
 
-Plug 'tpope/vim-dispatch'
-
 Plug 'mattn/emmet-vim'
+
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
@@ -80,9 +74,15 @@ set shiftwidth=2
 set softtabstop=2
 
 set wrap
-set textwidth=80
+set textwidth=79
 set formatoptions=qcron1
 set colorcolumn=96
+
+" performance
+set synmaxcol=128
+set ttyfast " u got a fast terminal
+set ttyscroll=3
+set lazyredraw " to avoid scrolling problems
 
 set cursorline
 
