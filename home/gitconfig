@@ -83,9 +83,7 @@
   brav    = branch -a -v
   brv     = branch -v
   co      = checkout
-  pullff  = pull --no-ff
-  purr    = pull ––rebase
-  ff      = merge --ff-only
+  purr    = pull --rebase
   l       = log --oneline --decorate --graph
   lg      = log -p
   ll      = log --pretty=oneline --abbrev-commit --max-count=15 --decorate --graph
@@ -98,6 +96,7 @@
   ri      = rebase --interactive --autosquash
   standup = !git log --since yesterday --author `git config user.email` --pretty=short
   camend  = commit --amend --no-edit
+  cleanup = !git co master && git purr && git delete-merged-branches && git remote prune origin
 
   # Fancy logging.
   #   h = head
