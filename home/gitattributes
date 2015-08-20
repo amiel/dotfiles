@@ -1,4 +1,4 @@
 *.png diff=exif
 Gemfile.lock merge=gemfilelock
-db/structure.sql filter=remove-trailing-whitespace
+# db/structure.sql filter=remove-trailing-whitespace
 
