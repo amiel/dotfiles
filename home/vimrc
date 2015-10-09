@@ -57,6 +57,7 @@ let mapleader = ","
 set exrc
 set secure
 
+
 set nocompatible
 syntax enable
 set encoding=utf-8
@@ -64,6 +65,8 @@ set mouse=a
 " Keep open files hidden (doesn't require you to save files to switch away from them)
 set hidden
 filetype plugin indent on
+
+set nomodeline
 
 " set shortmess=atI
 
@@ -143,11 +146,15 @@ set wildignore+=node_modules/*,bower_components/*
 set list
 
 
-
 " http://items.sjbach.com/319/configuring-vim-right
 " extends % to match more things correctly
 runtime macros/matchit.vim
 
+""""""""""""""""
+" Abbreviations
+""""""""""""""""
+
+abbr pry require 'pry'; binding.pry
 
 """"""""""""
 " Syntastic
