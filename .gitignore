@@ -1,8 +1,8 @@
 Icon*
 .DS_Store
 .dropbox
-00env
-env
+00env.sh
+env.sh
 home/tmuxinator
 .netrwhist
 
