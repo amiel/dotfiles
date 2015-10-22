@@ -4,7 +4,7 @@
 # installation instructions.
 
 
-Window = Struct.new(:width, :height, :layout)
+Window = Struct.new(:width, :height, :layout, :zoomed)
 
 PaneInfo = Struct.new(:id, :width, :height, :window, :current_command, :x, :y) do
   def initialize(*)
@@ -13,7 +13,8 @@ PaneInfo = Struct.new(:id, :width, :height, :window, :current_command, :x, :y) d
   end
 
   def set_layout
-    matches = window.layout.match(/#{width}x#{height},(\d+),(\d+),#{id}/)
+    # set_layout: "8902,364x83,0,0[364x16,0,0,0,364x66,0,17{181x66,0,17,4,91x66,182,17,5,90x66,274,17,10}]"
+    matches = window.layout.match(/\d+x\d+,(\d+),(\d+),#{id}/)
     self.x = matches[1].to_i
     self.y = matches[2].to_i
   end
@@ -50,6 +51,7 @@ class TMUX
       get_tmux_thing('window_width').to_i,
       get_tmux_thing('window_height').to_i,
       get_tmux_thing('window_layout'),
+      get_tmux_thing('window_zoomed_flag').to_i == 1,
     )
   end
 
@@ -68,11 +70,21 @@ class TMUX
   end
 end
 
+def should_zoom?(arg, pane)
+  return true if pane.window.zoomed
+  return true if arg == '-L' && pane.left?
+  return true if arg == '-R' && pane.right?
+  return true if arg == '-U' && pane.top?
+  return true if arg == '-D' && pane.bottom?
+
+  false
+end
+
 tmux = TMUX.new
 pane = tmux.pane
 
 arg = ARGV[0]
-if arg == '-L' && pane.left? || arg == '-R' && pane.right? || arg == '-U' && pane.top? || arg == '-D' && pane.bottom?
+if should_zoom?(arg, pane)
   style = :zoom
   command = 'tmux resize-pane -Z'
 else
