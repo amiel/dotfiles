@@ -2,12 +2,6 @@
 
 function EXT_COLOR () { echo -ne "\033[38;5;$1m"; }
 
-function __git_parse_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) == "" ]] && echo "" && return
-  [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit (working directory clean)" ]] && printf "\033[32m✓\033[00m" && return
-  printf "\[\033[31m\]✗\[\033[00m\]"
-}
-
 function __git_pairs {
   local pairs="$(git config --get user.initials 2>/dev/null)"
   if [ -n "$pairs" ];then
