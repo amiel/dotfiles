@@ -33,6 +33,7 @@ Plug 'rking/ag.vim'
 Plug 'osyo-manga/vim-over'
 
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-abolish'
 
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
