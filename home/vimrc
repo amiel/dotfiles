@@ -393,6 +393,18 @@ endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO function
+function! PromoteToFunction()
+  :normal! dd
+  :normal! P
+  :.s/\(@\)\?\(\w\+\) \(||\)\?= \(.*\)$/def \2\r\4\rend\r/
+  :normal ={
+endfunction
+:command! PromoteToFunction :call PromoteToFunction()
+:map <leader>f :PromoteToFunction<cr>
+
+
 """"""""""""""""""""""""""""""""""""""
 " Update to new rspec expect() syntax
 function! UpdateRspec()
@@ -403,7 +415,7 @@ endfunction
 
 ":nmap <leader>gh :s/\v( |\{):(\w+)\=\>/\1\r\2: /g<cr>
 " :nmap <leader>gc :%s/\v:(\w+) \=\>/\1:/g<cr>
-:nmap <leader>gc :s/\v:(\w+) \=\>/\1:/g<cr>
+:nmap <leader>gc :s/\v:(\w+) ?\=\> ?/\1: /g<cr>
 
 
 " Copy the entire contents of the current file to the system clipboard
@@ -419,6 +431,7 @@ function! MakeDirectoryForCurrentFile()
 endfunction
 :command! Mkdir :call MakeDirectoryForCurrentFile()
 
+" TODO: Comment what the hell this does
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 function! QuickfixFilenames()
   " Building a hash ensures we get each buffer only once
