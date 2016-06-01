@@ -250,18 +250,14 @@ brew cask alfred link
 brew cask install iterm2
 brew cask install onepassword
 brew cask install transmit
-brew cask install sublime-text
-brew cask install teleport
 brew cask install github
-brew cask install flowdock
-brew cask install chronomate
+brew cask install slack
 
 brew tap homebrew/versions
 brew install apple-gcc42
 
 brew install ssh-copy-id
 brew install colordiff
-brew install mobile-shell
 brew install imagemagick
 brew install node
 brew install nmap
@@ -272,9 +268,8 @@ brew install v8
 brew install memcached
 brew install redis
 brew install postgresql
-brew install mysql
+brew install elasticsearch
 brew install gnupg
-brew install blink1
 
 brew cask install firefox
 brew cask install codekit
@@ -294,6 +289,9 @@ brew cask install qlprettypatch
 # brew cask install vlc
 # brew cask install transmission
 # brew cask install time-tracker-mac
+# brew cask install blink1
+# brew cask install sublime-text
+# brew cask install chronomate
 # brew install sleepwatcher
 
 #######
