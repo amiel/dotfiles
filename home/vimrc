@@ -37,6 +37,7 @@ Plug 'tpope/vim-abolish'
 
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'elixir-lang/vim-elixir'
 Plug 'scrooloose/syntastic'
 
 Plug 'tpope/vim-rsi'
@@ -83,7 +84,7 @@ set formatoptions=qcron1
 set colorcolumn=96
 
 " performance
-set synmaxcol=128
+set synmaxcol=256
 set ttyfast " u got a fast terminal
 set ttyscroll=3
 set lazyredraw " to avoid scrolling problems
@@ -306,8 +307,6 @@ nmap <buffer> <lender>r   <Plug>(xmpfilter-run)
 " imap <buffer> <F6> <Plug>(xmpfilter-mark)
 
 nnoremap <leader>. :A<cr>
-
-
 
 
 " Command-T mappings
