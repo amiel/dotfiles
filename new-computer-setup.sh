@@ -250,7 +250,8 @@ brew cask alfred link
 brew cask install iterm2
 brew cask install onepassword
 brew cask install transmit
-brew cask install github
+brew cask install sublime-text
+brew cask install chronomate
 brew cask install slack
 
 brew tap homebrew/versions
@@ -270,15 +271,16 @@ brew install redis
 brew install postgresql
 brew install elasticsearch
 brew install gnupg
+brew install git-extras
 
 brew cask install firefox
-brew cask install codekit
 brew cask install skype
 brew cask install heroku-toolbelt
 brew cask install airfoil
 brew cask install google-hangouts
+brew cask install gitup
 brew cask install gitx
-brew cask install vagrant
+# brew cask install vagrant
 
 # ql plugins
 brew cask install jsonlook
@@ -292,7 +294,6 @@ brew cask install qlprettypatch
 # brew cask install blink1
 # brew cask install sublime-text
 # brew cask install chronomate
-# brew install sleepwatcher
 
 #######
 # Ruby
