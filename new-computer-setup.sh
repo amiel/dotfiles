@@ -235,10 +235,6 @@ brew install git
 brew install reattach-to-user-namespace tmux
 brew install bash-completion
 
-brew tap phinze/cask
-brew install brew-cask
-brew tap caskroom/fonts
-
 brew cask install font-inconsolata
 brew cask install font-inconsolata-dz
 brew cask install font-inconsolata-dz-for-powerline
@@ -246,16 +242,11 @@ brew cask install font-inconsolata-dz-for-powerline
 # brew cask install dropbox # theoretically already installed
 brew cask install google-chrome
 brew cask install alfred
-brew cask alfred link
 brew cask install iterm2
-brew cask install onepassword
+brew cask install 1password
 brew cask install transmit
-brew cask install sublime-text
 brew cask install chronomate
 brew cask install slack
-
-brew tap homebrew/versions
-brew install apple-gcc42
 
 brew install ssh-copy-id
 brew install colordiff
@@ -282,18 +273,16 @@ brew cask install gitup
 brew cask install gitx
 # brew cask install vagrant
 
+brew cask install spectacle
+brew cask install valentina-studio
+
 # ql plugins
-brew cask install jsonlook
-brew cask install qlmarkdown
-brew cask install qlprettypatch
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
 
 # extra
 # brew cask install vlc
 # brew cask install transmission
-# brew cask install time-tracker-mac
-# brew cask install blink1
 # brew cask install sublime-text
-# brew cask install chronomate
 
 #######
 # Ruby
