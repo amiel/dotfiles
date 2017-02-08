@@ -143,6 +143,7 @@ runtime macros/matchit.vim
 """"""""""""""""
 
 abbr pry require 'pry'; binding.pry
+abbr deferTest return window.Ember.RSVP.defer().promise;
 
 """"""
 " ALE
