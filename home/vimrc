@@ -9,10 +9,11 @@ Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-abolish'
 
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'mxw/vim-jsx'
 Plug 'elixir-lang/vim-elixir'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-rails'
@@ -143,20 +144,25 @@ runtime macros/matchit.vim
 
 abbr pry require 'pry'; binding.pry
 
-""""""""""""
-" Syntastic
-""""""""""""
-let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_filetype_map = { 'handlebars.html': 'handlebars' }
+""""""
+" ALE
+""""""
+let g:ale_echo_msg_format = '%linter% %severity%: %s'
 
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✗'
+let g:ale_html_htmlhint_options='--format=unix --config ~/.htmlhintrc.json'
+let g:ale_html_tidy_args='-q -e -language en --show-body-only true'
+
+" I have htmlhint configured to handle partial html
+" Use jshint only for now until I get fern running with eslint
+let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['jshint'] }
+
+" let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 
 """"""""""""""
 " Airline
 """"""""""""""
-
 
 " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
@@ -164,6 +170,9 @@ set ttimeoutlen=50
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 1
+" let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#error_symbol = '✗'
+" let g:airline#extensions#ale#warning_symbol = '⚠'
 let g:airline_theme = 'custom'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
