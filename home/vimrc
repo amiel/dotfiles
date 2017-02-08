@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.1.0; pwd; rbenv rehash; ruby --version; rake make )' }
+Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.4.0; pwd; rbenv rehash; ruby --version; rake make )' }
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
