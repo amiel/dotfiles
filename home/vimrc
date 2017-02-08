@@ -1,29 +1,3 @@
-" " Bundle: tpope/vim-rsi
-" " Bundle: tpope/vim-rails
-" " Bundle: tpope/vim-fugitive
-" " Bundle: jgdavey/vim-blockle
-" " Bundle: commentary.vim
-" " Bundle: tpope/vim-repeat
-" " Bundle: t9md/vim-ruby-xmpfilter
-" " Bundle: tpope/vim-surround
-" " Bundle: vroom
-
-" " Bundle: jtratner/vim-flavored-markdown
-
-
-
-" " Bundle: tpope/vim-tbone
-" " Bundle: lunaru/vim-less
-" " Bundle: ember.vim
-" " Bundle: terryma/vim-multiple-cursors
-" " Bunlde: vim-preview
-" " Bundle: jlanzarotta/bufexplorer
-" " Bundle: tpope/vim-dispatch
-" " Bundle: rizzatti/funcoo.vim
-" " Bundle: rizzatti/dash.vim
-" " Bundle: ngmy/vim-rubocop
-
-
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.1.0; pwd; rbenv rehash; ruby --version; rake make )' }
@@ -50,6 +24,16 @@ Plug 'nono/vim-handlebars'
 Plug 'mattn/emmet-vim'
 
 Plug 'wakatime/vim-wakatime'
+
+" " Bundle: tpope/vim-repeat
+" " Bundle: tpope/vim-surround
+" " Bundle: vroom
+" " Bundle: tpope/vim-tbone
+" " Bundle: ember.vim
+" " Bundle: terryma/vim-multiple-cursors
+" " Bunlde: vim-preview
+" " Bundle: tpope/vim-dispatch
+" " Bundle: rizzatti/funcoo.vim
 
 call plug#end()
 
