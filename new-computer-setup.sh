@@ -202,21 +202,6 @@ defaults write com.runningwithcrayons.Alfred-Preferences syncfolder -string ~/Dr
 # Set iterm2 sync folder
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Preferences
 
-###############################
-# Sync Sublime Text 2 settings
-function setupstsync() {
-  local stdir=~/"Library/Application Support/Sublime Text 2"
-  local dropboxdir=~/"Dropbox/Sublime Text 2"
-  if [ ! -d "$stdir" ];then
-    mkdir -p "$stdir"
-    ln -s "$dropboxdir/Installed Packages" "$stdir/Installed Packages"
-    ln -s "$dropboxdir/Packages" "$stdir/Packages"
-    ln -s "$dropboxdir/Pristine Packages" "$stdir/Pristine Packages"
-  fi
-}
-
-setupstsync
-
 ######################
 # Set up a few things
 
@@ -235,10 +220,13 @@ brew install git
 brew install reattach-to-user-namespace tmux
 brew install bash-completion
 
+# Installing Fonts
+brew tap caskroom/fonts
 brew cask install font-inconsolata
 brew cask install font-inconsolata-dz
 brew cask install font-inconsolata-dz-for-powerline
 
+# Installing Applications
 # brew cask install dropbox # theoretically already installed
 brew cask install google-chrome
 brew cask install alfred
@@ -248,6 +236,7 @@ brew cask install transmit
 brew cask install chronomate
 brew cask install slack
 
+brew install heroku-toolbelt
 brew install ssh-copy-id
 brew install colordiff
 brew install imagemagick
@@ -260,32 +249,50 @@ brew install v8
 brew install memcached
 brew install redis
 brew install postgresql
-brew install elasticsearch
+brew install homebrew/versions/elasticsearch17
 brew install gnupg
 brew install git-extras
 
 brew cask install firefox
 brew cask install skype
-brew cask install heroku-toolbelt
 brew cask install airfoil
 brew cask install google-hangouts
 brew cask install gitup
 brew cask install gitx
+brew cask install vlc
+brew cask install java
 # brew cask install vagrant
 
-brew cask install spectacle
-brew cask install valentina-studio
+# brew cask install spectacle
+# brew cask install valentina-studio
 
 # ql plugins
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+brew cask install qlmarkdown
+brew cask install qlprettypatch
+brew cask install qlcolorcode
+brew cask install qlstephen
+brew cask install qlmarkdown
+brew cask install quicklook-json
+brew cask install qlprettypatch
+brew cask install quicklook-csv
+brew cask install betterzipql
+brew cask install qlimagesize
+brew cask install webpquicklook
+brew cask install suspicious-package
 
-# extra
-# brew cask install vlc
-# brew cask install transmission
-# brew cask install sublime-text
 
-#######
-# Ruby
+################
+# Ruby and Node
 
-brew install rbenv ruby-build
+brew install nvm
+brew install rbenv ruby-build rbenv-default-gems
 
+nvm install lts/boron
+nvm alias default lts/boron
+
+echo -e "bundler\ntmuxinator\n" >> $(rbenv root)/default-gems
+
+rbenv install 2.3.1
+rbenv install 2.4.0
+
+rbenv global 2.4.0
