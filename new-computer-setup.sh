@@ -287,12 +287,14 @@ brew cask install suspicious-package
 brew install nvm
 brew install rbenv ruby-build rbenv-default-gems
 
-nvm install lts/boron
-nvm alias default lts/boron
+# These things must happen in a new shell
 
-echo -e "bundler\ntmuxinator\n" >> $(rbenv root)/default-gems
+# nvm install lts/boron
+# nvm alias default lts/boron
 
-rbenv install 2.3.1
-rbenv install 2.4.0
+# echo -e "bundler\ntmuxinator\n" >> $(rbenv root)/default-gems
 
-rbenv global 2.4.0
+# rbenv install 2.3.1
+# rbenv install 2.4.0
+
+# rbenv global 2.4.0
