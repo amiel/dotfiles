@@ -1,4 +1,12 @@
 export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
+
+
+if __command_exists brew; then
+  . "$(brew --prefix nvm)/nvm.sh"
+fi
+
+if __command_exists yarn; then
+  export PATH="$PATH:`yarn global bin`"
+fi
 
 export NPM_AUTH_TOKEN="$(head -n 1 ~/.npmrc | sed "s/\/\/.*=//")"
