@@ -44,7 +44,6 @@ let mapleader = ","
 set exrc
 set secure
 
-
 set nocompatible
 syntax enable
 set encoding=utf-8
@@ -73,6 +72,13 @@ set synmaxcol=256
 set ttyfast " u got a fast terminal
 set ttyscroll=3
 set lazyredraw " to avoid scrolling problems
+
+" Avoid command-line redraw on every entered character by turning off
+" Arabic shaping (which is implemented poorly).
+" found here: https://groups.google.com/forum/#!topic/vim_dev/QOWQo7DKG0M
+if has('arabic')
+  set noarabicshape
+endif
 
 set cursorline
 
