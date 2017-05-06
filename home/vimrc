@@ -336,7 +336,7 @@ map <leader>h :CommandT<cr>
 map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
 map <leader>ne :CommandTFlush<cr>\|:CommandT %%<cr>
 
-map <leader>nt :CommandTFlush<cr>\|:CommandTBuffer<cr>
+map <leader>nt :CommandTFlush<cr>\|:CommandTTag<cr>
 map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
 map <leader>nad :CommandT app/admin<cr>
