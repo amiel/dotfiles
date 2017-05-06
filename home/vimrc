@@ -175,7 +175,6 @@ let g:ale_html_tidy_args='-q -e -language en --show-body-only true'
 " Use jshint only for now until I get fern running with eslint
 let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['jshint'] }
 
-" let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 
 """"""""""""""
 " Airline
@@ -317,7 +316,6 @@ nmap <buffer> <lender>r   <Plug>(xmpfilter-run)
 " imap <buffer> <F6> <Plug>(xmpfilter-mark)
 
 nnoremap <leader>. :A<cr>:Glcd<cr>
-
 
 " Command-T mappings
 
