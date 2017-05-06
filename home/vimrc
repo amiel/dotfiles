@@ -6,17 +6,23 @@ Plug 'bling/vim-airline'
 Plug 'rking/ag.vim'
 Plug 'osyo-manga/vim-over'
 
+Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-abolish'
 
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-projectionist'
+
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'elixir-lang/vim-elixir'
 Plug 'w0rp/ale'
 
-Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
+Plug 'sukima/vim-emberlayout'
+
 Plug 'tpope/vim-fugitive'
 Plug 'jgdavey/vim-blockle'
 Plug 'commentary.vim'
@@ -24,7 +30,11 @@ Plug 'nono/vim-handlebars'
 
 Plug 'mattn/emmet-vim'
 
-Plug 'wakatime/vim-wakatime'
+" To look in to:
+" * https://github.com/machakann/vim-sandwich
+" * https://github.com/rhysd/clever-f.vim
+" * http://bytefluent.com/vivify/
+" * https://www.reddit.com/r/vimplugins/comments/52v9dp/musthave_plugins/
 
 " " Bundle: tpope/vim-repeat
 " " Bundle: tpope/vim-surround
