@@ -1,0 +1,35 @@
+#!/bin/bash
+
+show_help() {
+  cat << EOF
+Usage: ${0##*/} emoji status text
+Example: ${0##*/} partyparrot having a good weekend
+EOF
+}
+
+show_token_help() {
+  cat << EOF
+Please export your slack API token (with the users.profile:write scope) as SLACK_STATUS_API_TOKEN.
+EOF
+}
+
+# Quit if anything fails
+set -e
+
+if [ "$#" -lt "2" ]; then
+  show_help
+  exit 1
+fi
+
+if [ -z "$SLACK_STATUS_API_TOKEN" ]; then
+  show_token_help
+  exit 1
+fi
+
+emoji="$1"
+shift
+text="$*"
+
+curl https://slack.com/api/users.profile.set --request POST -F token=$SLACK_STATUS_API_TOKEN -F 'profile={"status_text":"'"$text"'", "status_emoji": ":'"$emoji"':"}'
+echo
+echo
