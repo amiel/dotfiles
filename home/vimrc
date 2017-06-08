@@ -9,13 +9,14 @@ Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-projectionist'
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-" Plug 'mxw/vim-jsx'
 Plug 'elixir-lang/vim-elixir'
 Plug 'w0rp/ale'
 
@@ -36,14 +37,10 @@ Plug 'mattn/emmet-vim'
 " * http://bytefluent.com/vivify/
 " * https://www.reddit.com/r/vimplugins/comments/52v9dp/musthave_plugins/
 
-" " Bundle: tpope/vim-repeat
-" " Bundle: tpope/vim-surround
 " " Bundle: vroom
 " " Bundle: tpope/vim-tbone
 " " Bundle: ember.vim
 " " Bundle: terryma/vim-multiple-cursors
-" " Bunlde: vim-preview
-" " Bundle: tpope/vim-dispatch
 " " Bundle: rizzatti/funcoo.vim
 
 call plug#end()
