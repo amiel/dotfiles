@@ -171,7 +171,7 @@ let g:ale_html_tidy_args='-q -e -language en --show-body-only true'
 
 " I have htmlhint configured to handle partial html
 " Use jshint only for now until I get fern running with eslint
-let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['jshint'] }
+let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] }
 
 
 """"""""""""""
