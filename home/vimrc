@@ -73,6 +73,7 @@ set wrap
 set textwidth=79
 set formatoptions=qcron1
 set colorcolumn=96
+set nojoinspaces
 
 " performance
 set synmaxcol=256
