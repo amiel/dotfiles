@@ -8,6 +8,8 @@
   # brew install exiftool
   textconv = exiftool
 
+[init]
+  templatedir = ~/.git_template
 
 [core]
   # editor         = mate -w
@@ -114,6 +116,7 @@
   la = !git l --all
   today = log --since=midnight --author='Amiel Martin' --oneline
   yesterday = log --graph --all --since=\"day.before.yesterday.midnight\" --until=midnight --author=\\\"$(git config user.name)\\\" --oneline
+  ctags = !.git/hooks/ctags
 
 [mergetool "fugitive"]
   cmd = vim -f -c \"Gdiff\" \"$MERGED\"
