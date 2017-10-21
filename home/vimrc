@@ -1,9 +1,19 @@
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.4.0; pwd; rbenv rehash; ruby --version; rake make )' }
+
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+end
+
+" Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.4.0; pwd; rbenv rehash; ruby --version; rake make )' }
+
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+" Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+
+
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 Plug 'osyo-manga/vim-over'
 
 Plug 'tpope/vim-rsi'
@@ -17,6 +27,7 @@ Plug 'tpope/vim-projectionist'
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'elixir-lang/vim-elixir'
 Plug 'w0rp/ale'
 
@@ -26,10 +37,15 @@ Plug 'sukima/vim-emberlayout'
 
 Plug 'tpope/vim-fugitive'
 Plug 'jgdavey/vim-blockle'
-Plug 'commentary.vim'
+" Plug 'commentary.vim'
 Plug 'nono/vim-handlebars'
 
 Plug 'mattn/emmet-vim'
+
+" Experimental
+Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons'
+Plug 'matze/vim-lilypond'
 
 " To look in to:
 " * https://github.com/machakann/vim-sandwich
@@ -77,8 +93,12 @@ set nojoinspaces
 
 " performance
 set synmaxcol=256
-set ttyfast " u got a fast terminal
-set ttyscroll=3
+
+if !has('nvim')
+  set ttyfast " u got a fast terminal
+  set ttyscroll=3
+end
+
 set lazyredraw " to avoid scrolling problems
 
 " Avoid command-line redraw on every entered character by turning off
@@ -156,7 +176,7 @@ runtime macros/matchit.vim
 " Abbreviations
 """"""""""""""""
 
-abbr pry require 'pry'; binding.pry
+abbr rpry require 'pry'; binding.pry
 abbr deferTest return window.Ember.RSVP.defer().promise;
 
 """"""
@@ -173,6 +193,11 @@ let g:ale_html_tidy_args='-q -e -language en --show-body-only true'
 " Use jshint only for now until I get fern running with eslint
 let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] }
 
+"""""""""""
+" Startify
+"""""""""""
+
+let g:startify_change_to_vcs_root = 1
 
 """"""""""""""
 " Airline
@@ -182,6 +207,8 @@ let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] 
 
 set ttimeoutlen=50
 let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_statusline = 1
+
 " let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 1
 " let g:airline#extensions#ale#enabled = 1
@@ -216,7 +243,7 @@ highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
 highlight TabLine term=NONE cterm=NONE ctermbg=235 ctermfg=249
 highlight TabLineSel term=NONE cterm=NONE ctermbg=235 ctermfg=150
 
-highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
+" highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
 
 " from something else...
 " highlight! link DiffText MatchParen
@@ -297,6 +324,10 @@ map <leader>= mzgg=G`z
 
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+"
+cnoremap ## <C-R>=expand('%:tr')<cr>
+
 map <leader>e :edit %%
 map <leader>E :Explore<cr>
 map <leader>v :view %%
@@ -315,37 +346,47 @@ nmap <buffer> <lender>r   <Plug>(xmpfilter-run)
 
 nnoremap <leader>. :A<cr>:Glcd<cr>
 
+" let g:fzf_command_prefix = 'Fzf'
+
+" fzf mappings
+
+map <leader>h :Files<cr>
+map <leader>nh :GFiles?<cr>
+map <leader>bh :Buffers<cr>
+
 " Command-T mappings
 
 " let g:CommandTMatchWindowAtTop=1
 
-let g:CommandTWildIgnore=&wildignore . ",tmp/**,dist/**"
-let g:CommandTMaxDepth=8
-let g:CommandTFileScanner="git"
-let g:CommandTMatchWindowReverse=0
+
+
+" let g:CommandTWildIgnore=&wildignore . ",tmp/**,dist/**"
+" let g:CommandTMaxDepth=8
+" let g:CommandTFileScanner="git"
+" let g:CommandTMatchWindowReverse=0
 " The default for opening in a new tab is <C-t>, but that is my tmux prefix.
-let g:CommandTAcceptSelectionTabMap='<C-o>'
+" let g:CommandTAcceptSelectionTabMap='<C-o>'
 
 " Open files with <leader>h
-map <leader>h :CommandT<cr>
+" map <leader>h :CommandT<cr>
 
 " Open files, limited to the directory of the current file
 " This requires the %% mapping found below.
-map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
-map <leader>ne :CommandTFlush<cr>\|:CommandT %%<cr>
+" map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
+" map <leader>ne :CommandTFlush<cr>\|:CommandT %%<cr>
 
-map <leader>nt :CommandTFlush<cr>\|:CommandTTag<cr>
-map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
+" map <leader>nt :CommandTFlush<cr>\|:CommandTTag<cr>
+" map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
 
-map <leader>nad :CommandT app/admin<cr>
-map <leader>nas :CommandT app/assets<cr>
-map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
-map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
+" map <leader>nad :CommandT app/admin<cr>
+" map <leader>nas :CommandT app/assets<cr>
+" map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
+" map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+" map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
+" map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
+" map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
+" map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
+" map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
 
 
 map <leader>gg :topleft 100 :split Gemfile<cr>
@@ -468,7 +509,7 @@ let g:projectionist_heuristics = {
       \     "type": "unit-test"
       \   },
       \
-      \   "app/components/*/component.js": {
+      \   "app/components/*.js": {
       \     "alternate": "tests/integration/components/{}-test.js",
       \     "type": "component"
       \   },
