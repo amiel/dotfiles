@@ -12,10 +12,7 @@
   templatedir = ~/.git_template
 
 [core]
-  # editor         = mate -w
-  # I'd rather edit my commit messages in vim.
-  # Use the above for textmate
-  editor           = vim
+  editor           = nvim
   filemode         = true
   logallrefupdates = true
   whitespace       = fix, space-before-tab, trailing-space
@@ -31,17 +28,19 @@
   diff      = auto
   status    = auto
 [color "branch"]
-  current   = yellow reverse
-  local     = yellow
-  remote    = green
+  current   = green reverse
+  local     = green
+  remote    = yellow
+  upstream  = red
+  plain     = red
 [color "diff"]
   meta      = yellow bold
   frag      = magenta bold
   old       = red bold
   new       = green bold
 [color "status"]
-  added     = yellow
-  changed   = green
+  added     = green
+  changed   = yellow
   untracked = cyan
 
 [color]
