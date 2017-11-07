@@ -1,0 +1,2 @@
+defaults -currentHost write ~/Library/Preferences/ByHost/com.apple.notificationcenterui doNotDisturb -boolean false
+killall NotificationCenter
