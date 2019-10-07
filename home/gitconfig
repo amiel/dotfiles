@@ -1,15 +1,12 @@
-
-[user]
-  name = Amiel Martin
-  email = amiel@actionsprout.com
-  signingkey = 0DC8CE64
+[include]
+  path = ~/.gitconfig.local
 
 [diff "exif"]
   # brew install exiftool
   textconv = exiftool
 
-[init]
-  templatedir = ~/.git_template
+; [init]
+;   templatedir = ~/.git_template
 
 [core]
   editor           = nvim
@@ -21,7 +18,7 @@
   excludesfile = ~/.gitignore_global
 
 [merge]
- tool = fugitive
+  tool = fugitive
 
 [color]
   branch    = auto
@@ -54,7 +51,7 @@
   autosetupmerge = true
 
 [push]
-  default = tracking
+  default = simple
 
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
@@ -85,6 +82,7 @@
   brv     = branch -v
   co      = checkout
   purr    = pull --rebase
+  puff    = push --force-with-lease
   l       = log --oneline --decorate --graph
   lg      = log -p
   ll      = log --pretty=oneline --abbrev-commit --max-count=15 --decorate --graph
@@ -97,7 +95,8 @@
   ri      = rebase --interactive --autosquash
   standup = !git log --since yesterday --author `git config user.email` --pretty=short
   camend  = commit --amend --no-edit
-  cleanup = !git co master && git purr && git delete-merged-branches && git remote prune origin
+  cleanup = !SKIP_HOOKUP=1 git co master && git purr && git delete-merged-branches && git remote prune origin
+  publish = push -u origin HEAD
 
   # Fancy logging.
   #   h = head
@@ -118,7 +117,7 @@
   ctags = !.git/hooks/ctags
 
 [mergetool "fugitive"]
-  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
@@ -135,3 +134,14 @@
 
 [web]
   browser = open
+[commit]
+  gpgsign = true
+[rebase]
+  autoSquash = true
+[rerere]
+  enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

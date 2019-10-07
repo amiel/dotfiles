@@ -1,8 +1,4 @@
 
-
-# Allow cd'ing into any directory under src
-# export CDPATH=".:~/src"
-
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 export LANG='en_US.UTF-8'
@@ -11,25 +7,17 @@ export PAGER='less'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
-export PATH="$PATH:~/bin"
-
 if $IS_OSX; then
   export BREW_PREFIX=`brew --prefix`
-  export PGDATA="/usr/local/var/postgres"
-
-  export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
   export MANPATH="$BREW_PREFIX/share/man:$MANPATH"
-  export NODE_PATH="$BREW_PREFIX/lib/node:$BREW_PREFIX/lib/node_modules"
-  export PATH="$PATH:/usr/local/share/npm/bin"
 
-  export EDITOR="vim"
-  # export BUNDLER_EDITOR="subl"
-  # export LESSEDIT='mate -l %lm %f'
+  export EDITOR="nvim"
 else
-  export EDITOR=vim
+  export EDITOR=vi
 fi
 
+export GPG_TTY=$(tty)
 
 # Report the status of terminated background jobs immediately, rather than before the next
 # primary prompt.  This is effective only when job control is enabled.
@@ -46,9 +34,8 @@ export PROMPT_COMMAND='history -a'
 # Options: ignorespace, ignoredups
 #   ignoredups:   does not record duplicate history items
 #   ignorespace:  does not record with leading space to history
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups
 
 # Fuck that you have new mail shit
 unset MAILCHECK
-
 

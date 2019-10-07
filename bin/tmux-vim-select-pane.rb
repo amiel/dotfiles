@@ -20,7 +20,7 @@ PaneInfo = Struct.new(:id, :width, :height, :window, :current_command, :x, :y) d
   end
 
   def vim?
-    current_command == 'vim'
+    current_command == 'vim' || current_command == 'nvim'
   end
 
   def top?

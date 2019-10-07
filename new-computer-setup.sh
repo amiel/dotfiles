@@ -216,6 +216,8 @@ launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# TODO: Switch to Brewfile
+
 brew install git
 brew install reattach-to-user-namespace tmux
 brew install bash-completion
@@ -261,7 +263,7 @@ brew cask install gitup
 brew cask install gitx
 brew cask install vlc
 brew cask install java
-# brew cask install vagrant
+brew cask install beardedspice
 
 # brew cask install spectacle
 # brew cask install valentina-studio
