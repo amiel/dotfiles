@@ -30,6 +30,11 @@ emoji="$1"
 shift
 text="$*"
 
-curl https://slack.com/api/users.profile.set --request POST -F token=$SLACK_STATUS_API_TOKEN -F 'profile={"status_text":"'"$text"'", "status_emoji": ":'"$emoji"':"}'
+# TODO: Have a better way of clearing the status
+if [ ! -z $emoji ];then
+  emoji=":$emoji:"
+fi
+
+curl https://slack.com/api/users.profile.set --request POST -F token=$SLACK_STATUS_API_TOKEN -F 'profile={"status_text":"'"$text"'", "status_emoji": "'"$emoji"'"}'
 echo
 echo
