@@ -217,7 +217,6 @@ cask "quicklook-json"
 cask "recordit"
 # cask "skype"
 cask "slack"
-cask "soulver"
 cask "suspicious-package"
 cask "texmaker"
 cask "transmit"
@@ -230,3 +229,4 @@ mas "Pages", id: 409201541
 mas "Shush", id: 496437906
 mas "Wunderlist", id: 410628904
 mas "Xcode", id: 497799835
+mas "Soulver", id: 413965349
