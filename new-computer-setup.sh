@@ -38,13 +38,17 @@ defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Prefere
 ######################
 # Set up a few things
 
-# [ -d ~/src ] || mkdir ~/src
-# [ -e ~/src/dotfiles ] || ln -s ~/Documents/dotfiles ~/src/dotfiles
-# ~/src/dotfiles/bin/link-dotfiles
+[ -d ~/src ] || mkdir ~/src
+[ -e ~/src/dotfiles ] || ln -s ~/Dropbox/dotfiles ~/src/dotfiles
+~/src/dotfiles/bin/link-dotfiles
 
 ###########
 # Homebrew
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew bundle install
+# brew bundle install
+
+
+
+# fonts from https://github.com/romkatv/powerlevel10k#installation
