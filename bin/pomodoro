@@ -53,7 +53,7 @@ case $1 in
   end)
     set_time '  --- NO POMODORO --- '
     ;;
-  *) # Or time)
+  tmux) # Or time)
     t=`current_time`
 
     arrow="\xee\x82\xb2"
@@ -62,6 +62,10 @@ case $1 in
     echo -ne "#[fg=colour$(color)]$arrow#[bg=colour$(color),fg=colour235]"
     is_running && echo -ne " $tomato  "
     echo "$(pomodoro_string) #[bg=default,fg=default]"
+    ;;
+
+  *)
+    echo $(pomodoro_string)
     ;;
 esac
 
