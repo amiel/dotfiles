@@ -7,12 +7,16 @@ home/tmuxinator
 .netrwhist
 
 home/zshenv
+home/gitconfig.local
 
 # Bundles managed by vim-update-bundles
 home/vim/doc/bundle-log.txt
 home/vim/doc/bundles.txt
 home/vim/bundle
 .bundle
+
+# needs to be installed from https://github.com/kevinschoon/pomo
+bin/pomo
 
 # vim plugins managed by https://github.com/junegunn/vim-plug
 home/vim/plugged
