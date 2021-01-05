@@ -1,0 +1,47 @@
+source /usr/local/share/antigen/antigen.zsh
+
+# # TODO: homebrew completions in a bundle?
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+#   autoload -Uz compinit
+#   compinit
+# fi
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle rbenv
+antigen bundle fzf
+antigen bundle tmuxinator
+
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
+antigen bundle ELLIOTTCABLE/rbenv.plugin.zsh
+antigen bundle schoonology/userenv-zsh
+
+# antigen bundle esroze/docker-compose-zsh-plugin
+antigen bundle chriskempson/base16-shell
+
+antigen bundle Schoonology/userenv-zsh
+
+# export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# antigen bundle nojhan/liquidprompt
+antigen theme romkatv/powerlevel10k
+
+antigen apply
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# source "${ZSH}/custom/plugins/fzf-custom/base16-material-darker.config"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
+
+export GPG_TTY=$(tty)
+
+source ~/.zsh_aliases
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+unsetopt share_history

@@ -6,6 +6,8 @@ env.sh
 home/tmuxinator
 .netrwhist
 
+home/zshenv
+
 # Bundles managed by vim-update-bundles
 home/vim/doc/bundle-log.txt
 home/vim/doc/bundles.txt
