@@ -9,35 +9,61 @@ end
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 " Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-vinegar'
+
+Plug 'chriskempson/base16-vim'
 
 
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
-" Plug 'rking/ag.vim'
 Plug 'osyo-manga/vim-over'
+Plug 'sjl/gundo.vim'
 
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-abolish'
+" Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
+
+Plug 'ap/vim-css-color'
+
+Plug 'whatyouhide/vim-gotham'
+
+if has('nvim')
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+"   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"   " Plug 'Shougo/neco-syntax'
+end
 
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-projectionist'
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+" Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+" Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'elixir-lang/vim-elixir'
-Plug 'w0rp/ale'
+Plug 'mhinz/vim-mix-format'
+Plug 'slashmili/alchemist.vim'
+Plug 'matze/vim-lilypond'
+Plug 'dart-lang/dart-vim-plugin'
+
+
+" JSON MAPPINGS: TODO LEARN
+Plug 'tpope/vim-jdaddy'
+
+" Plug 'w0rp/ale'
 
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
-Plug 'sukima/vim-emberlayout'
+Plug 'tpope/vim-db'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'jgdavey/vim-blockle'
-" Plug 'commentary.vim'
+Plug 'tpope/vim-commentary'
 Plug 'nono/vim-handlebars'
 
 Plug 'mattn/emmet-vim'
@@ -45,19 +71,32 @@ Plug 'mattn/emmet-vim'
 " Experimental
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
-Plug 'matze/vim-lilypond'
+Plug 'djoshea/vim-autoread'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'tmux-plugins/vim-tmux'
+
+Plug 'sukima/vim-javascript-imports'
+Plug 'sukima/vim-ember-imports'
+
+Plug 'coot/CRDispatcher'
+Plug 'coot/EnchantedVim'
 
 " To look in to:
 " * https://github.com/machakann/vim-sandwich
 " * https://github.com/rhysd/clever-f.vim
 " * http://bytefluent.com/vivify/
 " * https://www.reddit.com/r/vimplugins/comments/52v9dp/musthave_plugins/
+" Chiel92/vim-autoformat
+" https://github.com/Raimondi/delimitMate
 
 " " Bundle: vroom
 " " Bundle: tpope/vim-tbone
 " " Bundle: ember.vim
 " " Bundle: terryma/vim-multiple-cursors
 " " Bundle: rizzatti/funcoo.vim
+
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -109,11 +148,13 @@ if has('arabic')
 endif
 
 set cursorline
+set signcolumn=yes
 
 set hlsearch
 
 set number
-set relativenumber
+au FileType fzf set nonu nornu
+
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
@@ -123,10 +164,11 @@ set ignorecase smartcase
 " fail.
 set noequalalways
 
-set winheight=7 winminheight=7
+set winheight=15 winminheight=7
 set winwidth=13 winminwidth=13
 set winheight=50 winwidth=96
 
+set cmdheight=2
 
 set scrolloff=4
 
@@ -139,7 +181,9 @@ set autoread
 " keep undo information even after we quit
 set undofile
 
-set backup
+set noswapfile
+
+set backupcopy=yes
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -167,6 +211,7 @@ set wildignore+=bower_components/**
 
 set list
 
+let g:mix_format_on_save = 1
 
 " http://items.sjbach.com/319/configuring-vim-right
 " extends % to match more things correctly
@@ -179,6 +224,19 @@ runtime macros/matchit.vim
 abbr rpry require 'pry'; binding.pry
 abbr deferTest return window.Ember.RSVP.defer().promise;
 
+"""""""""""
+" deoplete
+"""""""""""
+
+if has("nvim")
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#sources#jedi#python_path = 'python3'
+  let g:loaded_python_provider = 1 " Disable python2 support
+  " let g:python_host_prog = '/usr/local/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
+end
+
+
 """"""
 " ALE
 """"""
@@ -187,17 +245,58 @@ let g:ale_echo_msg_format = '%linter% %severity%: %s'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✗'
 let g:ale_html_htmlhint_options='--format=unix --config ~/.htmlhintrc.json'
-let g:ale_html_tidy_args='-q -e -language en --show-body-only true'
+let g:ale_html_tidy_options='-q -e -language en --show-body-only true'
 
 " I have htmlhint configured to handle partial html
 " Use jshint only for now until I get fern running with eslint
 let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] }
 
+""""""
+" COC
+""""""
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+map <leader>jd <Plug>(coc-definition)
+map <leader>ji <Plug>(coc-implementation)
+map <leader>jr <Plug>(coc-references)
+map <leader>jc <Plug>(coc-rename)
+
+map <leader>gs :CocList -I -A symbols
+
+
 """""""""""
 " Startify
 """""""""""
 
+let g:startify_list_order = [
+      \ ['   Sessions'],
+      \ 'sessions',
+      \ ['   Bookmarks'],
+      \ 'bookmarks',
+      \ ['   My most recently used files in the current directory'],
+      \ 'dir',
+      \ ['   Commands'],
+      \ 'commands',
+      \ ]
+
 let g:startify_change_to_vcs_root = 1
+let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
+
+let g:startify_commands = [
+    \ ['Vim Reference', 'h ref'],
+    \ ]
 
 """"""""""""""
 " Airline
@@ -222,26 +321,50 @@ let g:airline_theme = 'custom'
 :set t_Co=256 " 256 colors
 :set background=dark
 " :color Tomorrow-Night-Eighties
-" :color grb256
+" :color gotham256
 
-highlight ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+" let base16colorspace=256
+" colorscheme base16-default-dark
+
+" highlight ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
 " highlight cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
-highlight cursorline cterm=bold ctermbg=NONE term=NONE guibg=NONE
-highlight LineNr ctermfg=239
-highlight SpecialKey term=NONE ctermfg=238 guifg=NONE
-highlight SignColumn ctermbg=NONE guibg=NONE
-highlight NonText ctermfg=black
+" highlight cursorline cterm=bold ctermbg=NONE term=NONE guibg=NONE
+" highlight LineNr ctermfg=239
+" highlight SpecialKey term=NONE ctermfg=238 guifg=NONE
+" highlight SignColumn ctermbg=NONE guibg=NONE
+" highlight NonText ctermfg=black
 
-highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
-highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
-highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
-highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
+" highlight DiffAdd ctermbg=194 ctermbg=235
+" highlight DiffChange ctermfg=157 ctermbg=235
+" highlight DiffText cterm=bold ctermfg=120 ctermbg=234
+" highlight DiffDelete ctermfg=52 ctermbg=232
 
-highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
+" highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
 
-highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
-highlight TabLine term=NONE cterm=NONE ctermbg=235 ctermfg=249
-highlight TabLineSel term=NONE cterm=NONE ctermbg=235 ctermfg=150
+" highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
+" highlight TabLine term=NONE cterm=NONE ctermbg=235 ctermfg=249
+" highlight TabLineSel term=NONE cterm=NONE ctermbg=235 ctermfg=150
+
+" highlight ALEWarning cterm=bold ctermfg=226
+" highlight ALEError cterm=bold ctermbg=52
+" highlight ALEErrorSign cterm=bold ctermfg=124
+" highlight link ALEWarningSign  ALEWarning
+
+" highlight CocWarningVirtualText term=NONE ctermfg=166 ctermbg=236
+" highlight CocInfoVirtualText ctermfg=166 ctermbg=236
+
+" CocErrorVirtualText xxx links to CocErrorSign
+" CocWarningVirtualText xxx links to CocWarningSign
+" CocInfoVirtualText xxx links to CocInfoSign
+" CocHintVirtualText xxx links to CocHintSign
+
+
+
 
 " highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
 
@@ -264,13 +387,20 @@ map <leader>a =ip
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
-set pastetoggle=<leader>z
+set pastetoggle=<leader>v
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+if has('nvim')
+  tnoremap <c-j> <c-\><c-n><c-w>j
+  tnoremap <c-k> <c-\><c-n><c-w>k
+  tnoremap <c-h> <c-\><c-n><c-w>h
+  tnoremap <c-l> <c-\><c-n><c-w>l
+endif
 
 " rotate windows
 nnoremap <c-w><c-o> <c-w>r
@@ -317,6 +447,12 @@ nnoremap <leader><leader> <c-^>
 " Use real regexes for searches
 nnoremap / /\v
 vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+
+let g:VeryMagic = 0
+let g:VeryMagicSubstitute = 1
+
 
 map <leader>= mzgg=G`z
 
@@ -328,76 +464,26 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 "
 cnoremap ## <C-R>=expand('%:tr')<cr>
 
-map <leader>e :edit %%
+" map <leader>e :edit %%
 map <leader>E :Explore<cr>
-map <leader>v :view %%
 
-
-" nmap <silent> <leader>r mzggVG!xmpfilter -a<cr>'z
-nmap <buffer> <lender>r   <Plug>(xmpfilter-run)
-
-" nmap <buffer> <F5> <Plug>(xmpfilter-run)
-" xmap <buffer> <F5> <Plug>(xmpfilter-run)
-" imap <buffer> <F5> <Plug>(xmpfilter-run)
-
-" nmap <buffer> <F6> <Plug>(xmpfilter-mark)
-" xmap <buffer> <F6> <Plug>(xmpfilter-mark)
-" imap <buffer> <F6> <Plug>(xmpfilter-mark)
-
-nnoremap <leader>. :A<cr>:Glcd<cr>
-
-" let g:fzf_command_prefix = 'Fzf'
+nnoremap <leader>. :A<cr>
+" :Glcd<cr>
 
 " fzf mappings
 
 map <leader>h :Files<cr>
 map <leader>nh :GFiles?<cr>
-map <leader>bh :Buffers<cr>
-
-" Command-T mappings
-
-" let g:CommandTMatchWindowAtTop=1
-
-
-
-" let g:CommandTWildIgnore=&wildignore . ",tmp/**,dist/**"
-" let g:CommandTMaxDepth=8
-" let g:CommandTFileScanner="git"
-" let g:CommandTMatchWindowReverse=0
-" The default for opening in a new tab is <C-t>, but that is my tmux prefix.
-" let g:CommandTAcceptSelectionTabMap='<C-o>'
-
-" Open files with <leader>h
-" map <leader>h :CommandT<cr>
-
-" Open files, limited to the directory of the current file
-" This requires the %% mapping found below.
-" map <leader>nh :CommandTFlush<cr>\|:CommandT %%<cr>
-" map <leader>ne :CommandTFlush<cr>\|:CommandT %%<cr>
-
-" map <leader>nt :CommandTFlush<cr>\|:CommandTTag<cr>
-" map <leader>nb :CommandTFlush<cr>\|:CommandTBuffer<cr>
-
-" map <leader>nad :CommandT app/admin<cr>
-" map <leader>nas :CommandT app/assets<cr>
-" map <leader>nv :CommandTFlush<cr>\|:CommandT app/views<cr>
-" map <leader>nc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-" map <leader>nm :CommandTFlush<cr>\|:CommandT app/models<cr>
-" map <leader>nj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
-" map <leader>nl :CommandTFlush<cr>\|:CommandT lib<cr>
-" map <leader>np :CommandTFlush<cr>\|:CommandT public<cr>
-" map <leader>ns :CommandTFlush<cr>\|:CommandT spec<cr>
-
-
-map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>gr :topleft :split config/routes.rb<cr>
+map <leader>nb :Buffers<cr>
+" map <leader>e :Files %%<cr>
+map <leader>ne :Files %%<cr>
 
 if has("autocmd")
   " Remove trailing whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
 
   " Source the vimrc file after saving it
-  autocmd bufwritepost .vimrc source $MYVIMRC
+  " autocmd bufwritepost .vimrc source $MYVIMRC
 
   set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
 
@@ -409,25 +495,32 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :VroomRunTestFile<cr>
-map <leader>T :VroomRunNearestTest<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<c-n>"
-  endif
+" function! InsertTabWrapper()
+"   let col = col('.') - 1
+"   if !col || getline('.')[col - 1] !~ '\k'
+"     return "\<tab>"
+"   else
+"     return "\<c-n>"
+"   endif
+" endfunction
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <s-tab> <c-n>
+
+" When using `dd` in the quickfix list, remove the item from the quickfix list.
+function! RemoveQFItem()
+  let curqfidx = line('.') - 1
+  let qfall = getqflist()
+  call remove(qfall, curqfidx)
+  call setqflist(qfall, 'r')
+  execute curqfidx + 1 . "cfirst"
+  :copen
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+:command! RemoveQFItem :call RemoveQFItem()
+" Use map <buffer> to only map dd in the quickfix window. Requires +localmap
+autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
+
 
 
 
@@ -490,110 +583,3 @@ function! QuickfixFilenames()
   endfor
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
-
-
-
-
-
-" TODO: Move to a plugin
-" NOTE: This was originally copied from
-" https://gist.github.com/chrisgame/1b4e983104c7180f0d33
-let g:projectionist_heuristics = {
-      \ "ember-cli-build.js": {
-      \   "app/adapters/*.js": {
-      \     "alternate": "tests/unit/adapters/{}-test.js",
-      \     "type": "adapter"
-      \   },
-      \   "tests/unit/adapters/*-test.js": {
-      \     "alternate": "app/adapters/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/components/*.js": {
-      \     "alternate": "tests/integration/components/{}-test.js",
-      \     "type": "component"
-      \   },
-      \   "tests/integration/components/*-test.js": {
-      \     "alternate": "app/components/{}/component.js",
-      \     "type": "integration-test"
-      \   },
-      \
-      \   "app/helpers/*.js": {
-      \     "alternate": "tests/unit/helpers/{}-test.js",
-      \     "type": "helper"
-      \   },
-      \   "tests/unit/helpers/*-test.js": {
-      \     "alternate": "app/helpers/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/initializers/*.js": {
-      \     "alternate": "tests/unit/initializers/{}-test.js",
-      \     "type": "initializer"
-      \   },
-      \   "tests/unit/initializers/*-test.js": {
-      \     "alternate": "app/initializers/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/instance-initializers/*.js": {
-      \     "alternate": "tests/unit/instance-initializers/{}-test.js",
-      \     "type": "instance-initializers"
-      \   },
-      \   "tests/unit/instance-initializers/*-test.js": {
-      \     "alternate": "app/instance-initializers/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/mixins/*.js": {
-      \     "alternate": "tests/unit/mixins/{}-test.js",
-      \     "type": "mixin"
-      \   },
-      \   "tests/unit/mixins/*-test.js": {
-      \     "alternate": "app/mixins/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/models/*.js": {
-      \     "alternate": "tests/unit/models/{}-test.js",
-      \     "type": "model"
-      \   },
-      \   "tests/unit/models/*-test.js": {
-      \     "alternate": "app/models/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/serializers/*.js": {
-      \     "alternate": "tests/unit/serializers/{}-test.js",
-      \     "type": "serializer"
-      \   },
-      \   "tests/unit/serializers/*-test.js": {
-      \     "alternate": "app/serializers/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/services/*.js": {
-      \     "alternate": "tests/unit/services/{}-test.js",
-      \     "type": "service"
-      \   },
-      \   "tests/unit/services/*-test.js": {
-      \     "alternate": "app/services/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/transforms/*.js": {
-      \     "alternate": "tests/unit/transforms/{}-test.js",
-      \     "type": "transform"
-      \   },
-      \   "tests/unit/transforms/*-test.js": {
-      \     "alternate": "app/transforms/{}.js",
-      \     "type": "unit-test"
-      \   },
-      \
-      \   "app/mirage/factories/*.js": {"type": "factory"},
-      \   "app/mirage/fixtures/*.js": {"type": "fixture"},
-      \   "app/mirage/scenarios/*.js": {"type": "scenario"},
-      \   "tests/acceptance/*.js": {"type": "acceptance-test"},
-      \   "app/*.scss": {"type": "style"},
-      \   "app/*.hbs": {"type": "template"},
-      \ }}
