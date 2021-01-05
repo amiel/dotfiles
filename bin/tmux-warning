@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+
+Window = Struct.new(:width, :height, :layout, :zoomed)
+
+PaneInfo = Struct.new(:id, :width, :height, :window, :current_command, :x, :y) do
+  def initialize(*)
+    super
+    set_layout
+  end
+
+  def set_layout
+    # set_layout: "8902,364x83,0,0[364x16,0,0,0,364x66,0,17{181x66,0,17,4,91x66,182,17,5,90x66,274,17,10}]"
+    matches = window.layout.match(/\d+x\d+,(\d+),(\d+),#{id}/)
+    self.x = matches[1].to_i
+    self.y = matches[2].to_i
+  end
+
+  def vim?
+    current_command == 'vim' || current_command == 'nvim'
+  end
+
+  def height_no_match?
+    y + height > window.height
+  end
+end
+
+class TMUX
+  def get_tmux_thing(thing)
+    `tmux display-message -p '\#{#{thing}}'`.strip
+  end
+
+  def window
+    @_window ||= Window.new(
+      get_tmux_thing('window_width').to_i,
+      get_tmux_thing('window_height').to_i,
+      get_tmux_thing('window_layout'),
+      get_tmux_thing('window_zoomed_flag').to_i == 1,
+    )
+  end
+
+  def pane
+    @_pane ||= PaneInfo.new(
+      get_tmux_thing('pane_id').gsub(/\%/,'').to_i,
+      get_tmux_thing('pane_width').to_i,
+      get_tmux_thing('pane_height').to_i,
+      window,
+      current_pane_command,
+    )
+  end
+
+  def current_pane_command
+    File.basename get_tmux_thing('pane_current_command')
+  end
+end
+
+
+if TMUX.new.pane.height_no_match?
+  warning = "TMUX UNSTABLE"
+  arrow = "\xee\x82\xb2"
+  # TEMP: Temporarily disable the warning
+  # printf "#[fg=colour174]#{arrow}#[bg=colour174,fg=colour235] #{warning} "
+end
+
+
+

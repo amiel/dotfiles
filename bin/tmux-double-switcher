@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Allows switching two sessions at the same time.
+
+current_session="$1"
+shift
+target_session="$1"
+shift
+
+current_test_session="${current_session/AS/Test}"
+target_test_session="${target_session/AS/Test}"
+
+tmux switch-client -t "$target_session"
+
+if test "$(tmux list-clients -t "$current_test_session")"; then
+  tmux switch-client -c $(tmux list-clients -F "#{client_name}" -t "$current_test_session") -t "${target_test_session}"
+fi
+

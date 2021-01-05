@@ -1,0 +1,32 @@
+#!/usr/local/bin/zsh
+# For use with the pomo CI from https://github.com/kevinschoon/pomo/
+
+local pomo_status="$(pomo status)"
+local arrow="\xee\x82\xb2"
+local tomato="\xf0\x9f\x8d\x85"
+local color
+local show
+local text
+
+
+
+case "${pomo_status[1]}" in
+  R)
+    show=true
+    color="#82AAFF"
+    text="$pomo_status"
+    ;;
+  B|P)
+    color="colour174"
+    show=true
+    text="$pomo_status"
+    ;;
+  *)
+    show=false
+    ;;
+esac
+
+if $($show); then
+  echo -ne "#[fg=${color}]$arrow#[bg=${color},fg=colour235] ${pomo_status} $arrow#[bg=default,fg=white]$tomato#[bg=default,fg=default]"
+fi
+

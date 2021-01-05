@@ -9,6 +9,8 @@ for name in *; do
     : # echo "Skip $name"
   else
 
+    # Annotations inspired by https://github.com/rconradharris/simpledot
+
     target=~/.$name
     if [ -e "$target" ]; then
       if [ -L "$target" ]; then
