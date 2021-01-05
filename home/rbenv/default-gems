@@ -1,0 +1,9 @@
+# dotfiles @ ~/.rbenv/default-gems
+gem-ctags
+bundler
+tmuxinator
+pivotal_git_scripts
+neovim
+papertrail
+hookup
+pry
