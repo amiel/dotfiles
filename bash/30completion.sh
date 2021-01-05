@@ -19,11 +19,3 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
 
 # heroku autocomplete setup
 HEROKU_AC_BASH_SETUP_PATH=/Users/amiel/Library/Caches/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
-
-###-tns-completion-start-###
-if [ -f /Users/amiel/.tnsrc ]; then
-    source /Users/amiel/.tnsrc
-fi
-###-tns-completion-end-###
-
-
