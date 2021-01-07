@@ -3,14 +3,18 @@
 
 # First:
 # 1. Update OSX
-# 2. Install XCode
-# 3. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
-# 4. Install dropbox and wait for it to sync
-# 5. Then, run this script
+# 2. Set keyboard layout (I use Dvorak)
+# 3. Set Caps Lock -> Control in modifier keys
+# 4. Install XCode
+# 5. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
+# 6. Install dropbox and wait for it to sync
+# 7. Then, run this script
 
 
 # Manual settings (TODO: script them)
 #
+# * Update network name in Sharing preferences
+# * Keyboard -> shortcuts -> Use keyboard navigation to move focus between cotnrols
 # * Setup dvorak
 # * ctrl-option-command swicches input sources
 # * set up bluetooth keyboard and trackpad
@@ -45,10 +49,8 @@ defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Prefere
 ###########
 # Homebrew
 
-# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # brew bundle install
-
-
 
 # fonts from https://github.com/romkatv/powerlevel10k#installation
