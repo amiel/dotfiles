@@ -810,10 +810,14 @@
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
   }
 
+function __command_exists {
+  hash $1 2>&-
+}
+
   # This depends on the pomo CI from https://github.com/kevinschoon/pomo/
   function prompt_pomodoro() {
     local pomo_status="UNKNOWN"
-    local pomo_status_text="$(pomo status)"
+    local pomo_status_text="$(__command_exists pomo && pomo status)"
 
     case "${pomo_status_text[1]}" in
       R) pomo_status="RUNNING";;
