@@ -5,7 +5,6 @@
 # 1. Update OSX
 # 2. Set keyboard layout (I use Dvorak)
 # 3. Set Caps Lock -> Control in modifier keys
-# 4. Install XCode
 # 5. Copy ssh-keys (`scp x.x.x.x:'.ssh/id_rsa*' .ssh/`)
 # 6. Install dropbox and wait for it to sync
 # 7. Then, run this script
@@ -21,7 +20,7 @@
 # * keyboard: capslock -> control
 # * trackpad speed
 #
-# * 1password
+# * sign in to 1password
 # * Alfred license from 1password
 
 # Ask for the administrator password upfront
@@ -51,6 +50,12 @@ defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/Dropbox/Prefere
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# brew bundle install
+# TODO: brew bundle install
+
+# TODO: install pomo
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # fonts from https://github.com/romkatv/powerlevel10k#installation
+#
+# * alfred license
+# * gh auth login
