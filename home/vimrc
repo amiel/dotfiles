@@ -184,9 +184,9 @@ set undofile
 set noswapfile
 
 set backupcopy=yes
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+set undodir=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
 set backupskip=/tmp/*,/private/tmp/*
 
 set wildmode=longest,list
