@@ -41,6 +41,11 @@ export GPG_TTY=$(tty)
 
 source ~/.zsh_aliases
 
+
+DOTFILES=$(dirname $(dirname $(readlink ~/.zshrc)))
+export PATH="$PATH:$DOTFILES/bin"
+
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
