@@ -7,3 +7,6 @@ alias vi="nvim" # I'm lazy
 alias mux="tmuxinator"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+alias difftool="git difftool --no-symlinks --dir-diff"
+
