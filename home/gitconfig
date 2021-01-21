@@ -93,14 +93,14 @@
   ll      = log --pretty=oneline --abbrev-commit --max-count=15 --decorate --graph
   browse  = !hub browse
   compare = !hub compare
-  pom     = push -u origin master
+  pom     = push -u origin main
   ds      = diff --stat=160,120
   fixup   = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   ri      = rebase --interactive --autosquash
   standup = !git log --since yesterday --author `git config user.email` --pretty=short
   camend  = commit --amend --no-edit
-  cleanup = !SKIP_HOOKUP=1 git co master && git purr && git delete-merged-branches && git remote prune origin
+  cleanup = !SKIP_HOOKUP=1 git co main && git purr && git delete-merged-branches && git remote prune origin
   publish = push -u origin HEAD
 
   # Fancy logging.
