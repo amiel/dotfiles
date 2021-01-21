@@ -40,7 +40,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
 export GPG_TTY=$(tty)
 
 source ~/.zsh_aliases
-
+source ~/src/as/as-developers/actionsprout-command/actionsprout.zsh
 
 DOTFILES=$(dirname $(dirname $(readlink ~/.zshrc)))
 export PATH="$PATH:$DOTFILES/bin"
