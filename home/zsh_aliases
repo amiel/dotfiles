@@ -8,5 +8,7 @@ alias mux="tmuxinator"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
+# kitty specific
 alias difftool="git difftool --no-symlinks --dir-diff"
+alias icat="kitty +kitten icat"
 
