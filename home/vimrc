@@ -201,7 +201,7 @@ set directory=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
 set undodir=~/.vim-tmp//,~/.tmp//,~/tmp//,/var/tmp//,/tmp//
 set backupskip=/tmp/*,/private/tmp/*
 
-set wildmode=longest,list
+set wildmode=longest:full,list
 set wildmenu
 
 
@@ -234,80 +234,12 @@ runtime macros/matchit.vim
 """"""""""""""""
 
 abbr rpry require 'pry'; binding.pry
-abbr deferTest return window.Ember.RSVP.defer().promise;
-
-"""""""""""
-" deoplete
-"""""""""""
 
 if has("nvim")
-  " let g:deoplete#enable_at_startup = 1
-  " let g:deoplete#sources#jedi#python_path = 'python3'
   let g:loaded_python_provider = 1 " Disable python2 support
-  " let g:python_host_prog = '/usr/local/bin/python'
+  let g:python_host_prog = '/usr/local/bin/python'
   let g:python3_host_prog = '/usr/local/bin/python3'
 end
-
-
-""""""
-" ALE
-""""""
-let g:ale_echo_msg_format = '%linter% %severity%: %s'
-
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = '✗'
-let g:ale_html_htmlhint_options='--format=unix --config ~/.htmlhintrc.json'
-let g:ale_html_tidy_options='-q -e -language en --show-body-only true'
-
-" I have htmlhint configured to handle partial html
-" Use jshint only for now until I get fern running with eslint
-let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] }
-
-""""""""""""""""
-"" languageclient-neovim
-
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"     \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-"     \ 'go' :[
-"     \ }
-
-" Launch gopls when Go files are in use
-" let g:LanguageClient_serverCommands = {
-"        \ 'go': ['gopls']
-"        \ }
-" Run gofmt on save
-" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
-
-
-
-" " note that if you are using Plug mapping you should not use `noremap` mappings.
-" nmap <F5> <Plug>(lcn-menu)
-" " Or map each action separately
-" nmap <silent>K <Plug>(lcn-hover)
-" nmap <silent> gd <Plug>(lcn-definition)
-" nmap <silent> <F2> <Plug>(lcn-rename)
-
-"""""""""
-" golang
-"""""""""
-
-" vim-go
-
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
-" let g:go_def_mapping_enabled = 0
-
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
 
 
 """""""""""
@@ -526,23 +458,6 @@ if has("autocmd")
     autocmd VimResized * :wincmd = " resize splits when the window is resized
   augroup END
 endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-" function! InsertTabWrapper()
-"   let col = col('.') - 1
-"   if !col || getline('.')[col - 1] !~ '\k'
-"     return "\<tab>"
-"   else
-"     return "\<c-n>"
-"   endif
-" endfunction
-" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-" inoremap <s-tab> <c-n>
-
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
