@@ -7,3 +7,5 @@ tags
 .agignore
 .gems
 .rbenv-gemsets
+.vscode
+amiel.env
