@@ -9,30 +9,41 @@ end
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 " Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar' " netrw improvements
 
 Plug 'chriskempson/base16-vim'
 
-
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
-Plug 'osyo-manga/vim-over'
-Plug 'sjl/gundo.vim'
+Plug 'osyo-manga/vim-over' " Show :%s/ changes in realtime, especially with :OverCommandLine
+Plug 'sjl/gundo.vim' " TODO: Get this working again
 
-Plug 'tpope/vim-rsi'
+Plug 'TamaMcGlinn/quickfixdd'
+
+Plug 'tpope/vim-rsi' " Readline keybindings
 Plug 'tpope/vim-dispatch'
-" Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish' " %Subvert/...
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch' " :Move, :Delete, etc
 
 Plug 'ap/vim-css-color'
 
-Plug 'whatyouhide/vim-gotham'
+Plug 'ervandew/supertab'
 
 if has('nvim')
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
+
+
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Plug 'autozimu/LanguageClient-neovim', {
+  "   \ 'branch': 'next',
+  "   \ 'do': 'bash install.sh',
+  "   \ }
 
 "   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "   " Plug 'Shougo/neco-syntax'
@@ -41,14 +52,16 @@ end
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-projectionist'
 
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 " Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 " Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-Plug 'elixir-lang/vim-elixir'
-Plug 'mhinz/vim-mix-format'
-Plug 'slashmili/alchemist.vim'
-Plug 'matze/vim-lilypond'
-Plug 'dart-lang/dart-vim-plugin'
+"
+" Plug 'elixir-lang/vim-elixir'
+" Plug 'mhinz/vim-mix-format'
+" Plug 'slashmili/alchemist.vim'
+
+" Plug 'matze/vim-lilypond'
+" Plug 'dart-lang/dart-vim-plugin'
 
 
 " JSON MAPPINGS: TODO LEARN
@@ -60,11 +73,10 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-db'
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'jgdavey/vim-blockle'
+Plug 'tpope/vim-fugitive' " git support
+Plug 'jgdavey/vim-blockle' " <leader>b to switch ruby block style
 Plug 'tpope/vim-commentary'
-Plug 'nono/vim-handlebars'
+" Plug 'nono/vim-handlebars'
 
 Plug 'mattn/emmet-vim'
 
@@ -77,7 +89,7 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux'
 
 Plug 'sukima/vim-javascript-imports'
-Plug 'sukima/vim-ember-imports'
+" Plug 'sukima/vim-ember-imports'
 
 Plug 'coot/CRDispatcher'
 Plug 'coot/EnchantedVim'
@@ -148,7 +160,7 @@ if has('arabic')
 endif
 
 set cursorline
-set signcolumn=yes
+set signcolumn=number
 
 set hlsearch
 
@@ -164,11 +176,11 @@ set ignorecase smartcase
 " fail.
 set noequalalways
 
-set winheight=15 winminheight=7
+" set winheight=15 " winminheight=7
 set winwidth=13 winminwidth=13
-set winheight=50 winwidth=96
+" set winheight=50 winwidth=96
 
-set cmdheight=2
+set cmdheight=3
 
 set scrolloff=4
 
@@ -229,8 +241,8 @@ abbr deferTest return window.Ember.RSVP.defer().promise;
 """""""""""
 
 if has("nvim")
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#sources#jedi#python_path = 'python3'
+  " let g:deoplete#enable_at_startup = 1
+  " let g:deoplete#sources#jedi#python_path = 'python3'
   let g:loaded_python_provider = 1 " Disable python2 support
   " let g:python_host_prog = '/usr/local/bin/python'
   let g:python3_host_prog = '/usr/local/bin/python3'
@@ -251,29 +263,51 @@ let g:ale_html_tidy_options='-q -e -language en --show-body-only true'
 " Use jshint only for now until I get fern running with eslint
 let g:ale_linters = { 'handlebars.html': ['htmlhint'], 'javascript': ['eslint'] }
 
-""""""
-" COC
-""""""
+""""""""""""""""
+"" languageclient-neovim
 
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? coc#_select_confirm() :
-  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"     \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+"     \ 'go' :[
+"     \ }
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Launch gopls when Go files are in use
+" let g:LanguageClient_serverCommands = {
+"        \ 'go': ['gopls']
+"        \ }
+" Run gofmt on save
+" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
-let g:coc_snippet_next = '<tab>'
 
-map <leader>jd <Plug>(coc-definition)
-map <leader>ji <Plug>(coc-implementation)
-map <leader>jr <Plug>(coc-references)
-map <leader>jc <Plug>(coc-rename)
 
-map <leader>gs :CocList -I -A symbols
+" " note that if you are using Plug mapping you should not use `noremap` mappings.
+" nmap <F5> <Plug>(lcn-menu)
+" " Or map each action separately
+" nmap <silent>K <Plug>(lcn-hover)
+" nmap <silent> gd <Plug>(lcn-definition)
+" nmap <silent> <F2> <Plug>(lcn-rename)
+
+"""""""""
+" golang
+"""""""""
+
+" vim-go
+
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+" let g:go_def_mapping_enabled = 0
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
 
 
 """""""""""
@@ -485,7 +519,7 @@ if has("autocmd")
   " Source the vimrc file after saving it
   " autocmd bufwritepost .vimrc source $MYVIMRC
 
-  set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
+  " set runtimepath+=/usr/local/share/lilypond/2.16.2/vim/
 
   augroup windows
     autocmd!
@@ -507,19 +541,6 @@ endif
 " endfunction
 " inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " inoremap <s-tab> <c-n>
-
-" When using `dd` in the quickfix list, remove the item from the quickfix list.
-function! RemoveQFItem()
-  let curqfidx = line('.') - 1
-  let qfall = getqflist()
-  call remove(qfall, curqfidx)
-  call setqflist(qfall, 'r')
-  execute curqfidx + 1 . "cfirst"
-  :copen
-endfunction
-:command! RemoveQFItem :call RemoveQFItem()
-" Use map <buffer> to only map dd in the quickfix window. Requires +localmap
-autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
 
 
 

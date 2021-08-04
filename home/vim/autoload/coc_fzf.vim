@@ -1,3 +1,6 @@
+" I am not using COC.vim at the moment,
+finish
+
 function! s:format_coc_diagnostic(item) abort
   return (has_key(a:item,'file')  ? bufname(a:item.file) : '')
         \ . '|' . (a:item.lnum  ? a:item.lnum : '')

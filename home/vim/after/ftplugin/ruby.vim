@@ -14,3 +14,4 @@ set makeprg=rake
 call SetupCoverage()
 
 
+" autocmd BufWritePre * :!standardrb --fix % &
