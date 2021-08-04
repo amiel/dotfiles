@@ -26,6 +26,10 @@ antigen bundle chriskempson/base16-shell
 
 antigen bundle Schoonology/userenv-zsh
 
+# antigen bundle zsh-autosuggestions
+# antigen bundle zsh-syntax-highlighting
+antigen bundle softmoth/zsh-vim-mode
+
 # export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # antigen bundle nojhan/liquidprompt
@@ -40,7 +44,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
 export GPG_TTY=$(tty)
 
 source ~/.zsh_aliases
-source ~/src/as/as-developers/actionsprout-command/actionsprout.zsh
 
 DOTFILES=$(dirname $(dirname $(readlink ~/.zshrc)))
 export PATH="$PATH:$DOTFILES/bin"
@@ -50,3 +53,14 @@ export PATH="$PATH:$DOTFILES/bin"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 unsetopt share_history
+
+
+
+# TODO: Refactor this go stuff to somewhere
+
+export GOBIN="$HOME/go/bin"
+export PATH="$PATH:$GOBIN"
+
+
+# . /Users/amiel/src/vendor/torch/install/bin/torch-activate
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

@@ -35,7 +35,8 @@
       # os_icon               # os identifier
       dir                     # current directory
       vcs                     # git status
-      # prompt_char           # prompt symbol
+      # mode
+      prompt_char           # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -59,7 +60,7 @@
       rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
       # rvm                     # ruby version from rvm (https://rvm.io)
       kubecontext             # current kubernetes context (https://kubernetes.io/)
-      # terraform               # terraform workspace (https://www.terraform.io)
+      terraform               # terraform workspace (https://www.terraform.io)
       aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
       # aws_eb_env            # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
       # azure                 # azure account name (https://docs.microsoft.com/en-us/cli/azure)
@@ -810,9 +811,19 @@
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
   }
 
-function __command_exists {
-  hash $1 2>&-
-}
+  function prompt_mode() {
+    # MODE_INDICATOR_VIINS='%F{15}<%F{8}INSERT<%f'
+    # MODE_INDICATOR_VICMD='%F{10}<%F{2}NORMAL<%f'
+    # MODE_INDICATOR_REPLACE='%F{9}<%F{1}REPLACE<%f'
+    # MODE_INDICATOR_SEARCH='%F{13}<%F{5}SEARCH<%f'
+    # MODE_INDICATOR_VISUAL='%F{12}<%F{4}VISUAL<%f'
+    # MODE_INDICATOR_VLINE='%F{12}<%F{4}V-LINE<%f'
+  }
+
+  function __command_exists {
+    hash $1 2>&-
+  }
+
 
   # This depends on the pomo CI from https://github.com/kevinschoon/pomo/
   function prompt_pomodoro() {
