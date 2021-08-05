@@ -16,7 +16,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'amiel/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'osyo-manga/vim-over' " Show :%s/ changes in realtime, especially with :OverCommandLine
-Plug 'sjl/gundo.vim' " TODO: Get this working again
+Plug 'sjl/gundo.vim' " Or try mbbill/undotree
 
 Plug 'TamaMcGlinn/quickfixdd'
 
@@ -237,8 +237,9 @@ abbr rpry require 'pry'; binding.pry
 
 if has("nvim")
   let g:loaded_python_provider = 1 " Disable python2 support
-  let g:python_host_prog = '/usr/local/bin/python'
+  " let g:python_host_prog = '/usr/local/bin/python'
   let g:python3_host_prog = '/usr/local/bin/python3'
+  let g:gundo_prefer_python3 = v:true
 end
 
 
