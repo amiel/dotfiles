@@ -2,6 +2,7 @@ alias gb='for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=f
 alias migrate="bundle exec rake db:migrate db:test:prepare"
 alias be="bundle exec"
 alias bake="bundle exec rake"
+alias bails="bundle exec rails"
 alias ql="qlmanage -p"
 alias vi="nvim" # I'm lazy
 alias mux="tmuxinator"

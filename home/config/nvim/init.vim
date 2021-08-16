@@ -17,14 +17,21 @@ let g:compe.source = {
   \ 'nvim_lsp': v:true,
   \ }
 
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-Space> compe#complete()
+" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 " inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 " inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 lua << EOF
-require'lspconfig'.solargraph.setup{}
+require'lspconfig'.solargraph.setup{
+  settings = {
+    solargraph = {
+      autoformat = true
+    }
+  }
+}
 EOF
 
 

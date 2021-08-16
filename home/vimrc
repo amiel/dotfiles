@@ -31,6 +31,7 @@ Plug 'tpope/vim-eunuch' " :Move, :Delete, etc
 Plug 'ap/vim-css-color'
 
 Plug 'ervandew/supertab'
+Plug 'cohama/lexima.vim'
 
 if has('nvim')
 
@@ -395,12 +396,12 @@ inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
 
 " CTRL+A moves to start of line in command mode
-cnoremap <C-a> <home>
+" cnoremap <C-a> <home>
 " CTRL+E moves to end of line in command mode
-cnoremap <C-e> <end>
+" cnoremap <C-e> <end>
 
 " Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
+" imap <c-l> <space>=><space>
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
 
