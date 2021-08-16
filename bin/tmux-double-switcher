@@ -7,8 +7,8 @@ shift
 target_session="$1"
 shift
 
-current_test_session="${current_session/AS/Test}"
-target_test_session="${target_session/AS/Test}"
+current_test_session="Test ${current_session}"
+target_test_session="Test ${target_session/=/}"
 
 tmux switch-client -t "$target_session"
 
