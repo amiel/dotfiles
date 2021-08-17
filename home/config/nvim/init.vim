@@ -2,36 +2,61 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-set completeopt=menuone,noselect
+" highlight link CompeDocumentation NormalFloat
 
-highlight link CompeDocumentation NormalFloat
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.source = {
-  \ 'path': v:true,
-  \ 'buffer': v:true,
-  \ 'nvim_lsp': v:true,
-  \ }
+" let g:compe = {}
+" let g:compe.enabled = v:true
+" let g:compe.source = {
+"   \ 'path': v:true,
+"   \ 'buffer': v:true,
+"   \ 'nvim_lsp': v:true,
+"   \ }
 
 " inoremap <silent><expr> <C-Space> compe#complete()
 " inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+" inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
 " inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 " inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 " inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
+
+" NOTE: You may already have these in your configuration somewhere.
+" Autocomplete menu options
+set completeopt=menuone,noselect,noinsert
+set noshowmode
+set shortmess+=c
+
+" 🐓 Coq completion settings
+
+" Set recommended to false
+let g:coq_settings = {
+      \ "keymap.recommended": v:false,
+      \ "keymap.bigger_preview": "<c-o>",
+      \ "keymap.jump_to_mark": "<Tab>"
+      \ }
+
+" Keybindings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+
+
 lua << EOF
-require'lspconfig'.solargraph.setup{
+local lsp = require("lspconfig")
+
+lsp.solargraph.setup(require("coq")().lsp_ensure_capabilities{
   settings = {
     solargraph = {
       autoformat = true
     }
   }
-}
+})
 EOF
 
 
@@ -78,10 +103,13 @@ end
 local servers = { "solargraph" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-	on_attach = on_attach,
-	flags = {
-	  debounce_text_changes = 150,
-	}
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
   }
 end
 EOF
+
+
+:COQnow
