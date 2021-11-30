@@ -81,7 +81,7 @@
   aa      = add --all .
   dw      = diff --word-diff=color
   dc      = diff --cached
-  dif     = icdiff
+  dif     = difftool --no-symlinks --dir-diff
   br      = branch
   brav    = branch -a -v
   brv     = branch -v
