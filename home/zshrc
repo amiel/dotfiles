@@ -8,34 +8,7 @@ source /usr/local/share/antigen/antigen.zsh
 #   compinit
 # fi
 
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle rbenv
-antigen bundle fzf
-antigen bundle tmuxinator
-
-export NVM_AUTO_USE=true
-export NVM_LAZY_LOAD=true
-antigen bundle lukechilds/zsh-nvm
-antigen bundle ELLIOTTCABLE/rbenv.plugin.zsh
-antigen bundle schoonology/userenv-zsh
-
-# antigen bundle esroze/docker-compose-zsh-plugin
-antigen bundle chriskempson/base16-shell
-
-antigen bundle Schoonology/userenv-zsh
-
-# antigen bundle zsh-autosuggestions
-# antigen bundle zsh-syntax-highlighting
-antigen bundle softmoth/zsh-vim-mode
-
-# export PATH="$PATH":"$HOME/.pub-cache/bin"
-
-# antigen bundle nojhan/liquidprompt
-antigen theme romkatv/powerlevel10k
-
-antigen apply
+antigen init ~/.antigenrc
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 # source "${ZSH}/custom/plugins/fzf-custom/base16-material-darker.config"
@@ -60,7 +33,9 @@ unsetopt share_history
 
 export GOBIN="$HOME/go/bin"
 export PATH="$PATH:$GOBIN"
+export PATH="$PATH:$HOME/.local/bin"
+
+export COLORTERM=truecolor
 
 
-# . /Users/amiel/src/vendor/torch/install/bin/torch-activate
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
