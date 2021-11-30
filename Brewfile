@@ -1,53 +1,63 @@
-tap "bufbuild/buf"
-tap "dart-lang/dart"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "jesseduffield/lazydocker"
-tap "teamookla/speedtest"
+tap "vitorgalvao/tiny-scripts"
+# Run your GitHub Actions locally 🚀
+brew "act"
 # CLI tool for working with Architecture Decision Records
 brew "adr-tools"
 # Plugin manager for zsh, inspired by oh-my-zsh and vundle
 brew "antigen"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Core application library for C
 brew "glib"
+# Vector graphics library with cross-device output support
+brew "cairo"
 # Cross-platform make
 brew "cmake"
-# Dependency manager for Cocoa projects
-brew "cocoapods"
 # Color-highlighted diff(1) output
 brew "colordiff"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Reimplementation of ctags(1)
-brew "ctags"
+# Power of curl, ease of use of httpie
+brew "curlie"
 # Lightweight DNS forwarder and DHCP server
-brew "dnsmasq", restart_service: true
-# Functional metaprogramming aware language built on Erlang VM
-brew "elixir"
+brew "dnsmasq"
+# Disk Usage/Free Utility - a better 'df' alternative
+brew "duf"
 # Emoji on the command-line :scream:
 brew "emojify"
 # Run arbitrary commands when files change
 brew "entr"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# GNU Ubiquitous Intelligent Language for Extensions
+brew "guile"
 # International domain name library (IDNA2008, Punycode and TR46)
 brew "libidn2"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
+# Generate introspection data for GObject libraries
+brew "gobject-introspection"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Subtitle renderer for the ASS/SSA subtitle format
+brew "libass"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Toolkit for image loading and pixel buffer manipulation
+brew "gdk-pixbuf"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -56,12 +66,18 @@ brew "git"
 brew "git-extras"
 # Git extension for versioning large files
 brew "git-lfs"
+# Alternative to top/htop
+brew "glances"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU Pretty Good Privacy (PGP) package
-brew "gnupg"
+brew "gnupg", link: false
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Ping, but with a graph
+brew "gping"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Reliable, high performance TCP/HTTP load balancer
@@ -84,6 +100,10 @@ brew "imagemagick"
 brew "ios-deploy"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes command-line interface
+brew "kubernetes-cli", link: false
+# Simple terminal UI for git commands
+brew "lazygit"
 # Graphical front-end for GCC's coverage testing tool (gcov)
 brew "lcov"
 # Pager program similar to more
@@ -100,6 +120,8 @@ brew "mas"
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Benchmarks performance of many different types of networking
+brew "netperf"
 # Port scanning utility for large networks
 brew "nmap"
 # Development kit for the Java programming language
@@ -108,11 +130,18 @@ brew "openjdk"
 brew "pgcli"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Object-relational database system
+brew "postgresql"
+# Object-relational database system
+brew "postgresql@12", restart_service: true
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Your Swiss Army Knife for Protocol Buffers
 brew "prototool"
-brew "python3"
+# Monitor data's progress through a pipe
+brew "pv"
+# Cross-platform application and UI framework
+brew "qt"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -123,8 +152,20 @@ brew "rbenv-default-gems"
 brew "redis"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
+# Rust toolchain installer
+brew "rustup-init"
+# Intuitive find & replace CLI
+brew "sd"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Autoformat shell script source code
+brew "shfmt"
+# Simple keystroke visualizer
+brew "showkey"
+# SOcket CAT: netcat on steroids
+brew "socat"
 # Add a public key to a remote machine's authorized_keys file
 brew "ssh-copy-id"
 # User interface to the TELNET protocol
@@ -133,20 +174,20 @@ brew "telnet"
 brew "terraform"
 # Code-search similar to ack
 brew "the_silver_searcher"
-# Text interface for Git repositories
-brew "tig"
-# Simplified and community-driven man pages
-brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Maintained ctags implementation
+brew "universal-ctags"
 # Google's JavaScript engine
 brew "v8"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Watch files and take action when they change
 brew "watchman"
+# Command-line tool to track (your) time
+brew "watson"
 # Command-line client for WebSockets
 brew "websocat"
 # Internet file retriever
@@ -157,67 +198,69 @@ brew "yarn"
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# A new way of working with Protocol Buffers.
-brew "bufbuild/buf/buf"
-# The Dart SDK
-brew "dart-lang/dart/dart"
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
-# A simple terminal UI for docker, written in Go
-brew "jesseduffield/lazydocker/lazydocker"
-# Ookla Speedtest
-brew "teamookla/speedtest/speedtest"
+# Enable, disable, toggle, and show status of Do Not Disturb on macOS Big Sur
+brew "vitorgalvao/tiny-scripts/calm-notifications"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
-cask "alacritty"
-cask "kitty"
+# Application launcher and productivity software
 cask "alfred"
+# Securely stores and accesses AWS credentials in a development environment
+cask "aws-vault"
+# Utility to display the output from any script or program in the menu bar
 cask "bitbar"
-cask "discord"
+# Utility that prevents the system from going to sleep
+cask "caffeine"
+# App to build and share containerized applications and microservices
 cask "docker"
-# cask "dropbox"
+# Web browser
 cask "firefox"
 cask "font-hack-nerd-font"
 cask "font-inconsolata"
 cask "font-inconsolata-dz-for-powerline"
 cask "font-inconsolata-nerd-font"
 cask "font-meslo-lg-nerd-font"
-# cask "frescobaldi"
-cask "gitup"
-cask "gitx"
+# Web browser
 cask "google-chrome"
+# Tools to protect your emails and files
 cask "gpg-suite"
-# cask "iterm2"
-# cask "java"
-cask "jet"
-cask "jqbx"
-cask "kitematic"
-# cask "muzzle"
+# HTTP and GraphQL Client
+cask "insomnia"
+# GPU-based terminal emulator
+cask "kitty"
+# App to manage software development and track bugs
+cask "linear-linear"
+# Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
-cask "postman"
+# QuickLook plug-in that renders source code with syntax highlighting
 cask "qlcolorcode"
+# Display image info and preview unsupported formats in QuickLook
 cask "qlimagesize"
+# QuickLook generator for Markdown files
 cask "qlmarkdown"
 cask "qlprettypatch"
 cask "qlstephen"
 cask "quicklook-csv"
 cask "quicklook-json"
+# Screencasting software
 cask "recordit"
-# cask "shotcut"
+# Instant messaging application focusing on security
+cask "signal"
+# Team communication and collaboration software
 cask "slack"
+# Music streaming service
 cask "spotify"
+# Application for inspecting installer packages
 cask "suspicious-package"
-# cask "texmaker"
-# cask "vcv-rack"
+# Open-source code editor
 cask "visual-studio-code"
-# cask "vlc"
 cask "webpquicklook"
+# Video communication and virtual meeting platform
 cask "zoom"
 mas "DaisyDisk", id: 411643860
-# mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
 mas "Microsoft To Do", id: 1274495053
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Shush", id: 496437906
-mas "Soulver", id: 413965349
+mas "Soulver 2", id: 413965349
 mas "Xcode", id: 497799835
