@@ -365,6 +365,15 @@
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       res+="${clean}${POWERLEVEL9K_VCS_BRANCH_ICON}"
       where=${(V)VCS_STATUS_LOCAL_BRANCH}
+
+      # Shorten common branch name prefixes
+      where=${where/#feature\//f…/}
+      where=${where/#spike\//s…/}
+      where=${where/#bug\//b…/}
+
+      # If there is a branch name prefix and it is still more than one
+      # character (plus elipsis), shorten it to 3 characters.
+      where="${where/#???*\//${where:0:3}…/}"
     elif [[ -n $VCS_STATUS_TAG ]]; then
       res+="${meta}#"
       where=${(V)VCS_STATUS_TAG}
@@ -375,7 +384,7 @@
 
     # If local branch name or tag is at most 32 characters long, show it in full.
     # Otherwise show the first 12 … the last 12.
-    (( $#where > 32 )) && where[13,-13]="…"
+    (( $#where > 32 )) && where[18,-8]="…"
     res+="${clean}${where//\%/%%}"  # escape %
 
     # Show tracking branch name if it differs from local branch.
