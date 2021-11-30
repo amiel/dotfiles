@@ -4,7 +4,7 @@ alias be="bundle exec"
 alias bake="bundle exec rake"
 alias bails="bundle exec rails"
 alias ql="qlmanage -p"
-alias vi="nvim" # I'm lazy
+alias vi="lvim"
 alias mux="tmuxinator"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
