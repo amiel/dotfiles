@@ -48,20 +48,19 @@ ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
 
 
 lua << EOF
-local lsp = require("lspconfig")
+local nvim_lsp = require('lspconfig')
 
-lsp.solargraph.setup(require("coq")().lsp_ensure_capabilities{
+nvim_lsp.solargraph.setup(require("coq")().lsp_ensure_capabilities{
   settings = {
     solargraph = {
       autoformat = true
     }
   }
 })
-EOF
 
+nvim_lsp.rust_analyzer.setup{}
+nvim_lsp.tsserver.setup{}
 
-lua << EOF
-local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -95,12 +94,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   vim.api.nvim_command("au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "solargraph" }
+local servers = { "solargraph", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
