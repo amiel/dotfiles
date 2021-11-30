@@ -20,3 +20,6 @@ bin/pomo
 
 # vim plugins managed by https://github.com/junegunn/vim-plug
 home/vim/plugged
+
+# Includes an oauth token
+home/config/gh/hosts.yml
