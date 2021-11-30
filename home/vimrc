@@ -21,7 +21,8 @@ Plug 'sjl/gundo.vim' " Or try mbbill/undotree
 Plug 'TamaMcGlinn/quickfixdd'
 
 Plug 'tpope/vim-rsi' " Readline keybindings
-Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-dispatch'
+Plug 'preservim/vimux'
 Plug 'tpope/vim-abolish' " %Subvert/...
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -36,9 +37,14 @@ Plug 'ap/vim-css-color'
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
 
+  " TODO: Look in to using https://github.com/simrat39/rust-tools.nvim
+
   " Plug 'hrsh7th/nvim-compe'
   Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
   Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+  Plug 'kyazdani42/nvim-web-devicons'
+
 end
 
 Plug 'tpope/vim-bundler'
@@ -512,3 +518,4 @@ function! QuickfixFilenames()
   endfor
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
+
