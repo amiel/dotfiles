@@ -13,6 +13,10 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "base16-material-darker"
 
+-- TODO: Set up something for this:
+-- https://www.reddit.com/r/neovim/comments/nrz9hp/can_i_close_all_floating_windows_without_closing/h0lg5m1/
+-- or https://github.com/neovim/neovim/issues/11440#issuecomment-877693865
+
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = ","
 -- add your own keymapping
