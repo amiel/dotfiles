@@ -1,4 +1,4 @@
-source /usr/local/share/antigen/antigen.zsh
+source $(brew --prefix)/share/antigen/antigen.zsh
 
 # # TODO: homebrew completions in a bundle?
 # if type brew &>/dev/null; then
@@ -38,4 +38,4 @@ export PATH="$PATH:$HOME/.local/bin"
 export COLORTERM=truecolor
 
 
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+[[ $(brew --prefix)/bin/kubectl ]] && source <(kubectl completion zsh)
