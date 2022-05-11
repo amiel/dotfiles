@@ -9,3 +9,4 @@ tags
 .rbenv-gemsets
 .vscode
 amiel.env
+neovim-tmux-navigator-*.log

@@ -30,6 +30,7 @@ unsetopt share_history
 
 
 # TODO: Refactor this go stuff to somewhere
+export PATH="$(brew --prefix)/bin:$PATH"
 
 export GOBIN="$HOME/go/bin"
 export PATH="$PATH:$GOBIN"
@@ -39,3 +40,7 @@ export COLORTERM=truecolor
 
 
 [[ $(brew --prefix)/bin/kubectl ]] && source <(kubectl completion zsh)
+
+
+# TODO: Where to put this
+export JQ_COLORS='0;31:0;31:1;37:0;37:0;32:1;37:1;37'

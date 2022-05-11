@@ -5,11 +5,12 @@
   # brew install exiftool
   textconv = exiftool
 
-; [init]
+[init]
+	defaultBranch = main
 ;   templatedir = ~/.git_template
 
 [core]
-  editor           = nvim
+  editor           = lvim
   filemode         = true
   logallrefupdates = true
   whitespace       = fix, space-before-tab, trailing-space
@@ -86,6 +87,7 @@
   brav    = branch -a -v
   brv     = branch -v
   co      = checkout
+  fall    = fetch --all
   purr    = pull --rebase
   puff    = push --force-with-lease
   l       = log --oneline --decorate --graph
@@ -102,6 +104,10 @@
   camend  = commit --amend --no-edit
   cleanup = !SKIP_HOOKUP=1 git co main && git purr && git delete-merged-branches && git remote prune origin
   publish = push -u origin HEAD
+  bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
+  uncommit = reset --soft HEAD^
+
+
 
   # Fancy logging.
   #   h = head
@@ -122,7 +128,7 @@
   ctags = !.git/hooks/ctags
 
 [mergetool "fugitive"]
-  cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = lvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
@@ -130,8 +136,6 @@
 [credential]
   helper = osxkeychain
 
-[hub]
-  protocol = https
 [filter "media"]
   clean = git media clean %f
   smudge = git media smudge %f
@@ -150,5 +154,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[init]
-	defaultBranch = main
+[help]
+	autoCorrect = prompt

@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/usr/bin/env zsh
 # For use with the pomo CI from https://github.com/kevinschoon/pomo/
 
 local pomo_status="$(pomo status)"
