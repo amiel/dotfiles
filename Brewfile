@@ -3,7 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "vitorgalvao/tiny-scripts"
 # Run your GitHub Actions locally 🚀
 brew "act"
 # CLI tool for working with Architecture Decision Records
@@ -198,8 +197,6 @@ brew "yarn"
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Enable, disable, toggle, and show status of Do Not Disturb on macOS Big Sur
-brew "vitorgalvao/tiny-scripts/calm-notifications"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application launcher and productivity software
