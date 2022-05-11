@@ -49,10 +49,17 @@ lvim.keys.normal_mode["<S-l>"] = ":tabn<cr>"
 -- lvim.builtin.which_key.mappings["w"] = { "<cmd>Telescope find_files<CR>", "Files" }
 lvim.builtin.which_key.mappings["/"] = { "<cmd>nohlsearch<CR>", "clear search hilight" }
 lvim.builtin.which_key.mappings["h"] = { "<cmd>Telescope find_files<CR>", "Find File" }
-lvim.builtin.which_key.mappings["w"] = { "<C-W>v", "Split Horizontal" }
-lvim.builtin.which_key.mappings["v"] = { "<C-W>s", "Split Vertical" }
+lvim.builtin.which_key.mappings["v"] = { "<C-W>v", "Split Vertical" }
+lvim.builtin.which_key.mappings["w"] = { "<C-W>s", "Split Horizontal" }
 lvim.builtin.which_key.mappings[","] = { "<C-^>", "Previous File" }
--- lvim.buildin.which_key.mappings["f"] = { "<cmd>s/<CR>", ""}
+
+lvim.builtin.which_key.mappings["."] = {
+  name = "+Open Other",
+  ["."] = {"<cmd>Other<CR>", "Open Other"},
+  v = {"<cmd>OtherVSplit<CR>", "Split Vertical"},
+  w = {"<cmd>OtherSplit<CR>", "Split Horizontal"},
+}
+
 lvim.builtin.which_key.mappings["n"] = {
   name = "+Find File",
   h = { "<cmd>Telescope git_status<cr>", "Git Status" },
@@ -72,7 +79,6 @@ lvim.builtin.which_key.mappings["n"] = {
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.bufferline.active = false
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -175,14 +181,30 @@ lvim.plugins = {
   {"tpope/vim-rsi"}, -- Readline keybindings
   {"jgdavey/vim-blockle"}, -- <leader>b to switch ruby block style
   {"amiel/neovim-tmux-navigator", run = "cargo install --path ."},
-
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
+  {"rcarriga/nvim-notify"},
+  { "rgroli/other.nvim" },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
+
+
+return require("other-nvim").setup({
+  mappings = {
+    {
+      pattern = "/app/(.*)/(.*).rb",
+      target = "/spec/%1/%2_spec.rb",
+    },
+    {
+      pattern = "/spec/(.*)/(.*)_spec.rb",
+      target = "/app/%1/%2.rb",
+    }
+  },
+})
+
