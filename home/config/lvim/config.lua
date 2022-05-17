@@ -26,6 +26,10 @@ lvim.leader = ","
 -- add your own keymapping
 lvim.keys.normal_mode["<S-h>"] = ":tabp<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":tabn<cr>"
+
+lvim.keys.insert_mode["<C-c>"] = "<ESC>"
+lvim.keys.insert_mode["<C-[>"] = "<C-c>"
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
