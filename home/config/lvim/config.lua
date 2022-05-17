@@ -150,19 +150,105 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   end
 -- end
 
+
+-- local rubocopdaemon = {
+--     method = null_ls.methods.FORMATTING,
+--     filetypes = { "ruby" },
+--     -- null_ls.generator creates an async source
+--     -- that spawns the command with the given arguments and options
+--     generator = null_ls.generator({
+--         command = "rubocop-daemon",
+--         args = { "exec", "--", "--auto-correct", "-f", "quiet", "--stderr", "--stdin", "$FILENAME"},
+--         to_stdin = true,
+--         ignore_stderr = true,
+--         -- choose an output format (raw, json, or line)
+--         format = "raw",
+--         check_exit_code = function(code, stderr)
+--             local success = code <= 1
+
+--       print("Checking exit code")
+--       print("Checking exit code")
+--       print("Checking exit code")
+--       print("Checking exit code")
+
+--             if not success then
+--               -- can be noisy for things that run often (e.g. diagnostics), but can
+--               -- be useful for things that run on demand (e.g. formatting)
+--               print(stderr)
+--             end
+
+--             return success
+--         end,
+--     }),
+-- }
+
+local h = require("null-ls.helpers")
+local methods = require("null-ls.methods")
+
+local FORMATTING = methods.internal.FORMATTING
+
+local rubocopdaemon = h.make_builtin({
+  name = "rubocop-daemon",
+  method = FORMATTING,
+  filetypes = { "ruby" },
+  factory = h.generator_factory,
+  generator_opts = {
+    command = "rubocop-daemon",
+    args = { "exec", "--", "-x", "--format=quiet", "--stderr", "--out=/dev/null", "--stdin=$FILENAME" },
+    to_stdin = true,
+    ignore_stderr = true,
+    on_output = function(params, done)
+      local output = params.output
+      if not output then
+        return done()
+      end
+
+      local result = output:gsub("^====================\n", "")
+
+      return done({ { text = result } })
+    end,
+  },
+})
+
+local null_ls = require("null-ls")
+null_ls.register(rubocopdaemon)
+
+-- local sources = {rubocopdaemon}
+-- null_ls.setup({ sources = sources })
+
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { exe = "rubocop", filetypes = { "ruby" } },
-  -- {
-  --   exe = "prettier",
-  --   ---@usage arguments to pass to the formatter
-  --   -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-  --   args = { "--print-with", "100" },
-  --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-  --   -- filetypes = { "typescript", "typescriptreact" },
-  -- },
-}
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--    { exe = "rubocop", filetypes = { "ruby" } },
+-- }
+
+-- formatters.setup {
+--   { command = "rufo", filetypes = { "ruby"}}
+-- }
+--   { exe = "rubocop-daemon", args = { "exec", "--", "--auto-correct", "-f", "quiet", "--stderr", "--stdin", "$FILENAME",}, filetypes = { "ruby" } },
+--   -- {
+--   --   exe = "prettier",
+--   --   ---@usage arguments to pass to the formatter
+--   --   -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--   --   args = { "--print-with", "100" },
+--   --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--   --   -- filetypes = { "typescript", "typescriptreact" },
+--   -- },
+-- }
+
+
+-- local null_ls = require("null-ls")
+
+-- -- register any number of sources simultaneously
+-- local sources = {
+--     null_ls.builtins.formatting.prettier,
+--     null_ls.builtins.diagnostics.write_good,
+--     null_ls.builtins.code_actions.gitsigns,
+-- }
+
+-- null_ls.setup({ sources = sources })
+
+
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -188,13 +274,9 @@ lvim.plugins = {
   {"tpope/vim-eunuch"}, -- :Move, :Delete, etc
   {"tpope/vim-rsi"}, -- Readline keybindings
   {"jgdavey/vim-blockle"}, -- <leader>b to switch ruby block style
+  {"rgroli/other.nvim"},
   {"amiel/neovim-tmux-navigator", run = "cargo install --path ."},
-  {"rcarriga/nvim-notify"},
-  { "rgroli/other.nvim" },
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
+  {"folke/trouble.nvim", cmd = "TroubleToggle"},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -203,7 +285,7 @@ lvim.plugins = {
 -- }
 
 
-return require("other-nvim").setup({
+require("other-nvim").setup({
   mappings = {
     {
       pattern = "/app/(.*)/(.*).rb",
@@ -215,4 +297,5 @@ return require("other-nvim").setup({
     }
   },
 })
+
 
