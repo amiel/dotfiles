@@ -10,7 +10,11 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = {
+  pattern = "*",
+  timeout = 2000,
+}
+
 lvim.colorscheme = "base16-material-darker"
 
 -- TODO: Set up something for this:
