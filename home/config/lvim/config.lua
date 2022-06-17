@@ -12,7 +12,7 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = {
   pattern = "*",
-  timeout = 2000,
+  timeout = 8000,
 }
 
 lvim.colorscheme = "base16-material-darker"
@@ -63,9 +63,9 @@ lvim.builtin.which_key.mappings[","] = { "<C-^>", "Previous File" }
 
 lvim.builtin.which_key.mappings["."] = {
   name = "+Open Other",
-  ["."] = {"<cmd>Other<CR>", "Open Other"},
-  v = {"<cmd>OtherVSplit<CR>", "Split Vertical"},
-  w = {"<cmd>OtherSplit<CR>", "Split Horizontal"},
+  ["."] = { "<cmd>Other<CR>", "Open Other" },
+  v = { "<cmd>OtherVSplit<CR>", "Split Vertical" },
+  w = { "<cmd>OtherSplit<CR>", "Split Horizontal" },
 }
 
 lvim.builtin.which_key.mappings["n"] = {
@@ -109,7 +109,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
@@ -150,7 +149,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   end
 -- end
 
-
 -- local rubocopdaemon = {
 --     method = null_ls.methods.FORMATTING,
 --     filetypes = { "ruby" },
@@ -182,36 +180,55 @@ lvim.builtin.treesitter.highlight.enabled = true
 --     }),
 -- }
 
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
+-- local linters = require("lvim.lsp.null-ls.linters")
+-- linters.setup({
+--   { command = "rubocop" },
+--   {
+--     command = "shellcheck",
+--     args = { "--severity", "warning" },
+--   },
+-- })
 
-local FORMATTING = methods.internal.FORMATTING
+-- local h = require("null-ls.helpers")
+-- local methods = require("null-ls.methods")
 
-local rubocopdaemon = h.make_builtin({
-  name = "rubocop-daemon",
-  method = FORMATTING,
-  filetypes = { "ruby" },
-  factory = h.generator_factory,
-  generator_opts = {
-    command = "rubocop-daemon",
-    args = { "exec", "--", "-x", "--format=quiet", "--stderr", "--out=/dev/null", "--stdin=$FILENAME" },
-    to_stdin = true,
-    ignore_stderr = true,
-    on_output = function(params, done)
-      local output = params.output
-      if not output then
-        return done()
-      end
+-- local FORMATTING = methods.internal.FORMATTING
 
-      local result = output:gsub("^====================\n", "")
+-- local rubocopdaemon = h.make_builtin({
+--   name = "rubocop-daemon",
+--   method = FORMATTING,
+--   filetypes = { "ruby" },
+--   factory = h.generator_factory,
+--   generator_opts = {
+--     command = "rubocop-daemon",
+--     args = {
+--       "exec",
+--       "--",
+--       "--autocorrect",
+--       "--format=quiet",
+--       "--stderr",
+--       "--out=/dev/null",
+--       "--stdin=$FILENAME",
+--     },
+--     to_stdin = true,
+--     ignore_stderr = true,
+--     on_output = function(params, done)
+--       local output = params.output
+--       if not output then
+--         return done()
+--       end
 
-      return done({ { text = result } })
-    end,
-  },
-})
+--       local result = output:gsub("^====================\n", "")
 
-local null_ls = require("null-ls")
-null_ls.register(rubocopdaemon)
+--       return done({ { text = result } })
+--     end,
+--   },
+-- })
+
+-- local null_ls = require("null-ls")
+-- -- null_ls.register(rubocopdaemon)
+-- local sources = { rubocopdaemon, null_ls.builtins.formatting.stylua }
+-- null_ls.setup({ sources = sources })
 
 -- local sources = {rubocopdaemon}
 -- null_ls.setup({ sources = sources })
@@ -236,7 +253,6 @@ null_ls.register(rubocopdaemon)
 --   -- },
 -- }
 
-
 -- local null_ls = require("null-ls")
 
 -- -- register any number of sources simultaneously
@@ -247,8 +263,6 @@ null_ls.register(rubocopdaemon)
 -- }
 
 -- null_ls.setup({ sources = sources })
-
-
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -269,21 +283,26 @@ null_ls.register(rubocopdaemon)
 
 -- Additional Plugins
 lvim.plugins = {
-  {"RRethy/nvim-base16"},
-  {"TamaMcGlinn/quickfixdd"},
-  {"tpope/vim-eunuch"}, -- :Move, :Delete, etc
-  {"tpope/vim-rsi"}, -- Readline keybindings
-  {"jgdavey/vim-blockle"}, -- <leader>b to switch ruby block style
-  {"rgroli/other.nvim"},
-  {"amiel/neovim-tmux-navigator", run = "cargo install --path ."},
-  {"folke/trouble.nvim", cmd = "TroubleToggle"},
+  { "mattn/webapi-vim" },
+  { "RRethy/nvim-base16" },
+  { "tpope/vim-eunuch" }, -- :Move, :Delete, etc
+  { "tpope/vim-rsi" }, -- Readline keybindings
+  { "tpope/vim-fugitive" }, -- Git
+  { "tpope/vim-abolish" }, -- Lots of things, including case changes
+  { "jgdavey/vim-blockle" }, -- <leader>b to switch ruby block style
+  { "vim-test/vim-test" },
+  { "rgroli/other.nvim" },
+  { "duane9/nvim-rg" },
+  { "kevinhwang91/nvim-bqf" },
+  { "amiel/neovim-tmux-navigator", run = "cargo install --path ." },
+  { "folke/trouble.nvim", cmd = "TroubleToggle" },
+  { "simrat39/rust-tools.nvim" },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
-
 
 require("other-nvim").setup({
   mappings = {
@@ -294,8 +313,14 @@ require("other-nvim").setup({
     {
       pattern = "/spec/(.*)/(.*)_spec.rb",
       target = "/app/%1/%2.rb",
-    }
+    },
+    {
+      pattern = "/app/controllers/api/v1/(.*)_controller.rb",
+      target = "/spec/requests/api/v1/%1_request_spec.rb",
+    },
+    {
+      pattern = "/spec/requests/api/v1/(.*)_request_spec.rb",
+      target = "/app/controllers/api/v1/%1_controller.rb",
+    },
   },
 })
-
-
