@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export GEM_HOME="$HOME/.local/share/nvim/lsp_servers/solargraph" 
+export GEM_PATH="$HOME/.local/share/nvim/lsp_servers/solargraph"
+
+bundle install
+gem install solargraph solargraph-rails
+yard gems
+solargraph bundle
