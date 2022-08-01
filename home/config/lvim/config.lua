@@ -75,6 +75,18 @@ lvim.builtin.which_key.mappings["n"] = {
   e = { "<cmd>Telescope find_files cwd=%:h<cr>", "CWD" },
 }
 
+-- Macros
+lvim.builtin.which_key.mappings["m"] = {
+  name = "+Macros",
+  -- TODO: Refactor
+  l = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/let(:\\1) { \\3 }/<cr>", "Promote to let" },
+  c = {
+    "<cmd>.s/\\(class\\|module\\) \\(\\w\\+\\)::\\(\\w\\+\\)/module \\2\\r  \\1 \\3/<cr>Goend<esc>",
+    "Unnest module/class definition"
+  },
+}
+
+
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -288,7 +300,16 @@ lvim.plugins = {
   { "tpope/vim-eunuch" }, -- :Move, :Delete, etc
   { "tpope/vim-rsi" }, -- Readline keybindings
   { "tpope/vim-fugitive" }, -- Git
-  { "tpope/vim-abolish" }, -- Lots of things, including case changes
+  { "tpope/vim-surround" },
+
+  -- Lots of things, including case changes
+  -- See https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
+  { "tpope/vim-abolish" },
+
+  -- Also lots of random things, mostly mappings that start with [ or ]
+  -- See https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt
+  { "tpope/vim-unimpaired" },
+
   { "jgdavey/vim-blockle" }, -- <leader>b to switch ruby block style
   { "vim-test/vim-test" },
   { "rgroli/other.nvim" },
@@ -321,6 +342,14 @@ require("other-nvim").setup({
     {
       pattern = "/spec/requests/api/v1/(.*)_request_spec.rb",
       target = "/app/controllers/api/v1/%1_controller.rb",
+    },
+    {
+      pattern = "/lib/(.*).rb",
+      target = "/spec/lib/%1_spec.rb"
+    },
+    {
+      pattern = "/spec/lib/(.*)_spec.rb",
+      target = "/lib/%1.rb",
     },
   },
 })
