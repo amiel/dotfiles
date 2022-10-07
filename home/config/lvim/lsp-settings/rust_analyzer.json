@@ -1,5 +1,3 @@
   {
-    "rust-analyzer.cargo.features": [
-      "exercises"
-    ]
+    "rust-analyzer.cargo.features": []
   }
