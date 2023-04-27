@@ -1,9 +1,13 @@
 #!/bin/bash
 
+set -euo pipefail
+IFS=$'\n\t'
+
 export GEM_HOME="$HOME/.local/share/nvim/lsp_servers/solargraph" 
 export GEM_PATH="$HOME/.local/share/nvim/lsp_servers/solargraph"
 
+gem install bundler
+
 bundle install
-gem install solargraph solargraph-rails
+bundle clean --force
 yard gems
-solargraph bundle
