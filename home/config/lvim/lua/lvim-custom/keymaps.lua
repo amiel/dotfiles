@@ -26,6 +26,9 @@ M.setup = function()
   lvim.builtin.which_key.mappings["v"] = { "<C-W>v", "Split Vertical" }
   lvim.builtin.which_key.mappings["w"] = { "<C-W>s", "Split Horizontal" }
   lvim.builtin.which_key.mappings[","] = { "<C-^>", "Previous File" }
+  lvim.builtin.which_key.mappings["u"] = { "<cmd>Legendary<CR>", "Show Legendary" }
+
+  lvim.builtin.which_key.mappings["fml"] = { "<cmd>CellularAutomaton make_it_rain<CR>", "Make it rain!" }
 
   lvim.builtin.which_key.mappings["."] = {
     name = "+Open Other",
@@ -49,9 +52,27 @@ M.setup = function()
     f = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/def \\1\\r  \\3\\rend/<cr>", "Promote to function" },
     c = {
       "<cmd>.s/\\(class\\|module\\) \\(\\w\\+\\)::\\(\\w\\+\\)/module \\2\\r  \\1 \\3/<cr>Goend<esc>",
-      "Unnest module/class definition"
+      "Unnest module/class definition",
+    },
+    m = {
+      function()
+        vim.cmd([[
+          echo "Testing"
+        ]])
+      end,
+      "Testing"
     },
   }
+
+  -- require("legendary").setup({ which_key = { auto_register = true } })
+
+  require('legendary').setup({
+    which_key = {
+      mappings = lvim.builtin.which_key.mappings,
+      do_binding = false,
+    },
+  })
+
 end
 
 return M
