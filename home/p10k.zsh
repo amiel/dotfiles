@@ -642,7 +642,7 @@
   # Rbenv color.
   typeset -g POWERLEVEL9K_RBENV_FOREGROUND=168
   # Don't show ruby version if it's the same as global: $(rbenv version-name) == $(rbenv global).
-  typeset -g POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW=false
+  typeset -g POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_RBENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
