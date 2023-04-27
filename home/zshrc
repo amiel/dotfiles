@@ -1,3 +1,4 @@
+# ANTIGEN_LOG=/Users/amiel/tmp/antigen.log
 source $(brew --prefix)/share/antigen/antigen.zsh
 
 # # TODO: homebrew completions in a bundle?
@@ -31,10 +32,12 @@ unsetopt share_history
 
 # TODO: Refactor this go stuff to somewhere
 export PATH="$(brew --prefix)/bin:$PATH"
-
 export GOBIN="$HOME/go/bin"
 export PATH="$PATH:$GOBIN"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$(brew --prefix)/opt/python/libexec/bin"
+
+eval "$(nodenv init -)"
 
 export COLORTERM=truecolor
 
@@ -44,3 +47,12 @@ export COLORTERM=truecolor
 
 # TODO: Where to put this
 export JQ_COLORS='0;31:0;31:1;37:0;37:0;32:1;37:1;37'
+export LANG=en_US.UTF-8
+
+
+  if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi

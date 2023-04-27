@@ -1,24 +1,18 @@
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle rbenv
 antigen bundle fzf
 antigen bundle tmuxinator
 
-export NVM_AUTO_USE=true
-export NVM_LAZY_LOAD=true
-antigen bundle lukechilds/zsh-nvm
 antigen bundle ELLIOTTCABLE/rbenv.plugin.zsh
 antigen bundle schoonology/userenv-zsh
 
 # antigen bundle esroze/docker-compose-zsh-plugin
 antigen bundle chriskempson/base16-shell
 
-antigen bundle Schoonology/userenv-zsh
-
 # antigen bundle zsh-autosuggestions
 # antigen bundle zsh-syntax-highlighting
-antigen bundle softmoth/zsh-vim-mode
+antigen bundle softmoth/zsh-vim-mode --branch=main
 
 # export PATH="$PATH":"$HOME/.pub-cache/bin"
 
