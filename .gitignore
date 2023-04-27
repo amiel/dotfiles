@@ -24,3 +24,4 @@ home/vim/plugged
 # Includes an oauth token
 home/config/gh/hosts.yml
 home/config/lvim/plugin/packer_compiled.lua
+guard_result/result

@@ -10,3 +10,6 @@ tags
 .vscode
 amiel.env
 neovim-tmux-navigator-*.log
+
+# Prevent .git files from showing up in `rg --hidden`
+.git
