@@ -23,5 +23,17 @@ home/vim/plugged
 
 # Includes an oauth token
 home/config/gh/hosts.yml
+
 home/config/lvim/plugin/packer_compiled.lua
+home/config/lvim.bak
+home/config/nvim/lsp.log
+home/config/nvim/luacache_*
+
 guard_result/result
+
+home/config/op
+home/config/yarn
+home/config/pgcli
+home/config/configstore
+
+home/config/base16-shell
