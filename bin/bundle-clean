@@ -1,0 +1,12 @@
+#!/bin/bash
+
+bundle
+
+# Remove all gems not defined in the bundle
+bundle clean --force
+
+# Re-run rbenv-default-gems
+source /opt/homebrew/opt/rbenv/plugins/rbenv-default-gems/etc/rbenv.d/install/default-gems.bash
+STATUS=0 install_default_gems
+
+solargraph-update
