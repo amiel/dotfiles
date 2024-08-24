@@ -81,3 +81,11 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 require("lvim-custom").setup()
+
+
+-- Use internal formatting for bindings like gq instead of LSP.
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.bo[args.buf].formatexpr = nil
+  end,
+})
