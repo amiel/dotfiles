@@ -39,7 +39,7 @@
 # [ -e ~/src/dotfiles ] || ln -s ~/Dropbox/dotfiles ~/src/dotfiles
 # ~/src/dotfiles/bin/link-dotfiles
 
-stow -v --dotfiles -t ~ -d ~/src/dotfiles --no-folding --adopt --ignore '.DS_Store' -S home
+stow -v --dotfiles -t ~ -d ~/src/dotfiles --no-folding --ignore '.DS_Store' -S home
 
 ###########
 # Homebrew

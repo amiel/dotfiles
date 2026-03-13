@@ -33,3 +33,5 @@ home/config/pgcli
 home/config/configstore
 
 home/config/base16-shell
+
+.claude/settings.local.json

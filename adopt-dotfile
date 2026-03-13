@@ -1,0 +1,69 @@
+#!/bin/bash
+
+set -euo pipefail
+
+STOW_DIR=~/src/dotfiles
+PACKAGE=home
+PACKAGE_DIR="$STOW_DIR/$PACKAGE"
+
+usage() {
+  echo "Usage: adopt-dotfile <dotfile-path>"
+  echo ""
+  echo "Adopt a dotfile from the home directory into the stow package."
+  echo ""
+  echo "Examples:"
+  echo "  adopt-dotfile ~/.bashrc"
+  echo "  adopt-dotfile ~/.config/foo/bar.conf"
+  exit 1
+}
+
+if [[ $# -ne 1 ]]; then
+  usage
+fi
+
+source_path="$1"
+
+# Resolve to absolute path
+source_path="$(cd "$(dirname "$source_path")" && pwd)/$(basename "$source_path")"
+
+# Ensure the file is under the home directory
+if [[ "$source_path" != "$HOME/"* ]]; then
+  echo "Error: $source_path is not under the home directory ($HOME)" >&2
+  exit 1
+fi
+
+# Ensure the source file exists
+if [[ ! -e "$source_path" ]]; then
+  echo "Error: $source_path does not exist" >&2
+  exit 1
+fi
+
+# Get the path relative to $HOME
+rel_path="${source_path#$HOME/}"
+
+# Convert leading dot in each path component to dot- prefix for stow --dotfiles
+stow_path=""
+IFS='/' read -ra parts <<< "$rel_path"
+for part in "${parts[@]}"; do
+  if [[ "$part" == .* ]]; then
+    part="dot-${part#.}"
+  fi
+  if [[ -z "$stow_path" ]]; then
+    stow_path="$part"
+  else
+    stow_path="$stow_path/$part"
+  fi
+done
+
+dest="$PACKAGE_DIR/$stow_path"
+
+# Create the parent directory and empty file
+mkdir -p "$(dirname "$dest")"
+touch "$dest"
+
+echo "Created empty file: $dest"
+echo "Running stow --adopt to pull in the real content..."
+
+stow -v --dotfiles -t ~ -d "$STOW_DIR" --no-folding --adopt --ignore '.DS_Store' -S "$PACKAGE"
+
+echo "Done! Adopted $rel_path"
