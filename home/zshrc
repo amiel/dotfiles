@@ -1,33 +1,27 @@
-# ANTIGEN_LOG=/Users/amiel/tmp/antigen.log
-source $(brew --prefix)/share/antigen/antigen.zsh
+# TODO: Ensure antidote is installed by Brewfile through chezmoi
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 
-# # TODO: homebrew completions in a bundle?
-# if type brew &>/dev/null; then
-#   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-#   autoload -Uz compinit
-#   compinit
-# fi
-
-antigen init ~/.antigenrc
-
-export FZF_DEFAULT_COMMAND='ag -g ""'
-# source "${ZSH}/custom/plugins/fzf-custom/base16-material-darker.config"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
-
-export GPG_TTY=$(tty)
+autoload -U compinit; compinit
+zmodload zsh/complist
 
 source ~/.zsh_aliases
 
-DOTFILES=$(dirname $(dirname $(readlink ~/.zshrc)))
-export PATH="$PATH:$DOTFILES/bin"
+if [[ "$TERM_PROGRAM" == "kiro" ]]; then
+  PROMPT='%n@%m:%~%# '
+else
+  # plugins in .zsh_plugins.txt
+  antidote load
 
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+  # source "${ZSH}/custom/plugins/fzf-custom/base16-material-darker.config"
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info --bind 'ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up'"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  [[ ! -f ~/.p10k.mise.zsh ]] || source ~/.p10k.mise.zsh
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 unsetopt share_history
-
 
 
 # TODO: Refactor this go stuff to somewhere
@@ -41,7 +35,6 @@ eval "$(nodenv init -)"
 
 export COLORTERM=truecolor
 
-
 [[ $(brew --prefix)/bin/kubectl ]] && source <(kubectl completion zsh)
 
 
@@ -49,10 +42,117 @@ export COLORTERM=truecolor
 export JQ_COLORS='0;31:0;31:1;37:0;37:0;32:1;37:1;37'
 export LANG=en_US.UTF-8
 
+# export LESSOPEN="|/opt/homebrew/bin/lesspipe.sh %s"
+export LESSOPEN='|~/.lessfilter %s'
 
-  if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+# TODO: Move all this to a separate completion file
 
-    autoload -Uz compinit
-    compinit
-  fi
+# general completion settings
+#
+bindkey              '^I'       fzf-tab-complete #  menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+
+# Ztyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt DVORAK
+
+zstyle ':completion:*complete*:*' insert-unambiguous yes
+zstyle ':completion:*history*:*' insert-unambiguous yes
+zstyle ':completion:*:*' matcher-list 'm:{[:lower:]-}={[:upper:]_}' '+r:|[.]=**'
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+# Disable automatic completion of remote branches
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# set descriptions format to enable group support
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# Colors for files and directory
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Required for completion to be in good groups (named after the tags)
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+
+zstyle ':completion:*' keep-prefix true
+
+zstyle ':completion:*' show-ambiguity '1;31'
+# zstyle ':completion:*' word true
+# zstyle ':completion:*' show-completer true
+
+# fzf-tab
+
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+
+# bindkey '^N' fzf-tab-complete
+# bindkey '^P' fzf-tab-complete
+
+# Customize fzf-tab appearance
+# export LESSOPEN="|/opt/homebrew/bin/lesspipe.sh %s"
+# zstyle ':fzf-tab:*' fzf-preview 'lesspipe.sh ${(Q)realpath}'
+# zstyle ':fzf-tab:*:(cd|ls):*' fzf-preview 'eza -F --color=always --git -l --no-permissions --no-user $realpath'
+# zstyle ':fzf-tab:*:rake:*' fzf-preview 'rake -D $word'
+# zstyle ':fzf-tab:*:git-checkout:*' fzf-preview 'git log --oneline --color=always --date=short --decorate=short -n 20 -- {}'
+# zstyle ':completion:*:git-(add|checkout|restore):*' fzf-preview  'git diff --color=always -- {} | head -n 200'
+# zstyle ':fzf-tab:*:git-(add|checkout|restore):*' fzf-preview  'git diff --color=always -- $realpath | head -n 200'
+
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-min-size 80 16
+zstyle ':fzf-tab:complete:*:*' popup-pad 80 8
+
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-u:preview-half-page-up' 'ctrl-d:preview-half-page-down'
+
+
+# +---------+
+# | Options |
+# +---------+
+
+# Define completers
+# zstyle ':completion:*' completer _extensions _complete _approximate
+
+# Use cache for commands using cache
+# zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+# zstyle ':completion:*' complete true
+
+# zle -C alias-expension complete-word _generic
+# bindkey '^Xa' alias-expension
+# zstyle ':completion:alias-expension:*' completer _expand_alias
+
+# Allow you to select in a menu
+# zstyle ':completion:*' menu select
+
+# Autocomplete options for cd instead of directory stack
+# zstyle ':completion:*' complete-options true
+
+# zstyle ':completion:*' file-sort modification
+
+# Only display some tags for the command cd
+# zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+# zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+
+
+# See ZSHCOMPWID "completion matching control"
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+
+## For kubernetes
+# source $DOTFILES/zsh/plugins/kubectl-completion/_kubectl
+# zstyle ':completion:*:*:kubectl:*' list-grouped false
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+[[ "$TERM_PROGRAM" == "kiro" ]] && eval "$(rbenv init -)"
