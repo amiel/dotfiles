@@ -1,0 +1,9 @@
+# ~/.tmuxinator/ember-data.yml
+
+name: ember-data
+root: ~/src/github/ember/ember-data
+
+windows:
+  - server: npm test
+  - editor: vi
+  - shell:

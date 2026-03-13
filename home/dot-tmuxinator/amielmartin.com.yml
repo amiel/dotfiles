@@ -1,0 +1,7 @@
+name: Personal Website
+root: ~/src/amielmartin.com
+
+windows:
+  - server: bake watch
+  - editor: vi
+  - bash:

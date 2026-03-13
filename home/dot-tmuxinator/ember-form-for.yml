@@ -1,0 +1,10 @@
+# ~/.tmuxinator/ember-form-for.yml
+
+name: ember-form-for
+root: ~/src/opensource/ember-form-for
+
+windows:
+  - bash:
+  - tests: node_modules/.bin/ember test --server
+  - editor:
+  - bash:

@@ -1,0 +1,24 @@
+# ~/.tmuxinator/smarttrips.yml
+
+name: SmartTrips
+root: ~/src/SmartTrips
+
+socket_name: carnesmedia
+
+windows:
+  - server:
+      layout: main-horizontal
+      panes:
+        - docker-compose up web
+        - tail -f log/development.log
+  - console:
+      layout: main-horizontal
+      panes:
+        - read; docker-compose exec web rails dbconsole
+        - read; docker-compose exec web rails console
+  - editor:
+      layout: main-horizontal
+      panes:
+        - read; docker-compose exec web bundle exec guard
+        - vi
+  - bash: # -

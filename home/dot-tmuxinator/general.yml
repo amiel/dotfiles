@@ -1,0 +1,6 @@
+# ~/.tmuxinator/general.yml
+
+name: General
+
+windows:
+  - zsh:

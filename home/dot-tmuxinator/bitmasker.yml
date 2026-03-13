@@ -1,0 +1,11 @@
+# ~/.tmuxinator/bitmasker.yml
+
+name: bitmasker
+root: ~/src/github/bitmasker
+windows:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - rerun bundle exec rake test
+        - vi
+  - bash:

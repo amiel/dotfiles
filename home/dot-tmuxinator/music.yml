@@ -1,0 +1,23 @@
+# /Users/amiel/.tmuxinator/music.yml
+
+name: Music
+root: ~/src/music
+
+on_project_start:
+
+on_project_stop:
+  - tmux kill-session -t "Test Music"
+
+on_project_restart:
+  - tmux list-clients | grep -q Test && tmux switch-client -c $(tmux list-clients | grep Test | sed 's/:.*//') -t "Test Music":2.1
+
+
+
+windows:
+  - server: make watch
+  - x:
+  - editor:
+  - ~:
+    - tmux new-session -d -t "Music" -s "Test Music"
+    - TMUX= tmux select-window -t "Test Music":2
+    - tmux list-clients | grep -q Test && tmux switch-client -c $(tmux list-clients | grep Test | sed 's/:.*//') -t "Test Music":2.1

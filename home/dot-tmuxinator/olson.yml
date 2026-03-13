@@ -1,0 +1,8 @@
+# ~/.tmuxinator/olson.yml
+# you can make as many tabs as you wish...
+
+project_name: Olson
+project_root: ~/src/github/olson
+tabs:
+  - console: pry
+  - guard: bundle exec guard

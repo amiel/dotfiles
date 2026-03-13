@@ -1,0 +1,8 @@
+# ~/.tmuxinator/pomodoriapp.yml
+# you can make as many tabs as you wish...
+
+name: Pomodoriapp
+root: ~/src/carnesmedia/pomodoriapp
+windows:
+  - bash:
+  - server: ruby app.rb

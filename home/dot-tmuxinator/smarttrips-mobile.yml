@@ -1,0 +1,16 @@
+# /Users/amiel/.tmuxinator/smarttrips-mobile.yml
+
+name: SmartTrips Mobile
+root: ~/src/smarttrips_mobile
+
+socket_name: carnesmedia
+
+windows:
+  - server: read; flutter run
+  - tests:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - read
+        - nvim
+  - bash:

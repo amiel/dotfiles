@@ -1,0 +1,8 @@
+[user]
+  name = Amiel Martin
+  email = amiel.martin@gmail.com
+  # signingkey = F045722922A44A34
+  # signingkey = EBD5DF39BDE06E84
+	signingkey = /Users/amiel/.ssh/id_rsa.pub
+
+

@@ -1,0 +1,9 @@
+# ~/.tmuxinator/default.yml
+# you can make as many tabs as you wish...
+
+name: PassingPedagogy
+root: ~/src/personal/passingpedagogy.com
+windows:
+  - server: powder restart;powder applog
+  - guard: guard
+  - bash: # -

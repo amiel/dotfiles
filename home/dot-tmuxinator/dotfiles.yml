@@ -1,0 +1,16 @@
+# ~/.tmuxinator/dotfiles.yml
+
+name: Dotfiles
+root: ~/Dropbox/dotfiles
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        -
+        - vi
+  - ~: cd guard_result; be guard
+  - ~:
+    - tmux new-session -d -t "Dotfiles" -s "Test Dotfiles"
+    - TMUX= tmux select-window -t "Test Dotfiles":2
+    - tmux list-clients | grep -q Test && tmux switch-client -c $(tmux list-clients | grep Test | sed 's/:.*//') -t "Test Dotfiles":2.1

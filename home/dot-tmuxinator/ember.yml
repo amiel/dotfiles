@@ -1,0 +1,11 @@
+# ~/.tmuxinator/ember.yml
+
+name: ember
+root: ~/src/github/ember/ember.js
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+windows:
+  - editor: vi
+  - server: npm start

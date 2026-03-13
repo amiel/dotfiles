@@ -1,0 +1,27 @@
+name: Venice
+root: ~/src/bento/venice
+
+on_project_start:
+
+on_project_stop:
+  - tmux kill-session -t "Test Venice"
+
+on_project_restart:
+  - tmux list-clients | grep -q Test && tmux switch-client -c $(tmux list-clients | grep Test | sed 's/:.*//') -t "Test Venice":2.1
+
+windows:
+  - server:
+      layout: tiled
+      panes:
+        - overmind start
+        - tail -f log/development.log
+  - tests:
+      layout: tiled
+      panes:
+        - be guard
+        - bundle exec rails console
+  - editor: vi
+  - ~:
+    - tmux new-session -d -t "Venice" -s "Test Venice"
+    - TMUX= tmux select-window -t "Test Venice":2
+    - tmux list-clients | grep -q Test && tmux switch-client -c $(tmux list-clients | grep Test | sed 's/:.*//') -t "Test Venice":2.1

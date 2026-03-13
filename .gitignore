@@ -3,23 +3,19 @@ Icon*
 .dropbox
 00env.sh
 env.sh
-home/tmuxinator
+home/dot-tmuxinator
 .netrwhist
+.bundle
 
 home/zshenv
-home/gitconfig.local
-
-# Bundles managed by vim-update-bundles
-home/vim/doc/bundle-log.txt
-home/vim/doc/bundles.txt
-home/vim/bundle
-.bundle
+home/dot-zshenv
 
 # needs to be installed from https://github.com/kevinschoon/pomo
 bin/pomo
 
 # vim plugins managed by https://github.com/junegunn/vim-plug
-home/vim/plugged
+home/dot-vim/plugged
+home/dot-vim/plugged
 
 # Includes an oauth token
 home/config/gh/hosts.yml

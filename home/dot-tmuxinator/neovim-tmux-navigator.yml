@@ -1,0 +1,8 @@
+# /Users/amiel/.tmuxinator/neovim-tmux-navigator.yml
+
+name: neovim-tmux-navigator
+root: ~/src/neovim-tmux-navigator/
+
+windows:
+  - editor:
+  - ~:

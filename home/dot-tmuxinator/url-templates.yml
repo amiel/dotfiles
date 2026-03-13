@@ -1,0 +1,9 @@
+# ~/.tmuxinator/url-templates.yml
+
+name: url-templates
+root: ~/src/ember-data-url-templates
+
+windows:
+  - server: ember serve
+  - editor: vi
+  - bash:
