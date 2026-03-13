@@ -5,4 +5,4 @@ set -euo pipefail
 STOW_DIR=~/src/dotfiles
 PACKAGE=home
 
-stow -v --dotfiles -t ~ -d "$STOW_DIR" --no-folding --ignore '.DS_Store' -S "$PACKAGE"
+stow -v --dotfiles -t ~ -d "$STOW_DIR" --no-folding --ignore '.DS_Store' -S "$PACKAGE" "$@"
