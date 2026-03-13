@@ -30,7 +30,7 @@ export GOBIN="$HOME/go/bin"
 export PATH="$PATH:$GOBIN"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(brew --prefix)/opt/python/libexec/bin"
-export PATH="$PATH:$(brew --prefix rustup)/bin"
+export PATH="$PATH:$(brew --prefix rustup)/bin:$HOME/.cargo/bin"
 
 # eval "$(nodenv init -)"
 
