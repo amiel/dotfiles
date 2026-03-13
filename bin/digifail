@@ -1,6 +1,0 @@
-#!/bin/bash
-
-
-# ROOT=$(dirname "${BASH_SOURCE}")
-
-RBENV_VERSION=2.1.0 digicolor red
