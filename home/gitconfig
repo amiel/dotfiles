@@ -10,7 +10,7 @@
 ;   templatedir = ~/.git_template
 
 [core]
-  editor           = lvim
+  editor           = nvim
   filemode         = true
   logallrefupdates = true
   whitespace       = fix, space-before-tab, trailing-space
@@ -102,30 +102,29 @@
   ri      = rebase --interactive --autosquash
   standup = !git log --since yesterday --author `git config user.email` --pretty=short
   camend  = commit --amend --no-edit
-  cleanup = !SKIP_HOOKUP=1 git co main && git purr && git delete-merged-branches && git remote prune origin
+  cleanup = !SKIP_HOOKUP=1 git switch main && git purr && git delete-merged-branches && git remote prune origin
   publish = push -u origin HEAD
   bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
   uncommit = reset --soft HEAD^
-  parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
-
-
+  parent  = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+  sw      = switch
 
   # Fancy logging.
   #   h = head
-  #   hp = head with patch
   #   r = recent commits, only current branch
   #   ra = recent commits, all reachable refs
   #   l = all commits, only current branch
   #   la = all commits, all reachable refs
-  head = !git l -1
-  h = !git head
-  hp = "!source ~/.githelpers && show_git_head"
-  r = !git l -30
-  ra = !git r --all
-  l = "!source ~/.githelpers && pretty_git_log"
-  la = !git l --all
+  head = l -1
+  h = l -1
+  r = l -30
+  ra = r --all
+  # l = "!source ~/.githelpers && pretty_git_log"
+  l = log --graph --color --pretty=\"tformat:%C(yellow)%h%Creset %Cgreen(%ar)%Creset %C(bold blue)<%an>%Creset %C(red)%d%Creset %s\"
+  la = l --all
+
   today = log --since=midnight --author='Amiel Martin' --oneline
-  yesterday = log --graph --all --since=\"day.before.yesterday.midnight\" --until=midnight --author=\\\"$(git config user.name)\\\" --oneline
+  yesterday = log --graph --all --since=\"day.before.yesterday.midnight\" --until=midnight --author=\"$(git config user.name)\" --oneline
   ctags = !.git/hooks/ctags
 
 [mergetool "fugitive"]
@@ -158,3 +157,10 @@
 	required = true
 [help]
 	autoCorrect = prompt
+[gpg]
+	format = ssh
+[tag]
+	gpgSign = true
+[user]
+	name = Amiel Martin
+	email = amiel.martin@gmail.com
