@@ -1,0 +1,6 @@
+# dotfiles @ ~/.rbenv/default-gems
+gem-ctags
+bundler
+tmuxinator
+neovim
+pry

@@ -49,11 +49,13 @@ stow -v --dotfiles -t ~ -d ~/src/dotfiles --no-folding --ignore '.DS_Store' -S h
 # brew bundle
 
 # TODO: install pomo
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # TODO: rustup-init
 #
 # TODO: mise
+
+mise install
 
 #####
 # raycast
