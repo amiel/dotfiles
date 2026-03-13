@@ -31,7 +31,7 @@ export PATH="$PATH:$GOBIN"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(brew --prefix)/opt/python/libexec/bin"
 
-eval "$(nodenv init -)"
+# eval "$(nodenv init -)"
 
 export COLORTERM=truecolor
 
