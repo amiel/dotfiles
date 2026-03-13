@@ -4,109 +4,9 @@ if !has('nvim')
   Plug 'tpope/vim-sensible'
 end
 
-" Plug 'wincent/Command-T', { 'do': '( eval \"$(rbenv init -)\"; export RBENV_VERSION=2.4.0; pwd; rbenv rehash; ruby --version; rake make )' }
-
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-" Plug 'junegunn/fzf.vim'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-vinegar' " netrw improvements
-
 Plug 'chriskempson/base16-vim'
 
-Plug 'amiel/vim-tmux-navigator'
-Plug 'bling/vim-airline'
-Plug 'osyo-manga/vim-over' " Show :%s/ changes in realtime, especially with :OverCommandLine
-Plug 'sjl/gundo.vim' " Or try mbbill/undotree
-
-Plug 'TamaMcGlinn/quickfixdd'
-
 Plug 'tpope/vim-rsi' " Readline keybindings
-" Plug 'tpope/vim-dispatch'
-Plug 'preservim/vimux'
-Plug 'tpope/vim-abolish' " %Subvert/...
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-eunuch' " :Move, :Delete, etc
-
-Plug 'ap/vim-css-color'
-
-" Plug 'ervandew/supertab'
-" Plug 'cohama/lexima.vim'
-
-if has('nvim')
-  Plug 'neovim/nvim-lspconfig'
-
-  " TODO: Look in to using https://github.com/simrat39/rust-tools.nvim
-
-  " Plug 'hrsh7th/nvim-compe'
-  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-  Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-
-  Plug 'kyazdani42/nvim-web-devicons'
-
-end
-
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-projectionist'
-
-" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-" Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-" Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-"
-" Plug 'elixir-lang/vim-elixir'
-" Plug 'mhinz/vim-mix-format'
-" Plug 'slashmili/alchemist.vim'
-
-" Plug 'matze/vim-lilypond'
-" Plug 'dart-lang/dart-vim-plugin'
-
-
-" JSON MAPPINGS: TODO LEARN
-Plug 'tpope/vim-jdaddy'
-
-" Plug 'w0rp/ale'
-
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-db'
-
-Plug 'tpope/vim-fugitive' " git support
-Plug 'jgdavey/vim-blockle' " <leader>b to switch ruby block style
-Plug 'tpope/vim-commentary'
-" Plug 'nono/vim-handlebars'
-
-Plug 'mattn/emmet-vim'
-
-" Experimental
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'djoshea/vim-autoread'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'roxma/vim-tmux-clipboard'
-Plug 'tmux-plugins/vim-tmux'
-
-Plug 'sukima/vim-javascript-imports'
-" Plug 'sukima/vim-ember-imports'
-
-Plug 'coot/CRDispatcher'
-Plug 'coot/EnchantedVim'
-
-" To look in to:
-" * https://github.com/machakann/vim-sandwich
-" * https://github.com/rhysd/clever-f.vim
-" * http://bytefluent.com/vivify/
-" * https://www.reddit.com/r/vimplugins/comments/52v9dp/musthave_plugins/
-" Chiel92/vim-autoformat
-" https://github.com/Raimondi/delimitMate
-
-" " Bundle: vroom
-" " Bundle: tpope/vim-tbone
-" " Bundle: ember.vim
-" " Bundle: terryma/vim-multiple-cursors
-" " Bundle: rizzatti/funcoo.vim
-
-Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -165,7 +65,6 @@ set hlsearch
 set number
 au FileType fzf set nonu nornu
 
-
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 
@@ -202,8 +101,6 @@ set backupskip=/tmp/*,/private/tmp/*
 set wildmode=longest:full,list
 set wildmenu
 
-
-
 set wildignore+=*vim/backups*
 set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
@@ -221,64 +118,9 @@ set wildignore+=bower_components/**
 
 set list
 
-let g:mix_format_on_save = 1
-
 " http://items.sjbach.com/319/configuring-vim-right
 " extends % to match more things correctly
 runtime macros/matchit.vim
-
-""""""""""""""""
-" Abbreviations
-""""""""""""""""
-
-abbr rpry require 'pry'; binding.pry
-
-if has("nvim")
-  let g:loaded_python_provider = 1 " Disable python2 support
-  " let g:python_host_prog = '/usr/local/bin/python'
-  let g:python3_host_prog = '/usr/local/bin/python3'
-  let g:gundo_prefer_python3 = v:true
-end
-
-
-"""""""""""
-" Startify
-"""""""""""
-
-let g:startify_list_order = [
-      \ ['   Sessions'],
-      \ 'sessions',
-      \ ['   Bookmarks'],
-      \ 'bookmarks',
-      \ ['   My most recently used files in the current directory'],
-      \ 'dir',
-      \ ['   Commands'],
-      \ 'commands',
-      \ ]
-
-let g:startify_change_to_vcs_root = 1
-let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
-
-let g:startify_commands = [
-    \ ['Vim Reference', 'h ref'],
-    \ ]
-
-""""""""""""""
-" Airline
-""""""""""""""
-
-" set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-
-set ttimeoutlen=50
-let g:airline_powerline_fonts = 1
-let g:webdevicons_enable_airline_statusline = 1
-
-" let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#hunks#non_zero_only = 1
-" let g:airline#extensions#ale#enabled = 1
-" let g:airline#extensions#ale#error_symbol = '✗'
-" let g:airline#extensions#ale#warning_symbol = '⚠'
-let g:airline_theme = 'custom'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -292,52 +134,6 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-
-" let base16colorspace=256
-" colorscheme base16-default-dark
-
-" highlight ColorColumn term=NONE ctermbg=233 ctermfg=NONE guibg=NONE
-" highlight cursorline cterm=NONE ctermbg=234 term=NONE guibg=NONE
-" highlight cursorline cterm=bold ctermbg=NONE term=NONE guibg=NONE
-" highlight LineNr ctermfg=239
-" highlight SpecialKey term=NONE ctermfg=238 guifg=NONE
-" highlight SignColumn ctermbg=NONE guibg=NONE
-" highlight NonText ctermfg=black
-
-" highlight DiffAdd ctermbg=194 ctermbg=235
-" highlight DiffChange ctermfg=157 ctermbg=235
-" highlight DiffText cterm=bold ctermfg=120 ctermbg=234
-" highlight DiffDelete ctermfg=52 ctermbg=232
-
-" highlight VertSplit term=NONE cterm=NONE ctermbg=238 ctermfg=238
-
-" highlight TabLineFill term=NONE cterm=NONE ctermbg=235 ctermfg=249
-" highlight TabLine term=NONE cterm=NONE ctermbg=235 ctermfg=249
-" highlight TabLineSel term=NONE cterm=NONE ctermbg=235 ctermfg=150
-
-" highlight ALEWarning cterm=bold ctermfg=226
-" highlight ALEError cterm=bold ctermbg=52
-" highlight ALEErrorSign cterm=bold ctermfg=124
-" highlight link ALEWarningSign  ALEWarning
-
-" highlight CocWarningVirtualText term=NONE ctermfg=166 ctermbg=236
-" highlight CocInfoVirtualText ctermfg=166 ctermbg=236
-
-" CocErrorVirtualText xxx links to CocErrorSign
-" CocWarningVirtualText xxx links to CocWarningSign
-" CocInfoVirtualText xxx links to CocInfoSign
-" CocHintVirtualText xxx links to CocHintSign
-
-
-
-
-" highlight Title term=NONE cterm=NONE ctermbg=235 ctermfg=238
-
-" from something else...
-" highlight! link DiffText MatchParen
-
-
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
