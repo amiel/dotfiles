@@ -75,6 +75,7 @@ brew install zsh-autocomplete
 ### END FORMULAE ###
 
 ### BEGIN CASKS ###
+brew install --cask 1password 2> /dev/null
 brew install --cask 1password-cli 2> /dev/null
 brew install --cask 4k-youtube-to-mp3 2> /dev/null
 brew install --cask anylist 2> /dev/null
