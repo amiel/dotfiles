@@ -25,8 +25,9 @@
 # * sign in to 1password
 # * gpg --import /Volumes/THEKEY/git-gpg-key.asc
 
+
 # Ask for the administrator password upfront
-sudo -v
+# sudo -v
 
 ###############
 # OSX Settings
@@ -37,6 +38,8 @@ sudo -v
 # [ -d ~/src ] || mkdir ~/src
 # [ -e ~/src/dotfiles ] || ln -s ~/Dropbox/dotfiles ~/src/dotfiles
 # ~/src/dotfiles/bin/link-dotfiles
+
+stow -v --dotfiles -t ~ -d ~/src/dotfiles --no-folding --adopt --ignore '.DS_Store' -S home
 
 ###########
 # Homebrew
@@ -52,6 +55,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 #
 # TODO: mise
 
+#####
+# raycast
+#
+# setup with hotkey ^-space (note you have to change keyboard shotcut to switch input sources from ^-space)
 
 # fonts from https://github.com/romkatv/powerlevel10k#installation
 #
