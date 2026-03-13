@@ -1,0 +1,73 @@
+local mappings = {
+}
+
+-- mappings["u"] = { "<cmd>Legendary<CR>", "Show Legendary" }
+
+return mappings
+
+--
+-- mappings["t"] = {
+--   name = "+Tests",
+--   t = { function() require("neotest").run.run() end, "Run nearest test" },
+--   T = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run current file" },
+--   a = { function() require("neotest").run.attach() end, "Attach test" },
+--   o = { function() require("neotest").output.open({ auto_close = true, enter = true }) end, "Open test results" },
+--   s = { function() require("neotest").summary.toggle() end, "Toggle summary view" },
+-- }
+-- -- mappings["t"] = { function() require("neotest").run.run() end, "Run nearest test" }
+--
+--
+-- mappings["fml"] = { "<cmd>CellularAutomaton make_it_rain<CR>", "Make it rain!" }
+--
+-- mappings["."] = {
+--   name = "+Open Other",
+--   ["."] = { "<cmd>Other<CR>", "Open Other" },
+--   v = { "<cmd>OtherVSplit<CR>", "Split Vertical" },
+--   w = { "<cmd>OtherSplit<CR>", "Split Horizontal" },
+-- }
+--
+-- mappings["n"] = {
+--   name = "+Find File",
+--   h = { "<cmd>Telescope git_status<cr>", "Git Status" },
+--   b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+--   e = { "<cmd>Telescope find_files cwd=%:h<cr>", "CWD" },
+-- }
+--
+-- mappings['S'] = { '<cmd>lua require("spectre").toggle()<CR>', "Toggle Spectre" }
+--
+-- -- vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+-- --   desc = "Search current word"
+-- -- })
+-- -- vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+-- --   desc = "Search current word"
+-- -- })
+-- -- vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+-- --   desc = "Search on current file"
+-- -- })
+--
+-- -- vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+--
+-- -- vim.g.tabby_keybinding_accept = '<C-Y>'
+--
+-- -- Macros
+-- mappings["m"] = {
+--   name = "+Macros",
+--   -- TODO: Refactor
+--   l = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/let(:\\1) { \\3 }/<cr>", "Promote to let" },
+--   f = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/def \\1\\r  \\3\\rend/<cr>", "Promote to function" },
+--   c = {
+--     "<cmd>.s/\\(class\\|module\\) \\(\\w\\+\\)::\\(\\w\\+\\)/module \\2\\r  \\1 \\3/<cr>Goend<esc>",
+--     "Unnest module/class definition",
+--   },
+--   m = {
+--     function()
+--       vim.cmd([[
+--         echo "Testing"
+--       ]])
+--     end,
+--     "Testing"
+--   },
+-- }
+--
+--
+-- return mappings
