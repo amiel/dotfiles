@@ -1,4 +1,4 @@
 return {
   "amiel/neovim-tmux-navigator",
-  build = "cargo install --path .",
+  build = "cargo install --locked --path .",
 }
