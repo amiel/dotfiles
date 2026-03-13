@@ -5,8 +5,3 @@ alias bails="bundle exec rails"
 alias ql="qlmanage -p"
 alias vi="nvim"
 alias mux="tmuxinator"
-
-# kitty specific
-alias difftool="git difftool --no-symlinks --dir-diff"
-alias icat="kitty +kitten icat"
-
