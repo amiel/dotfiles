@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+#
+# install - Set up a new Mac with Homebrew packages, casks, and Mac App Store apps
+#
+# Usage: ./install/install
+#
+
+set -e
+
+echo "Installing software..."
+
+# Install Homebrew if not present
+if ! command -v brew &> /dev/null; then
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew update
+
+### BEGIN FORMULAE ###
+brew install antidote
+brew install automake
+brew install awscli
+brew install bash-language-server
+brew install bat
+brew install chafa
+brew install direnv
+brew install dnsmasq
+brew install docker
+brew install duf
+brew install entr
+brew install exiftool
+brew install fzf
+brew install gemini-cli
+brew install gh
+brew install git
+brew install git-extras
+brew install gnu-sed
+brew install grep
+brew install gum
+brew install haproxy
+brew install jq
+brew install kubernetes-cli
+brew install lazygit
+brew install less
+brew install lesspipe
+brew install lua-language-server
+brew install luarocks
+brew install mas
+brew install mise
+brew install neovim
+brew install nmap
+brew install ollama
+brew install opencode
+brew install openvpn
+brew install overmind
+brew install pgcli
+brew install postgresql@17
+brew install redis
+brew install rust-analyzer
+brew install rustup
+brew install shellcheck
+brew install shfmt
+brew install telnet
+brew install terraform
+brew install tree
+brew install typescript
+brew install universal-ctags
+brew install uv
+brew install yarn
+brew install yq
+brew install zsh
+brew install zsh-autocomplete
+### END FORMULAE ###
+
+### BEGIN CASKS ###
+brew install --cask 1password-cli 2> /dev/null
+brew install --cask 4k-youtube-to-mp3 2> /dev/null
+brew install --cask anylist 2> /dev/null
+brew install --cask bluesnooze 2> /dev/null
+brew install --cask chatgpt 2> /dev/null
+brew install --cask claude 2> /dev/null
+brew install --cask claude-code 2> /dev/null
+brew install --cask discord 2> /dev/null
+brew install --cask docker-desktop 2> /dev/null
+brew install --cask firefox 2> /dev/null
+brew install --cask font-0xproto 2> /dev/null
+brew install --cask font-0xproto-nerd-font 2> /dev/null
+brew install --cask font-hack-nerd-font 2> /dev/null
+brew install --cask font-meslo-lg-nerd-font 2> /dev/null
+brew install --cask gemini 2> /dev/null
+brew install --cask ghostty 2> /dev/null
+brew install --cask github 2> /dev/null
+brew install --cask google-chrome 2> /dev/null
+brew install --cask google-drive 2> /dev/null
+brew install --cask linear-linear 2> /dev/null
+brew install --cask notion-calendar 2> /dev/null
+brew install --cask obsidian 2> /dev/null
+brew install --cask raycast 2> /dev/null
+brew install --cask signal 2> /dev/null
+brew install --cask spotify 2> /dev/null
+brew install --cask visual-studio-code 2> /dev/null
+brew install --cask whatsapp 2> /dev/null
+brew install --cask zoom 2> /dev/null
+### END CASKS ###
+
+### BEGIN MAS ###
+mas install 722444976 # Anytune
+mas install 411643860 # DaisyDisk
+mas install 363738376 # forScore
+mas install 409183694 # Keynote
+mas install 409203825 # Numbers
+mas install 409201541 # Pages
+mas install 803453959 # Slack
+mas install 413965349 # Soulver 2
+mas install 497799835 # Xcode
+### END MAS ###
+
+brew cleanup
+
+echo "Done!"
