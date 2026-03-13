@@ -1,7 +1,7 @@
 # ~/.tmuxinator/dotfiles.yml
 
 name: Dotfiles
-root: ~/Dropbox/dotfiles
+root: ~/src/dotfiles
 
 windows:
   - editor:
@@ -9,7 +9,7 @@ windows:
       panes:
         -
         - vi
-  - ~: cd guard_result; be guard
+  - ~: 
   - ~:
     - tmux new-session -d -t "Dotfiles" -s "Test Dotfiles"
     - TMUX= tmux select-window -t "Test Dotfiles":2

@@ -89,11 +89,15 @@ return {
         })
       });
 
+      local dict_paths = vim.tbl_filter(function(path)
+        return vim.uv.fs_stat(path) ~= nil
+      end, {
+        "/usr/share/dict/words",
+        "/opt/homebrew/Cellar/lilypond/2.24.4/share/lilypond/2.24.4/vim/syntax/lilypond-words",
+      })
+
       require("cmp_dictionary").setup({
-        paths = {
-          "/usr/share/dict/words",
-          "/opt/homebrew/Cellar/lilypond/2.24.4/share/lilypond/2.24.4/vim/syntax/lilypond-words"
-        }
+        paths = dict_paths,
       });
 
       --
