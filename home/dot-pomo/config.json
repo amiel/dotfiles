@@ -1,0 +1,5 @@
+{
+  "publish": true,
+  "publishJson": true,
+  "publishSocketPath": "/Users/amiel/.pomo/publish.sock"
+}
