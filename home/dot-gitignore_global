@@ -13,3 +13,5 @@ neovim-tmux-navigator-*.log
 
 # Prevent .git files from showing up in `rg --hidden`
 .git
+
+**/.claude/settings.local.json

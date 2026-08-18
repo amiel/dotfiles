@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Vim-aware pane navigation for herdr, replacing the tmux `neovim-tmux-navigator
+# client -U/-D/-L/-R` bindings. Bound to ctrl+h/j/k/l in ~/.config/herdr/config.toml.
+#
+# Order of operations, matching the tmux original:
+#   1. If nvim owns the focused pane, try to move between nvim's own splits.
+#   2. If nvim didn't move (we were at the edge of its layout), move herdr panes.
+#   3. If there's no herdr pane that way either, forward the raw key to the pane
+#      so ctrl+l still clears the screen at the rightmost pane. (The tmux version
+#      toggled pane zoom here instead.)
+#
+# Unlike the tmux version this needs no `neovim-tmux-navigator server` running
+# inside nvim: herdr reports the pane's foreground pid, and nvim's own
+# --server/--remote-expr handles the rest.
+
+set -uo pipefail
+
+direction="${1:-}"
+
+case "$direction" in
+  left)  wincmd=h; key="ctrl+h" ;;
+  down)  wincmd=j; key="ctrl+j" ;;
+  up)    wincmd=k; key="ctrl+k" ;;
+  right) wincmd=l; key="ctrl+l" ;;
+  *)
+    echo "usage: $(basename "$0") <left|down|up|right>" >&2
+    exit 2
+    ;;
+esac
+
+# The focused pane, and whatever is running in the foreground there.
+process_info="$(herdr pane process-info 2>/dev/null)"
+[ -z "$process_info" ] && exit 1
+
+pane_id="$(jq -r '.result.process_info.pane_id // empty' <<<"$process_info")"
+nvim_pid="$(jq -r '
+  .result.process_info.foreground_processes[]?
+  | select(.name | test("^n?vim(diff)?$"))
+  | .pid
+' <<<"$process_info" | head -1)"
+
+# 1. Try moving within nvim's splits first.
+if [ -n "$nvim_pid" ]; then
+  # nvim's listen socket, e.g. $TMPDIR/nvim.amiel/xxxxxx/nvim.<pid>.0
+  #
+  # The socket is not necessarily owned by the pid herdr reports: a terminal
+  # nvim forks a separate server process that owns it, and the socket is named
+  # after *that* pid. Headless nvim keeps it on the main process. Check both.
+  socket=""
+  for pid in "$nvim_pid" $(pgrep -P "$nvim_pid" 2>/dev/null); do
+    socket="$(lsof -a -p "$pid" -U -F n 2>/dev/null |
+      sed -n 's/^n//p' | grep -m1 -E '/nvim\.[0-9]+\.[0-9]+$')"
+    [ -n "$socket" ] && break
+  done
+
+  if [ -n "$socket" ]; then
+    # One round trip: move, and report whether the window actually changed.
+    moved="$(nvim --server "$socket" --remote-expr "luaeval(\"(function()
+      local before = vim.api.nvim_get_current_win()
+      vim.cmd('wincmd ${wincmd}')
+      return vim.api.nvim_get_current_win() ~= before and 1 or 0
+    end)()\")" 2>/dev/null)"
+
+    # Moved inside nvim; nothing more to do.
+    [ "$moved" = "1" ] && exit 0
+  fi
+fi
+
+# 2. Move between herdr panes, if there is one in that direction.
+if herdr pane neighbor --direction "$direction" 2>/dev/null | grep -q neighbor_pane_id; then
+  herdr pane focus --direction "$direction" >/dev/null
+  exit 0
+fi
+
+# 3. Nothing that way: let the pane have the key (keeps ctrl+l = clear).
+[ -n "$pane_id" ] && herdr pane send-keys "$pane_id" "$key" >/dev/null

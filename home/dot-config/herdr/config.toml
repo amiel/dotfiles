@@ -1,0 +1,127 @@
+# Herdr configuration
+#
+# Keybindings converted from home/dot-tmux.conf. Each converted binding keeps
+# its original tmux line in a comment above it. See the "Not ported" notes at
+# the bottom of this file for the tmux features that have no herdr equivalent.
+
+[theme]
+# tmux used a Material Palenight-ish palette. herdr has no status-line format
+# string, so only the accent colors carry over.
+# name = "catppuccin"
+
+[theme.custom]
+accent = "#82aaff" # was: @prefix_highlight_fg / status-left session badge bg
+yellow = "#ffcb6b" # was: @prefix_highlight_copy_mode_attr fg
+
+[keys]
+# was: set -g prefix C-t   /   unbind C-b
+prefix = "ctrl+t"
+
+# was: bind -n S-C-n next-window   /   bind -n S-C-p previous-window
+# A tmux "window" is a herdr "tab".
+next_tab = "ctrl+shift+n"
+previous_tab = "ctrl+shift+p"
+
+# was: bind Enter copy-mode
+copy_mode = "prefix+enter"
+
+# focus_pane_left/down/up/right intentionally keep their herdr defaults
+# (prefix+h/j/k/l) as a plain, always-works fallback. The vim-aware ctrl+hjkl
+# bindings you had in tmux are the [[keys.command]] entries below.
+
+# was: bind -n C-h run-shell 'neovim-tmux-navigator client -L'
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "herdr-nvim-nav left"
+description = "Focus pane left (vim-aware)"
+
+# was: bind -n C-j run-shell 'neovim-tmux-navigator client -D'
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "herdr-nvim-nav down"
+description = "Focus pane down (vim-aware)"
+
+# was: bind -n C-k run-shell 'neovim-tmux-navigator client -U'
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "herdr-nvim-nav up"
+description = "Focus pane up (vim-aware)"
+
+# was: bind -n C-l run-shell 'neovim-tmux-navigator client -R'
+# NOTE: this takes ctrl+l away from the shell. herdr-nvim-nav forwards the key
+# through to the pane when there is no pane to the right and nvim is not
+# focused, so clear-screen still works at the rightmost pane.
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "herdr-nvim-nav right"
+description = "Focus pane right (vim-aware)"
+
+[ui]
+# was: @prefix_highlight_fg '#82aaff'
+accent = "#82aaff"
+
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"
+
+[ui.toast]
+delivery = "system"
+
+[experimental]
+pane_history = true
+
+# ---------------------------------------------------------------------------
+# Not ported from .tmux.conf
+# ---------------------------------------------------------------------------
+#
+# Plugins (tpm, tmux-sensible, tmux-pain-control, tmux-prefix-highlight,
+#   tmux-yank, tmux-fingers, extrakto)
+#   herdr has its own plugin system (herdr-plugin.toml manifests), but none of
+#   these exist for it. No built-in equivalent for fingers/extrakto-style
+#   copy-mode text grabbing.
+#
+# Status line (status-left/right, colours, status-interval, visual-bell,
+#   monitor-activity, set-titles)
+#   herdr renders a sidebar, not a formattable status line. Row content is
+#   configurable via [ui.sidebar.spaces] / [ui.sidebar.agents] but it takes
+#   herdr tokens, not shell commands, so `date` and pomo-tmux-status cannot
+#   be embedded.
+#
+# bind t / C-M-t send-prefix
+#   herdr has no send-prefix action.
+#
+# bind-key ^l send-keys C-l
+#   No send-keys action. Not needed anyway: see the ctrl+l note above.
+#
+# bind -n S-Enter send-keys Escape "[13;2u"
+#   Terminal-level shift+enter encoding hack; herdr handles its own key
+#   encoding.
+#
+# copy-mode-vi bindings (v begin-selection, y copy-selection, r rectangle)
+#   herdr's copy mode has fixed bindings; only the key that enters it
+#   (copy_mode, above) is configurable.
+#
+# bind-key S choose-tree -ZGs  /  bind-key s <grouped-session switcher>
+#   herdr has no grouped-session concept, so tmux-double-switcher has nothing
+#   to drive. The nearest thing is the workspace picker, left on its herdr
+#   default of prefix+w (settings stays on prefix+s).
+#
+# bind-key p <pomodoro if-shell chain>
+#   Deliberately skipped for now. prefix+p remains previous_tab.
+#
+# base-index / pane-base-index / main-pane-height / mode-keys vi
+#   No herdr equivalents. Navigate mode already uses h/j/k/l.
+#
+# default-terminal, terminal-features RGB, xterm-keys
+#   herdr manages its own terminal capabilities.
+#
+# set-environment -gu RBENV_VERSION
+#   No config equivalent; unset it from your shell rc if still needed.
+#
+# mouse / WheelUpPane / WheelDownPane
+#   Skipped per request. FWIW herdr already defaults to mouse_capture = true
+#   and copy_on_select = true, which covers `set -g mouse on` and
+#   `set-clipboard on`.
