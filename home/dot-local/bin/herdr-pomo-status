@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Push pomodoro status into the herdr sidebar as a $pomo token, the way
+# pomo-tmux-status used to feed tmux's status-right.
+#
+# Called by pomo-event on each state / remaining-minute change. Called with no
+# argument (or an empty one) it clears the token.
+#
+# herdr has no global status line, so this tags one workspace — "Pomodoro" by
+# default, override with $HERDR_POMO_WORKSPACE. To render it, the space rows
+# need the token:
+#
+#   [ui.sidebar.spaces]
+#   rows = [["state_icon", "workspace"], ["branch", "git_status", "$pomo"]]
+
+set -uo pipefail
+
+workspace_label="${HERDR_POMO_WORKSPACE:-Pomodoro}"
+text="${1:-}"
+
+workspace_id="$(herdr workspace list 2>/dev/null |
+  jq -r --arg label "$workspace_label" \
+    '.result.workspaces[]? | select(.label == $label) | .workspace_id' |
+  head -1)"
+
+# herdr isn't running, or there's no such workspace. Not an error: the
+# pomodoro should still work without herdr up.
+[ -z "$workspace_id" ] && exit 0
+
+# NOTE: the workspace id has to come *before* the flags, despite what
+# `herdr workspace report-metadata --help` shows, or it fails with
+# "unknown option".
+if [ -z "$text" ]; then
+  herdr workspace report-metadata "$workspace_id" \
+    --source pomo --clear-token pomo >/dev/null
+else
+  # The TTL is a dead-man switch. pomo-event pushes an update every time the
+  # remaining minute ticks, so if it dies mid-pomodoro the status expires
+  # instead of leaving a stale time on screen forever.
+  herdr workspace report-metadata "$workspace_id" \
+    --source pomo --token pomo="$text" \
+    --ttl-ms "${HERDR_POMO_TTL_MS:-90000}" >/dev/null
+fi

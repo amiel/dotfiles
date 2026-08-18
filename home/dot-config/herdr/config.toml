@@ -81,23 +81,19 @@ show_agent_labels_on_pane_borders = true
 agent_panel_sort = "spaces"
 # tab_bar_position = "bottom"
 
-# This is the one place herdr will render arbitrary command output: a sidebar
-# row can contain a $token, and tokens are pushed in over the CLI. Verified
-# working; commented out only because nothing feeds $pomo yet.
+# Sidebar rows are the one place herdr renders arbitrary command output: a row
+# can contain a $token, and tokens are pushed in over the CLI. This replaces
+# the pomo half of tmux's status-right.
 #
-#   herdr workspace report-metadata <WS_ID> --source pomo --token pomo="🍅 12:34"
-#   herdr workspace report-metadata <WS_ID> --source pomo --clear-token pomo
+# $pomo is fed by herdr-pomo-status, which pomo-event calls on every state or
+# remaining-minute change. It tags only the "Pomodoro" space, so $pomo is empty
+# everywhere else — it shares the branch/git_status row rather than taking one
+# of its own so that empty case costs no vertical space.
 #
-# NOTE: the workspace id must come *before* the flags, despite what
-# `--help` shows, or the CLI errors with "unknown option".
-#
-# Something has to call that on a timer, the way status-interval 2 used to
-# re-run pomo-tmux-status. --ttl-ms makes the token self-expire if the poller
-# dies. Built-in space tokens: state_icon, state_text, workspace, branch,
-# git_status. A token can be styled: { token = "$pomo", fg = "#82aaff" }.
-#
-# [ui.sidebar.spaces]
-# rows = [["state_icon", "workspace"], ["branch", "git_status"], ["$pomo"]]
+# Built-in space tokens: state_icon, state_text, workspace, branch, git_status.
+# A token can be styled: { token = "$pomo", fg = "#82aaff" }.
+[ui.sidebar.spaces]
+rows = [["state_icon", "workspace"], ["branch", "git_status", "$pomo"]]
 
 [ui.toast]
 delivery = "system"
