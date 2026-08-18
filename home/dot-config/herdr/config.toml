@@ -1,3 +1,4 @@
+onboarding = false
 # Herdr configuration
 #
 # Keybindings converted from home/dot-tmux.conf. Each converted binding keeps
@@ -8,6 +9,7 @@
 # tmux used a Material Palenight-ish palette. herdr has no status-line format
 # string, so only the accent colors carry over.
 # name = "catppuccin"
+auto_switch = false
 
 [theme.custom]
 accent = "#82aaff" # was: @prefix_highlight_fg / status-left session badge bg
@@ -18,9 +20,12 @@ yellow = "#ffcb6b" # was: @prefix_highlight_copy_mode_attr fg
 prefix = "ctrl+t"
 
 # was: bind -n S-C-n next-window   /   bind -n S-C-p previous-window
-# A tmux "window" is a herdr "tab".
-next_tab = "ctrl+shift+n"
-previous_tab = "ctrl+shift+p"
+# A tmux "window" is a herdr "tab". An action accepts a list of bindings, so
+# all three forms work: the tmux ones, the prefix+C-n/C-p muscle memory, and
+# herdr's own prefix+n/prefix+p defaults (setting this key at all would
+# otherwise replace them).
+next_tab = ["ctrl+shift+n", "prefix+ctrl+n", "prefix+n"]
+previous_tab = ["ctrl+shift+p", "prefix+ctrl+p", "prefix+p"]
 
 # was: bind Enter copy-mode
 copy_mode = "prefix+enter"
@@ -51,14 +56,22 @@ command = "herdr-nvim-nav up"
 description = "Focus pane up (vim-aware)"
 
 # was: bind -n C-l run-shell 'neovim-tmux-navigator client -R'
-# NOTE: this takes ctrl+l away from the shell. herdr-nvim-nav forwards the key
-# through to the pane when there is no pane to the right and nvim is not
-# focused, so clear-screen still works at the rightmost pane.
+# NOTE: this takes ctrl+l away from the shell entirely — at the rightmost pane
+# it zooms rather than clearing. Use prefix+ctrl+l (below) to clear.
 [[keys.command]]
 key = "ctrl+l"
 type = "shell"
 command = "herdr-nvim-nav right"
 description = "Focus pane right (vim-aware)"
+
+# was: bind-key ^l send-keys C-l
+# Gives clear-screen back, now that ctrl+l is the pane-right binding. herdr has
+# no send-keys action, so this goes through the CLI.
+[[keys.command]]
+key = "prefix+ctrl+l"
+type = "shell"
+command = "herdr-send-key ctrl+l"
+description = "Send ctrl+l to the pane (clear screen)"
 
 [ui]
 # was: @prefix_highlight_fg '#82aaff'
@@ -66,9 +79,29 @@ accent = "#82aaff"
 
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "spaces"
+# tab_bar_position = "bottom"
+
+# This is the one place herdr will render arbitrary command output: a sidebar
+# row can contain a $token, and tokens are pushed in over the CLI. Verified
+# working; commented out only because nothing feeds $pomo yet.
+#
+#   herdr workspace report-metadata <WS_ID> --source pomo --token pomo="🍅 12:34"
+#   herdr workspace report-metadata <WS_ID> --source pomo --clear-token pomo
+#
+# NOTE: the workspace id must come *before* the flags, despite what
+# `--help` shows, or the CLI errors with "unknown option".
+#
+# Something has to call that on a timer, the way status-interval 2 used to
+# re-run pomo-tmux-status. --ttl-ms makes the token self-expire if the poller
+# dies. Built-in space tokens: state_icon, state_text, workspace, branch,
+# git_status. A token can be styled: { token = "$pomo", fg = "#82aaff" }.
+#
+# [ui.sidebar.spaces]
+# rows = [["state_icon", "workspace"], ["branch", "git_status"], ["$pomo"]]
 
 [ui.toast]
 delivery = "system"
+
 
 [experimental]
 pane_history = true
@@ -85,16 +118,13 @@ pane_history = true
 #
 # Status line (status-left/right, colours, status-interval, visual-bell,
 #   monitor-activity, set-titles)
-#   herdr renders a sidebar, not a formattable status line. Row content is
-#   configurable via [ui.sidebar.spaces] / [ui.sidebar.agents] but it takes
-#   herdr tokens, not shell commands, so `date` and pomo-tmux-status cannot
-#   be embedded.
+#   herdr renders a sidebar, not a formattable status line, and it never runs
+#   a command for you. But sidebar rows do render $tokens that you push in via
+#   `herdr workspace report-metadata`, so a poller can put pomo-tmux-status
+#   output there. See the [ui.sidebar.spaces] notes above.
 #
 # bind t / C-M-t send-prefix
 #   herdr has no send-prefix action.
-#
-# bind-key ^l send-keys C-l
-#   No send-keys action. Not needed anyway: see the ctrl+l note above.
 #
 # bind -n S-Enter send-keys Escape "[13;2u"
 #   Terminal-level shift+enter encoding hack; herdr handles its own key

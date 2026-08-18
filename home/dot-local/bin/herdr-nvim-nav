@@ -6,9 +6,9 @@
 # Order of operations, matching the tmux original:
 #   1. If nvim owns the focused pane, try to move between nvim's own splits.
 #   2. If nvim didn't move (we were at the edge of its layout), move herdr panes.
-#   3. If there's no herdr pane that way either, forward the raw key to the pane
-#      so ctrl+l still clears the screen at the rightmost pane. (The tmux version
-#      toggled pane zoom here instead.)
+#   3. If there's no herdr pane that way either, toggle zoom, same as the tmux
+#      version did. This means ctrl+l no longer clears the screen; prefix+ctrl+l
+#      is bound to herdr-send-key for that.
 #
 # Unlike the tmux version this needs no `neovim-tmux-navigator server` running
 # inside nvim: herdr reports the pane's foreground pid, and nvim's own
@@ -19,10 +19,10 @@ set -uo pipefail
 direction="${1:-}"
 
 case "$direction" in
-  left)  wincmd=h; key="ctrl+h" ;;
-  down)  wincmd=j; key="ctrl+j" ;;
-  up)    wincmd=k; key="ctrl+k" ;;
-  right) wincmd=l; key="ctrl+l" ;;
+  left)  wincmd=h ;;
+  down)  wincmd=j ;;
+  up)    wincmd=k ;;
+  right) wincmd=l ;;
   *)
     echo "usage: $(basename "$0") <left|down|up|right>" >&2
     exit 2
@@ -73,5 +73,5 @@ if herdr pane neighbor --direction "$direction" 2>/dev/null | grep -q neighbor_p
   exit 0
 fi
 
-# 3. Nothing that way: let the pane have the key (keeps ctrl+l = clear).
-[ -n "$pane_id" ] && herdr pane send-keys "$pane_id" "$key" >/dev/null
+# 3. Nothing that way: toggle zoom, matching the tmux original.
+herdr pane zoom ${pane_id:+"$pane_id"} >/dev/null

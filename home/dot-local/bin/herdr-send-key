@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Send a key to herdr's focused pane.
+#
+# herdr has no send-keys *action*, only the CLI, so passthrough bindings have to
+# go through a [[keys.command]]. Used for prefix+ctrl+l, which gives back
+# clear-screen after ctrl+l was taken over as the pane-right binding.
+
+set -uo pipefail
+
+if [ $# -lt 1 ]; then
+  echo "usage: $(basename "$0") <key>..." >&2
+  exit 2
+fi
+
+pane_id="$(herdr pane process-info 2>/dev/null |
+  jq -r '.result.process_info.pane_id // empty')"
+
+[ -z "$pane_id" ] && exit 1
+
+herdr pane send-keys "$pane_id" "$@" >/dev/null
