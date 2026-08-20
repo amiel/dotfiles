@@ -1,5 +1,5 @@
 {
   "publish": true,
   "publishJson": true,
-  "publishSocketPath": "/Users/amiel/.pomo/publish.sock"
+  "publishSocketPath": "/Users/amiel/Library/Application Support/pomo/publish.sock"
 }
