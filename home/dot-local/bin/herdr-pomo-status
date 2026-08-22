@@ -12,32 +12,88 @@
 #
 #   [ui.sidebar.spaces]
 #   rows = [["state_icon", "workspace"], ["branch", "git_status", "$pomo"]]
+#
+# Anything this script writes to stderr is logged by pomo-event, so stderr is
+# the channel for "the sidebar is not being updated and here is why".
 
 set -uo pipefail
+
+# Checked up front because every failure below is diagnosed by parsing JSON
+# with jq. Without it the parses come back empty and the script would blame a
+# missing workspace for what is really a broken install.
+if ! command -v jq >/dev/null; then
+  echo "herdr-pomo-status: jq is not on PATH" >&2
+  exit 1
+fi
 
 workspace_label="${HERDR_POMO_WORKSPACE:-Pomodoro}"
 text="${1:-}"
 
-workspace_id="$(herdr workspace list 2>/dev/null |
-  jq -r --arg label "$workspace_label" \
-    '.result.workspaces[]? | select(.label == $label) | .workspace_id' |
-  head -1)"
+# herdr reports failures as a JSON envelope on *stderr* with a non-zero exit,
+# so stderr has to be captured rather than discarded to tell "herdr is down"
+# (fine, expected) from "herdr is broken" (worth reporting). Discarding it is
+# what hid a client/server protocol mismatch for weeks: jq's
+# `.result.workspaces[]?` quietly matched nothing in the error envelope, the
+# workspace id came out empty, and this exited 0 as if herdr just wasn't up.
+list_output="$(herdr workspace list 2>&1)"
+list_status=$?
 
-# herdr isn't running, or there's no such workspace. Not an error: the
-# pomodoro should still work without herdr up.
-[ -z "$workspace_id" ] && exit 0
+# Non-JSON output leaves this empty, which the list_status check below catches.
+error_code="$(jq -r '.error.code // empty' <<<"$list_output" 2>/dev/null)"
+
+case "$error_code" in
+  server_not_running)
+    # Expected whenever herdr isn't running. The pomodoro works without it, so
+    # stay quiet: this would otherwise log once a minute all day.
+    exit 0
+    ;;
+  "")
+    # No error envelope. If herdr still failed, it failed in some way that
+    # isn't the documented JSON shape — report it raw rather than falling
+    # through and blaming a missing workspace.
+    if [ "$list_status" -ne 0 ]; then
+      echo "herdr-pomo-status: herdr workspace list failed (exit $list_status):" >&2
+      printf '%s\n' "$list_output" >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "herdr-pomo-status: herdr workspace list failed ($error_code):" >&2
+    jq -r '.error.message // empty' <<<"$list_output" >&2
+    exit 1
+    ;;
+esac
+
+workspace_id="$(jq -r --arg label "$workspace_label" \
+  '.result.workspaces[]? | select(.label == $label) | .workspace_id' \
+  <<<"$list_output" 2>/dev/null | head -1)"
+
+if [ -z "$workspace_id" ]; then
+  # herdr is up and healthy but has no workspace by that label — renaming the
+  # workspace silently breaks the status the same way the mismatch did, so say
+  # so instead of exiting 0 in silence.
+  echo "herdr-pomo-status: no herdr workspace labeled \"$workspace_label\"" >&2
+  exit 0
+fi
 
 # NOTE: the workspace id has to come *before* the flags, despite what
 # `herdr workspace report-metadata --help` shows, or it fails with
 # "unknown option".
+report_metadata() {
+  local output
+  output="$(herdr workspace report-metadata "$workspace_id" "$@" 2>&1)" && return 0
+
+  echo "herdr-pomo-status: herdr workspace report-metadata failed:" >&2
+  printf '%s\n' "$output" >&2
+  exit 1
+}
+
 if [ -z "$text" ]; then
-  herdr workspace report-metadata "$workspace_id" \
-    --source pomo --clear-token pomo >/dev/null
+  report_metadata --source pomo --clear-token pomo
 else
   # The TTL is a dead-man switch. pomo-event pushes an update every time the
   # remaining minute ticks, so if it dies mid-pomodoro the status expires
   # instead of leaving a stale time on screen forever.
-  herdr workspace report-metadata "$workspace_id" \
-    --source pomo --token pomo="$text" \
-    --ttl-ms "${HERDR_POMO_TTL_MS:-90000}" >/dev/null
+  report_metadata --source pomo --token pomo="$text" \
+    --ttl-ms "${HERDR_POMO_TTL_MS:-90000}"
 fi
