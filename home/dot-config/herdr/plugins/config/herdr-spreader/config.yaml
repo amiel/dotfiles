@@ -1,0 +1,37 @@
+workspaces:
+  - name: Dotfiles
+    root: ~/src/dotfiles
+    tabs:
+      - panes:
+        -
+  - name: Pomodoro
+    root: ~
+    tabs:
+      - label: "Pomodoro"
+        panes:
+          - command: pomo list
+      - label: "pomo event"
+        cwd: ~/src/pomo-event
+        panes:
+          - command: read; rm ~/.pomo/publish.sock; cargo run
+  - name: Venice
+    root: ~/src/bento/venice
+    tabs:
+      - label: "claude"
+        panes:
+          - command: claude
+      - label: "shell"
+        panes:
+          - command: 
+  # - name: Ordering Assistant
+  #   root: ~/src/bento/ordering_assistant/
+  #   tabs:
+  #     - label: "claude"
+  #       panes:
+  #         - command: claude --add-dir ../venice
+  #     - label: "shell"
+  #       panes:
+  #         - command: 
+
+
+

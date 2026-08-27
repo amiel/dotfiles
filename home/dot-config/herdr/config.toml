@@ -73,6 +73,15 @@ type = "shell"
 command = "herdr-send-key ctrl+l"
 description = "Send ctrl+l to the pane (clear screen)"
 
+# herdr-spreader's layout apply. Plugin actions never surface in a menu, so a
+# keybinding (or `herdr plugin action invoke`) is the only way to trigger one.
+# prefix+a is unused by herdr's defaults and by everything above.
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "herdr-spreader.apply"
+description = "Apply layout"
+
 [ui]
 # was: @prefix_highlight_fg '#82aaff'
 accent = "#82aaff"
