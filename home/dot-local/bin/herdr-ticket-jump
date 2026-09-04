@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# Jump between the two halves of a handoff-implementation handoff: the planning
+# tab in the source checkout, and the implementation workspace in its worktree.
+# Bound to prefix+shift+h (planning) and prefix+shift+l (implementation).
+#
+# handoff-implementation leaves three correlation keys behind:
+#   - the worktree workspace is labelled ENG-NNNN
+#   - its branch and checkout path are eng-NNNN-kebab-description
+#   - the planning tab in the source checkout is labelled "ENG-NNNN planning"
+#
+# Tab labels drift as agents rename themselves — the live ones read "implement"
+# and "pr-desc", not "implementation" — but the ticket prefix survives, because
+# ~/.claude/CLAUDE.md requires the ticket ID as the first word of a tab label.
+# So the ticket ID is the join key, read from whichever of those is at hand.
+#
+# The side we are on is decided structurally, not by label: a linked worktree is
+# implementation, anything else is planning. That holds even for a worktree
+# workspace someone has renamed.
+
+set -uo pipefail
+
+usage="usage: $(basename "$0") <plan|impl> [--from <workspace_id>] [--dry-run]"
+
+direction=""
+dry_run=""
+from=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    plan|impl) direction="$1" ;;
+    --dry-run) dry_run=1 ;;
+    --from)
+      shift
+      from="${1:-}"
+      [ -z "$from" ] && { echo "$usage" >&2; exit 2; }
+      ;;
+    *)
+      echo "$usage" >&2
+      exit 2
+      ;;
+  esac
+  shift
+done
+
+if [ -z "$direction" ]; then
+  echo "$usage" >&2
+  exit 2
+fi
+
+# Linear's team prefix. Override for a repo that uses a different tracker.
+prefix="${HERDR_TICKET_PREFIX:-ENG}"
+
+# The only channel a detached keybinding has back to the user, and the sound is
+# doing the real work. [ui.toast] delivery is "system", which does not render a
+# notification raised from the focused workspace — and a keybinding is always
+# pressed in the focused workspace. The title and body still reach the
+# notification list; the sound is what tells you in the moment.
+#
+# Caveat worth knowing: "request" is also the sound for an agent asking for
+# input, so a missed jump and a blocked agent are audibly identical. The
+# alternative was silence. See the [ui.toast] notes in config.toml.
+notify() {
+  if [ -n "$dry_run" ]; then
+    echo "would notify: $1 — $2"
+  else
+    herdr notification show "$1" --body "$2" --sound request >/dev/null 2>&1
+  fi
+  exit 1
+}
+
+workspaces="$(herdr workspace list 2>/dev/null)"
+if [ -z "$workspaces" ]; then
+  notify "herdr-ticket-jump" "herdr is not responding"
+fi
+
+# Act on the focused workspace, not the calling pane. A keybinding has no
+# calling pane, and the focused one is what the user is looking at either way.
+# --from overrides it, for testing a jump without taking focus along for the ride.
+# It takes a workspace id (w19) or a tab id (w19:t2); a tab id also pins which
+# tab is read for the ticket, instead of the workspace's active one.
+tab_override=""
+if [ -n "$from" ]; then
+  case "$from" in
+    *:t*) tab_override="$from"; focused="${from%%:*}" ;;
+    *)    focused="$from" ;;
+  esac
+else
+  focused="$(jq -r '
+    .result.workspaces[] | select(.focused == true) | .workspace_id
+  ' <<<"$workspaces" | head -1)"
+fi
+
+if [ -z "$focused" ]; then
+  notify "herdr-ticket-jump" "No focused workspace"
+fi
+
+# On the implementation side the ticket is in the workspace label or the
+# worktree path. Restricted to linked worktrees so a source checkout that
+# happens to sit under an eng-* directory cannot match here.
+ticket="$(jq -r --arg ws "$focused" '
+  .result.workspaces[]
+  | select(.workspace_id == $ws)
+  | select((.worktree // {}).is_linked_worktree == true)
+  | (.label // "") + " " + (.worktree.checkout_path // "")
+' <<<"$workspaces" | grep -oiE "${prefix}-[0-9]+" | head -1)"
+
+# Otherwise we are on the planning side, where the ticket is in the tab label.
+if [ -z "$ticket" ]; then
+  active_tab="$tab_override"
+  if [ -z "$active_tab" ]; then
+    active_tab="$(jq -r --arg ws "$focused" '
+      .result.workspaces[] | select(.workspace_id == $ws) | .active_tab_id // empty
+    ' <<<"$workspaces")"
+  fi
+
+  ticket="$(herdr tab list --workspace "$focused" 2>/dev/null |
+    jq -r --arg t "$active_tab" '
+      .result.tabs[] | select(.tab_id == $t) | .label // ""
+    ' | grep -oiE "${prefix}-[0-9]+" | head -1)"
+fi
+
+if [ -z "$ticket" ]; then
+  notify "herdr-ticket-jump" "No ${prefix} ticket in this workspace or tab"
+fi
+
+ticket="$(tr '[:lower:]' '[:upper:]' <<<"$ticket")"
+match="$(tr '[:upper:]' '[:lower:]' <<<"$ticket")"
+
+case "$direction" in
+  impl)
+    # Ticket IDs are globally unique, so search every linked worktree rather
+    # than scoping to this repo. That also works from an unrelated workspace.
+    target="$(jq -r --arg m "$match" '
+      .result.workspaces[]
+      | select((.worktree // {}).is_linked_worktree == true)
+      | select((((.label // "") + " " + (.worktree.checkout_path // "")) | ascii_downcase) | contains($m))
+      | .workspace_id
+    ' <<<"$workspaces" | head -1)"
+
+    if [ -z "$target" ]; then
+      notify "$ticket" "No implementation workspace"
+    fi
+
+    if [ -n "$dry_run" ]; then
+      echo "$ticket: would focus workspace $target"
+      exit 0
+    fi
+    herdr workspace focus "$target" >/dev/null
+    ;;
+
+  plan)
+    # Planning always lives in a source checkout, never in a linked worktree.
+    target=""
+    for ws in $(jq -r '
+      .result.workspaces[]
+      | select(((.worktree // {}).is_linked_worktree // false) == false)
+      | .workspace_id
+    ' <<<"$workspaces"); do
+      target="$(herdr tab list --workspace "$ws" 2>/dev/null |
+        jq -r --arg m "$match" '
+          .result.tabs[] | select(((.label // "") | ascii_downcase) | contains($m)) | .tab_id
+        ' | head -1)"
+      [ -n "$target" ] && break
+    done
+
+    if [ -z "$target" ]; then
+      notify "$ticket" "No planning tab"
+    fi
+
+    if [ -n "$dry_run" ]; then
+      echo "$ticket: would focus tab $target"
+      exit 0
+    fi
+    herdr tab focus "$target" >/dev/null
+    ;;
+esac

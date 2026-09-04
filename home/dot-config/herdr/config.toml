@@ -30,6 +30,48 @@ previous_tab = ["ctrl+shift+p", "prefix+ctrl+p", "prefix+p"]
 # was: bind Enter copy-mode
 copy_mode = "prefix+enter"
 
+# ---------------------------------------------------------------------------
+# Agent and workspace navigation
+# ---------------------------------------------------------------------------
+#
+# No tmux ancestry here — tmux had no concept of an agent. These are herdr
+# built-ins that ship unset, which is why switching between agents used to mean
+# reaching for the mouse.
+#
+# The pattern extends the pane keys one level up: prefix+h/j/k/l moves between
+# panes, prefix+shift+ the same letters moves between the bigger units. j/k
+# walks agents; h/l crosses between the planning and implementation halves of a
+# ticket (the [[keys.command]] pair at the bottom of this file).
+#
+# Deliberately left unbound: next_workspace/previous_workspace (the prefix+w
+# picker and switch_workspace below cover it, and shift+h/l is spoken for) and
+# remove_worktree (destructive — the CLI is a better home for it).
+
+# Cycle agents in agent-panel order, which ui.agent_panel_sort sets to
+# "spaces" — grouped by workspace, so an agent keeps a stable position.
+# Switch that to "priority" to walk an attention queue instead.
+#
+# Two forms, same as next_tab: shift+j/k is the one that matches the pane keys,
+# and ctrl+shift+j/k is the one you can roll into without lifting ctrl off the
+# prefix. Keep both — an action takes a list.
+next_agent = ["prefix+shift+j", "prefix+ctrl+shift+j"]
+previous_agent = ["prefix+shift+k", "prefix+ctrl+shift+k"]
+
+# Jump straight to an agent row or a workspace by index.
+# NOTE: alt is the least reliable modifier across terminals. If prefix+alt+1
+# does nothing, this is the first line to suspect.
+focus_agent = "prefix+alt+1..9"
+switch_workspace = "prefix+shift+1..9"
+
+# Back to wherever you just were, across workspaces and tabs. ctrl+o is vim's
+# jump-back. prefix+ctrl+t — the tmux double-tap-the-prefix spot — is taken by
+# the send-prefix binding below.
+last_pane = "prefix+ctrl+o"
+
+# Reopen a worktree that exists on disk but has no workspace. Joins the g
+# family: prefix+g goto, prefix+shift+g new worktree, prefix+ctrl+g open one.
+open_worktree = "prefix+ctrl+g"
+
 # focus_pane_left/down/up/right intentionally keep their herdr defaults
 # (prefix+h/j/k/l) as a plain, always-works fallback. The vim-aware ctrl+hjkl
 # bindings you had in tmux are the [[keys.command]] entries below.
@@ -82,6 +124,22 @@ type = "plugin_action"
 command = "herdr-spreader.apply"
 description = "Apply layout"
 
+# The h/l half of the shift+hjkl scheme: cross between the two halves of a
+# handoff-implementation handoff. Left goes back to the planning tab in the
+# source checkout, right goes out to the implementation worktree workspace.
+# Correlated by the ENG-NNNN ticket id; see herdr-ticket-jump for how.
+[[keys.command]]
+key = "prefix+shift+h"
+type = "shell"
+command = "herdr-ticket-jump plan"
+description = "Jump to this ticket's planning tab"
+
+[[keys.command]]
+key = "prefix+shift+l"
+type = "shell"
+command = "herdr-ticket-jump impl"
+description = "Jump to this ticket's implementation worktree"
+
 [ui]
 # was: @prefix_highlight_fg '#82aaff'
 accent = "#82aaff"
@@ -105,6 +163,21 @@ agent_panel_sort = "spaces"
 rows = [["state_icon", "workspace"], ["branch", "git_status", "$pomo"]]
 
 [ui.toast]
+# Agent done/blocked alerts arrive as macOS notifications, and that is the
+# point of this setting — they need to reach you when herdr is not on screen.
+#
+# Known gap, deliberately accepted: a `herdr notification show` fired from the
+# *focused* workspace does not render on this path. The dispatch succeeds
+# (shown: true), it just never appears — consistent with this being, per the
+# default config, "background notification popup delivery". Which is exactly
+# the case a keybinding hits, since you are by definition looking at the
+# workspace you pressed the key in.
+#
+# delivery is one global switch and there is no per-class override —
+# NotificationShowParams takes only title, body, sound, and position, and
+# position does not force the in-app renderer. So "herdr" would fix
+# herdr-ticket-jump's toast at the cost of moving agent alerts in-app. Not
+# worth it: herdr-ticket-jump signals with sound instead.
 delivery = "system"
 
 
@@ -129,7 +202,10 @@ pane_history = true
 #   output there. See the [ui.sidebar.spaces] notes above.
 #
 # bind t / C-M-t send-prefix
-#   herdr has no send-prefix action.
+#   Nothing to port: herdr does this natively. Pressing the prefix twice sends
+#   a literal prefix key, so ctrl+t ctrl+t already gets a ctrl+t through. The
+#   key is reserved for it — binding prefix+ctrl+t to anything else reloads
+#   with a "reserved keybinding" diagnostic and the binding is dropped.
 #
 # bind -n S-Enter send-keys Escape "[13;2u"
 #   Terminal-level shift+enter encoding hack; herdr handles its own key
