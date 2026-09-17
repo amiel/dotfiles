@@ -23,15 +23,30 @@ workspaces:
       - label: "shell"
         panes:
           - command: 
-  # - name: Ordering Assistant
-  #   root: ~/src/bento/ordering_assistant/
-  #   tabs:
-  #     - label: "claude"
-  #       panes:
-  #         - command: claude --add-dir ../venice
-  #     - label: "shell"
-  #       panes:
-  #         - command: 
-
-
-
+  - name: Reporting plugin
+    root: ~/src/bento/plugin-spike/
+    tabs:
+      - label: "claude"
+        panes:
+          - command: claude --add-dir ../venice
+      - label: "shell"
+        panes:
+          - command: 
+  - name: Health Plan Reporting
+    root: ~/src/bento/health-plan-reporting/
+    tabs:
+      - label: "claude"
+        panes:
+          - command: claude --add-dir ../venice
+      - label: "shell"
+        panes:
+          - command: 
+  - name: Bento Health Member Experience
+    root: ~/src/bento/bento-health-member-experience/
+    tabs:
+      - label: "claude"
+        panes:
+          - command: claude --add-dir ../venice
+      - label: "shell"
+        panes:
+          - command: 
