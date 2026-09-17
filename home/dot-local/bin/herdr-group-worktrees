@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# Reorder workspaces so every worktree sits directly beneath the checkout it
+# came from. Bound to prefix+ctrl+w, and called at the end of the
+# handoff-implementation skill so a fresh worktree lands in place immediately.
+#
+# herdr has no parent/child relationship between spaces — a worktree workspace
+# is an ordinary top-level workspace that happens to carry worktree.repo_key.
+# There is no config for this: ui.agent_panel_sort offers only "spaces"
+# (group by space) and "priority" (attention queue), and the agent panel's
+# group order just follows workspace order. Workspace order is creation order,
+# and worktrees are created last, so they pile up at the bottom away from their
+# source. Sorting the workspaces is therefore what sorts the agent panel.
+#
+# The result is adjacency, not nesting. Nesting is not on offer.
+#
+# CAVEAT: workspace.move is not in the CLI — `herdr workspace` exposes only
+# list/create/get/focus/rename/report-metadata/close — so the reorder goes
+# straight to the socket at protocol 20. Reads still go through the supported
+# CLI; only the write is unofficial. A protocol change should make this stop
+# working rather than reorder things wrongly, so every response is checked and
+# the first unexpected one aborts the run. Re-running always converges, since
+# the target order is computed fresh from the current state.
+
+set -uo pipefail
+
+dry_run=""
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=1 ;;
+    *)
+      echo "usage: $(basename "$0") [--dry-run]" >&2
+      exit 2
+      ;;
+  esac
+done
+
+# Same channel and caveats as herdr-ticket-jump: a notification raised from the
+# focused workspace does not render under system toast delivery, so the sound
+# is what actually lands.
+notify() {
+  if [ -n "$dry_run" ]; then
+    echo "would notify: $1"
+  else
+    herdr notification show "herdr-group-worktrees" --body "$1" --sound request >/dev/null 2>&1
+  fi
+  exit 1
+}
+
+socket="${HERDR_SOCKET_PATH:-}"
+if [ -z "$socket" ]; then
+  # Not injected outside a herdr pane; fall back to the running session's socket.
+  socket="$(herdr session list 2>/dev/null | awk '$2 == "running" { print $NF; exit }')"
+fi
+if [ -z "$socket" ] || [ ! -S "$socket" ]; then
+  notify "No herdr socket"
+fi
+
+workspaces="$(herdr workspace list 2>/dev/null)"
+if [ -z "$workspaces" ]; then
+  notify "herdr is not responding"
+fi
+
+# Each non-linked workspace, followed by the linked worktrees sharing its
+# repo_key. Workspaces with no worktree at all (repo_key null) collect nothing.
+# Worktrees whose source checkout is not open keep their order at the end.
+target="$(jq -r '
+  [ .result.workspaces[] ] as $all
+  | [ $all[] | select((.worktree.is_linked_worktree // false) == false) ] as $sources
+  | [ $all[] | select((.worktree.is_linked_worktree // false) == true)  ] as $linked
+  | ( [ $sources[]
+        | [ .workspace_id ]
+          + ( .worktree.repo_key as $rk
+              | if $rk == null then []
+                else [ $linked[] | select(.worktree.repo_key == $rk) | .workspace_id ] end )
+      ] | add ) as $grouped
+  | ($grouped + ([ $linked[] | .workspace_id ] - $grouped))[]
+' <<<"$workspaces")"
+
+read -r -a want <<<"$(tr '\n' ' ' <<<"$target")"
+read -r -a have <<<"$(jq -r '[.result.workspaces[].workspace_id] | join(" ")' <<<"$workspaces")"
+
+if [ "${#want[@]}" -eq 0 ]; then
+  notify "Could not compute an order"
+fi
+
+if [ "${want[*]}" = "${have[*]}" ]; then
+  [ -n "$dry_run" ] && echo "already grouped: ${have[*]}"
+  exit 0
+fi
+
+if [ -n "$dry_run" ]; then
+  echo "current: ${have[*]}"
+  echo "target:  ${want[*]}"
+  labels="$(jq -r '.result.workspaces[] | "\(.workspace_id)\t\(.label)"' <<<"$workspaces")"
+  for ws in "${want[@]}"; do
+    printf '  %s  %s\n' "$ws" "$(awk -F'\t' -v w="$ws" '$1 == w { print $2 }' <<<"$labels")"
+  done
+  exit 0
+fi
+
+# Place each workspace left to right. Everything before index i is already
+# final, so the element being moved is always at or after i and insert_index i
+# lands it correctly. The move response carries the new list, which saves a
+# round trip and doubles as the check that the call did what it claimed.
+moved=0
+for i in "${!want[@]}"; do
+  [ "${have[$i]:-}" = "${want[$i]}" ] && continue
+
+  response="$(printf '{"id":"group:move","method":"workspace.move","params":{"workspace_id":"%s","insert_index":%d}}\n' \
+    "${want[$i]}" "$i" | nc -U -w 2 "$socket" 2>/dev/null | head -1)"
+
+  order="$(jq -r 'if .result.workspaces then [.result.workspaces[].workspace_id] | join(" ") else empty end' \
+    <<<"$response" 2>/dev/null)"
+
+  if [ -z "$order" ]; then
+    notify "workspace.move failed at ${want[$i]} — stopped after $moved move(s)"
+  fi
+
+  read -r -a have <<<"$order"
+  moved=$((moved + 1))
+done
+
+if [ "${have[*]}" != "${want[*]}" ]; then
+  notify "Order did not converge after $moved move(s)"
+fi

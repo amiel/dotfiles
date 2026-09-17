@@ -140,6 +140,20 @@ type = "shell"
 command = "herdr-ticket-jump impl"
 description = "Jump to this ticket's implementation worktree"
 
+# Pull each worktree back under the checkout it came from. Workspace order is
+# creation order and worktrees are created last, so they drift to the bottom,
+# away from their source — and since the agent panel groups by space in
+# workspace order, they drift in the sidebar too. prefix+ctrl+w is free;
+# prefix+w is the workspace picker and prefix+shift+w renames.
+#
+# handoff-implementation also calls this after creating a worktree, so this
+# binding is for the drift that accumulates the rest of the time.
+[[keys.command]]
+key = "prefix+ctrl+w"
+type = "shell"
+command = "herdr-group-worktrees"
+description = "Group worktree workspaces under their source"
+
 [ui]
 # was: @prefix_highlight_fg '#82aaff'
 accent = "#82aaff"
