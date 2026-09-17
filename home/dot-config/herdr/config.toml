@@ -30,6 +30,27 @@ previous_tab = ["ctrl+shift+p", "prefix+ctrl+p", "prefix+p"]
 # was: bind Enter copy-mode
 copy_mode = "prefix+enter"
 
+# was: tmux-pain-control's | binding (dot-tmux.conf had `bind | split-window -h`
+# commented out on line 18 because the plugin already supplied it).
+#
+# herdr names splits by the divider, and the docs are unambiguous:
+# split_vertical is "split pane vertically (side by side)", split_horizontal is
+# "split pane horizontally (stacked)". So | is split_vertical, matching both
+# pain-control and the shape of the character.
+#
+# prefix+| is the one that fires, verified 2026-09-17. prefix+shift+backslash
+# is the same physical chord spelled the other way, kept only because the docs
+# warn punctuation-with-modifiers can depend on the terminal — it is insurance
+# for a different terminal, not load-bearing here. "pipe" and "bar" are both
+# rejected outright ("invalid keybinding ... disabling binding"), so those two
+# names and these two are the whole option space; no need to retry them.
+# prefix+v stays as the herdr default and a punctuation-free fallback.
+split_vertical = ["prefix+v", "prefix+|", "prefix+shift+backslash"]
+
+# The - half needs no binding: split_horizontal already defaults to
+# prefix+minus, which is exactly the pain-control muscle memory. Recorded here
+# only so it does not look like an oversight.
+
 # ---------------------------------------------------------------------------
 # Agent and workspace navigation
 # ---------------------------------------------------------------------------
