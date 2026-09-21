@@ -64,9 +64,8 @@ split_vertical = ["prefix+v", "prefix+|", "prefix+shift+backslash"]
 # walks agents; h/l crosses between the planning and implementation halves of a
 # ticket (the [[keys.command]] pair at the bottom of this file).
 #
-# Deliberately left unbound: next_workspace/previous_workspace (the prefix+w
-# picker and switch_workspace below cover it, and shift+h/l is spoken for) and
-# remove_worktree (destructive — the CLI is a better home for it).
+# Deliberately left unbound: remove_worktree (destructive — the CLI is a
+# better home for it).
 
 # Cycle agents in agent-panel order, which ui.agent_panel_sort sets to
 # "spaces" — grouped by workspace, so an agent keeps a stable position.
@@ -77,6 +76,19 @@ split_vertical = ["prefix+v", "prefix+|", "prefix+shift+backslash"]
 # prefix. Keep both — an action takes a list.
 next_agent = ["prefix+shift+j", "prefix+ctrl+shift+j"]
 previous_agent = ["prefix+shift+k", "prefix+ctrl+shift+k"]
+
+# Cycle workspaces — the outer unit, and the nearest thing herdr has to tmux's
+# session switching. (herdr does have its own "sessions", but those are whole
+# detachable server sessions, CLI-only via `herdr session attach`; there is no
+# keybinding action for them at all.)
+#
+# Third rung of the j/k ladder: prefix+j/k panes, prefix+ctrl+j/k workspaces,
+# prefix+shift+j/k agents. ctrl is the free modifier here — the two obvious
+# spellings were both taken, and neither was worth evicting:
+#   prefix+j/k        focus_pane_down/up, the plain always-works pane fallback
+#   prefix+shift+n/p  new_workspace / rename_pane, herdr defaults
+next_workspace = "prefix+ctrl+j"
+previous_workspace = "prefix+ctrl+k"
 
 # Jump straight to an agent row or a workspace by index.
 # NOTE: alt is the least reliable modifier across terminals. If prefix+alt+1
